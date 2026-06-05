@@ -930,13 +930,13 @@ footer{background:var(--dark);padding:64px 50px 32px;color:var(--white)}
 .co-btn-apple svg { width: 36px; height: 22px; }
 
 .co-btn-back {
-  display: block; text-align: center; margin-top: 16px;
-  font-family: var(--fb); font-size: 10px; font-weight: 400;
+  display: block; text-align: center; margin-top: 20px;
+  font-family: var(--fb); font-size: 10px; font-weight: 500;
   letter-spacing: 3px; text-transform: uppercase;
-  color: var(--gray); background: none; border: none; cursor: pointer;
-  transition: color 0.2s;
+  color: var(--dark); background: none; border: 1px solid rgba(0,0,0,0.15);
+  padding: 12px 0; cursor: pointer; transition: all 0.2s; width: 100%;
 }
-.co-btn-back:hover { color: var(--dark); }
+.co-btn-back:hover { background: var(--light); border-color: var(--dark); }
 
 /* Form */
 .co-form { margin-top: 8px; }
@@ -1754,13 +1754,17 @@ const PRODUCTS = {
   ts_bleu: { name:'T-shirt Riviera Bleu', collection:'Collection Riviera', price:39.99, priceStr:'39,99' },
   sh_rose: { name:'Short Riviera Rose',   collection:'Collection Riviera', price:44.99, priceStr:'44,99' },
   sh_bleu: { name:'Short Riviera Bleu',   collection:'Collection Riviera', price:44.99, priceStr:'44,99' },
+  cap_bleu: { name:'Casquette Riviera Bleu', collection:'Collection Riviera', price:39.99, priceStr:'39,99' },
+  cap_rose: { name:'Casquette Riviera Rose', collection:'Collection Riviera', price:39.99, priceStr:'39,99' },
+  e5:       { name:'Gentleman Parisien',     collection:'Collection Monaco',   price:89.99, priceStr:'89,99' },
 };
 
 /* ── Helpers ── */
 function getSlide(pid) {
   const sl = document.getElementById('slider-'+pid);
   if (!sl) return '';
-  return (sl.querySelector('.slide.active')||sl.querySelector('.slide')||{}).src || '';
+  const slide = sl.querySelector('.slide');
+  return slide ? slide.src : '';
 }
 function fmtPrice(n) { return n.toFixed(2).replace('.',',') + ' €'; }
 function cartTotal() { return cartItems.reduce((s,i)=>s+i.price*i.qty,0); }
@@ -1784,7 +1788,7 @@ function addToCart(name, price) {
     return;
   }
   let pid = null;
-  ['e1','e2','e3','e4','e5','ts_rose','ts_bleu','sh_rose','sh_bleu'].forEach(id=>{
+  ['e1','e2','e3','e4','e5','ts_rose','ts_bleu','sh_rose','sh_bleu','cap_bleu','cap_rose'].forEach(id=>{
     const mel=document.getElementById('modal-'+id); if(mel && mel.classList.contains('active')) pid=id;
   });
   if (!pid) return;
@@ -1845,8 +1849,8 @@ function renderCartDrawer() {
       </div>
     </div>`).join('');
   const inCart=[...new Set(cartItems.map(i=>i.pid))];
-  const upPids=['e1','e2','e3','e4','e5'].filter(p=>!inCart.includes(p)).slice(0,3);
-  const upsell=upPids.length?`<div class="cart-upsell"><p class="cart-upsell-title">Complétez votre look</p><div class="cart-upsell-grid">${upPids.map(pid=>{const p=PRODUCTS[pid];const img=getSlide(pid);return`<div class="cart-upsell-card" onclick="closeCart();openModal('${pid}')"><img class="cart-upsell-img" src="${img}" alt="${p.name}"/><p class="cart-upsell-name">${p.name}</p><p class="cart-upsell-price">${p.priceStr} €</p></div>`;}).join('')}</div></div>`:''
+  const upPids=['e1','e2','e3','e4','ts_rose','ts_bleu','sh_rose','sh_bleu','cap_bleu','cap_rose'].filter(p=>!inCart.includes(p)).slice(0,3);
+  const upsell=upPids.length?`<div class="cart-upsell"><p class="cart-upsell-title">Complétez votre look</p><div class="cart-upsell-grid">${upPids.map(pid=>{const p=PRODUCTS[pid];if(!p)return'';const img=getSlide(pid);return`<div class="cart-upsell-card" onclick="closeCart();openModal('${pid}')"><img class="cart-upsell-img" src="${img}" alt="${p.name}"/><p class="cart-upsell-name">${p.name}</p><p class="cart-upsell-price">${p.priceStr} €</p></div>`;}).join('')}</div></div>`:''
   body.innerHTML=itemsHtml+upsell;
   const tot=cartTotal();
   const el=document.getElementById('cartTotalPrice');
@@ -1946,7 +1950,8 @@ function renderCheckoutCart(content){
       <svg viewBox="0 0 165.521 105.965" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M150.698 0H14.823C6.638 0 0 6.638 0 14.823v76.319c0 8.185 6.638 14.823 14.823 14.823h135.875c8.185 0 14.823-6.638 14.823-14.823V14.823C165.521 6.638 158.883 0 150.698 0z" fill="black"/><path d="M42.369 35.174c1.633-2.047 2.737-4.754 2.441-7.522-2.379.119-5.264 1.574-6.957 3.621-1.516 1.750-2.855 4.576-2.501 7.224 2.647.207 5.384-1.277 7.017-3.323zM44.787 39.067c-3.875-.236-7.178 2.200-9.020 2.200-1.841 0-4.639-2.082-7.692-2.023-3.935.059-7.574 2.289-9.592 5.827-4.096 7.083-1.074 17.592 2.912 23.359 1.959 2.855 4.283 6.007 7.396 5.888 2.943-.117 4.075-1.900 7.635-1.900 3.559 0 4.579 1.900 7.692 1.841 3.204-.059 5.234-2.855 7.193-5.711 2.259-3.263 3.173-6.420 3.233-6.598-.072-.029-6.191-2.386-6.250-9.445-.059-5.930 4.841-8.756 5.059-8.903-2.771-4.107-7.100-4.535-8.566-4.535zM75.154 31.825c8.717 0 14.787 6.011 14.787 14.758 0 8.777-6.189 14.817-15.024 14.817h-9.654v15.342H58.450V31.825h16.704zm-9.891 23.891h8.007c6.071 0 9.525-3.275 9.525-8.986 0-5.711-3.454-8.956-9.495-8.956h-8.037v17.942zM92.691 53.436c0-8.836 5.195-14.521 13.175-14.521 7.950 0 13.175 5.685 13.175 14.521 0 8.866-5.194 14.521-13.175 14.521-7.980 0-13.175-5.655-13.175-14.521zm21.767 0c0-6.071-2.796-9.643-6.592-9.643-3.796 0-6.592 3.572-6.592 9.643 0 6.101 2.796 9.643 6.592 9.643 3.796 0 6.592-3.542 6.592-9.643zM123.700 78.249V39.282h6.208v5.017h.148c1.602-3.424 5.018-5.373 9.110-5.373 6.830 0 11.285 4.936 11.285 12.354v.089c0 7.387-4.484 12.264-11.344 12.264-4.003 0-7.389-1.900-8.961-5.165h-.119v13.781H123.700zm15.758-21.795c0-4.577-2.739-7.600-6.800-7.600-4.033 0-6.830 3.082-6.830 7.600 0 4.489 2.797 7.541 6.830 7.541 4.061 0 6.800-3.023 6.800-7.541z" fill="white"/></svg>
       &nbsp;Pay
     </button>
-    <button class="co-btn-back" onclick="closeCheckout()">← Continuer mes achats</button>`;
+    <button class="co-btn-back" onclick="closeCheckout()">← Continuer mes achats</button>
+    <p style="text-align:center;margin-top:12px;font-family:var(--fb);font-size:10px;letter-spacing:2px;color:var(--gray)">Paiement 100% sécurisé · Livraison offerte dès 100€</p>`;
 }
 
 function renderCheckoutForm(content){
@@ -2024,7 +2029,7 @@ document.querySelectorAll('.size-btn').forEach(btn=>{
 });
 
 /* ── Existing functions (keep) ── */
-function switchModal(newId){['e1','e2','e3','e4','e5','ts_rose','ts_bleu','sh_rose','sh_bleu'].forEach(id=>{ const el=document.getElementById('modal-'+id); if(el) el.classList.remove('active');});document.getElementById('modal-'+newId).classList.add('active');mSlideTo(newId,0);}
+function switchModal(newId){['e1','e2','e3','e4','e5','ts_rose','ts_bleu','sh_rose','sh_bleu','cap_bleu','cap_rose'].forEach(id=>{ const el=document.getElementById('modal-'+id); if(el) el.classList.remove('active');});document.getElementById('modal-'+newId).classList.add('active');mSlideTo(newId,0);}
 
 </script>
 
