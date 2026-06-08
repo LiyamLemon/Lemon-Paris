@@ -1669,8 +1669,8 @@ function fillUpsellImages(modalEl) {
   });
 }
 
-function openModal(id){document.getElementById('modal-'+id).classList.add('active');var sy=window.scrollY||window.pageYOffset;document.body.dataset.scrolly=sy;document.body.style.top='-'+sy+'px';document.body.style.position='fixed';document.body.style.width='100%';document.body.style.overflow='hidden';document.documentElement.style.overflow='hidden';mSlideTo(id,0);fillUpsellImages(document.getElementById('modal-'+id));}
-function closeModal(id){document.getElementById('modal-'+id).classList.remove('active');var sy=parseInt(document.body.dataset.scrolly||'0');document.body.style.position='';document.body.style.top='';document.body.style.width='';document.body.style.overflow='';document.documentElement.style.overflow='';window.scrollTo(0,sy);}
+function openModal(id){var ov=document.getElementById('modal-'+id);ov.classList.add('active');ov.style.display='flex';var sy=window.scrollY||window.pageYOffset;document.body.dataset.scrolly=sy;document.body.style.top='-'+sy+'px';document.body.style.position='fixed';document.body.style.width='100%';document.body.style.overflow='hidden';document.documentElement.style.overflow='hidden';mSlideTo(id,0);fillUpsellImages(document.getElementById('modal-'+id));}
+function closeModal(id){var ov=document.getElementById('modal-'+id);ov.classList.remove('active');ov.style.display='none';var sy=parseInt(document.body.dataset.scrolly||'0');document.body.style.position='';document.body.style.top='';document.body.style.width='';document.body.style.overflow='';document.documentElement.style.overflow='';window.scrollTo(0,sy);}
 function closeModalOutside(e,id){if(e.target===e.currentTarget)closeModal(id)}
 function switchModal(newId){['e1','e2','e3','e4','e5','ts_rose','ts_bleu','sh_rose','sh_bleu','cap_bleu','cap_rose'].forEach(id=>{ const el=document.getElementById('modal-'+id); if(el) el.classList.remove('active');});document.getElementById('modal-'+newId).classList.add('active');mSlideTo(newId,0);fillUpsellImages(document.getElementById('modal-'+newId));}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')['e1','e2','e3','e4','e5','ts_rose','ts_bleu','sh_rose','sh_bleu','cap_bleu','cap_rose'].forEach(id=>closeModal(id))});
@@ -2052,9 +2052,10 @@ document.querySelectorAll('.size-btn').forEach(btn=>{
 /* ── Existing functions (keep) ── */
 function switchModal(newId){['e1','e2','e3','e4','e5','ts_rose','ts_bleu','sh_rose','sh_bleu','cap_bleu','cap_rose'].forEach(id=>{ const el=document.getElementById('modal-'+id); if(el) el.classList.remove('active');});document.getElementById('modal-'+newId).classList.add('active');mSlideTo(newId,0);;fillUpsellImages(document.getElementById('modal-'+newId));}
 
-// Init des images upsell dynamiques
+// Init des images upsell dynamiques + masquage forcé des modales
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.modal-overlay').forEach(function(m) {
+    m.style.display='none';
     fillUpsellImages(m);
   });
 });
