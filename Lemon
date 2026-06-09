@@ -1771,7 +1771,33 @@ function updateBadge() {
 }
 
 /* ── Add to cart ── */
-function addToCart(name, price) {
+
+const SHOPIFY_HANDLES = {
+  'e1': 'ensemble-riveira-rose',
+  'e2': 'ensemble-riveira-bleu',
+  'e3': 'ensemble-monegasque',
+  'e4': 'ensemble-marbella',
+  'ts_rose': 't-shirt-riviera-rose',
+  'ts_bleu': 't-shirt-riviera-bleu',
+  'sh_rose': 'short-riviera-rose',
+  'sh_bleu': 'short-riviera-bleu',
+  'cap_bleu': 'casquette-riviera-bleu',
+  'cap_rose': 'casquette-riviera-rose'
+};
+const _variantCache = {};
+async function _getVariantId(pid, size) {
+  const handle = SHOPIFY_HANDLES[pid];
+  if (!handle) return null;
+  if (!_variantCache[handle]) {
+    try {
+      const r = await fetch('/products/' + handle + '.js');
+      _variantCache[handle] = (await r.json()).variants;
+    } catch(e) { return null; }
+  }
+  const v = (_variantCache[handle] || []).find(v => v.option1 === size || v.title === size);
+  return v ? v.id : null;
+}
+async function addToCart(name, price) {
   const modal = document.querySelector('.modal-overlay.active');
   const sz = modal ? modal.querySelector('.size-btn.active') : null;
   if (!sz) {
@@ -1781,12 +1807,22 @@ function addToCart(name, price) {
     return;
   }
   let pid = null;
-  ['e1','e2','e3','e4','e5','ts_rose','ts_bleu','sh_rose','sh_bleu','cap_bleu','cap_rose'].forEach(id=>{
+  ['e1','e2','e3','e4','ts_rose','ts_bleu','sh_rose','sh_bleu','cap_bleu','cap_rose'].forEach(id=>{
     const mel=document.getElementById('modal-'+id); if(mel && mel.classList.contains('active')) pid=id;
   });
   if (!pid) return;
-  const p = PRODUCTS[pid];
   const size = sz.textContent.replace(/<[^>]*>/g,'').trim();
+  const variantId = await _getVariantId(pid, size);
+  if (variantId) {
+    try {
+      const r = await fetch('/cart/add.js', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({id: variantId, quantity: 1})
+      });
+      if (r.ok) { window.location = '/cart'; return; }
+    } catch(e) {}
+  }
+  const p = PRODUCTS[pid];
   const key = pid+'_'+size;
   const img = getSlide(pid);
   const existing = cartItems.find(i=>i.key===key);
@@ -1799,11 +1835,28 @@ function addToCart(name, price) {
     btn.querySelector('span') ? btn.querySelector('span').textContent='✓ Ajouté' : btn.textContent='✓ Ajouté';
     setTimeout(()=>{ btn.classList.remove('success'); btn.querySelector('span') ? btn.querySelector('span').textContent='Ajouter au panier' : btn.textContent='Ajouter au panier'; },1800);
   }
-  renderCartDrawer();
-  openCart();
+  renderCartDrawer(); openCart();
 }
 
-function buyNow(name,price){ addToCart(name,price); }
+async function buyNow(name, price) {
+  const modal = document.querySelector('.modal-overlay.active');
+  const sz = modal ? modal.querySelector('.size-btn.active') : null;
+  if (!sz) {
+    if (modal) modal.querySelectorAll('.size-btn').forEach(b=>{
+      b.style.animation='none'; b.offsetHeight; b.style.animation='sizeshake 0.35s ease';
+    });
+    return;
+  }
+  let pid = null;
+  ['e1','e2','e3','e4','ts_rose','ts_bleu','sh_rose','sh_bleu','cap_bleu','cap_rose'].forEach(id=>{
+    const mel=document.getElementById('modal-'+id); if(mel && mel.classList.contains('active')) pid=id;
+  });
+  if (!pid) return;
+  const size = sz.textContent.replace(/<[^>]*>/g,'').trim();
+  const variantId = await _getVariantId(pid, size);
+  if (variantId) { window.location = '/cart/' + variantId + ':1'; return; }
+  addToCart(name, price);
+}
 
 function removeFromCart(key) { cartItems=cartItems.filter(i=>i.key!==key); updateBadge(); renderCartDrawer(); }
 
