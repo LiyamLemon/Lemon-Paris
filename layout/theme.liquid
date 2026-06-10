@@ -30,8 +30,9 @@ body{font-family:var(--fb);background:var(--white);color:var(--dark);overflow-x:
 .hero-bg-img-mobile{display:none}@media(max-width:768px){.hero-bg-img{display:none}.hero-bg-img-mobile{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;image-rendering:-webkit-optimize-contrast;will-change:transform}}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.08) 35%,rgba(0,0,0,0.18) 65%,rgba(0,0,0,0.55) 100%);z-index:1}
 .hero-header{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:22px 28px}
-.hero-logo-pill{display:inline-flex;align-items:center;opacity:0;animation:fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.2s forwards}
-.hero-logo-pill img{height:42px;width:auto;display:block;filter:invert(1);mix-blend-mode:screen}
+.hero-logo-link{text-decoration:none;opacity:0;animation:fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.2s forwards;display:inline-block}
+.hero-logo-svg{height:62px;width:auto;display:block}
+.shf-logo-svg{height:44px;width:auto;display:block}
 @keyframes fadeUp{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
 .hero-menu-btn{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;gap:6px;padding:4px}
@@ -1036,8 +1037,18 @@ footer{background:var(--dark);padding:64px 50px 32px;color:var(--white)}
   <img class="hero-bg-img" src="{{ 'img-002.jpg' | asset_url }}" alt="Lemon Paris"/>
   <div class="hero-overlay"></div>
   <header class="hero-header">
-    <a href="#" class="hero-logo-pill">
-      <img src="{{ 'img-003.jpg' | asset_url }}" alt="Lemon Paris"/>
+    <a href="#" class="hero-logo-link">
+      <svg class="hero-logo-svg" viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg" aria-label="Lemon Paris">
+        <path d="M8,68 C52,8 128,4 170,4 C212,4 288,8 332,68 C288,128 212,132 170,132 C128,132 52,128 8,68Z" fill="white"/>
+        <circle cx="88" cy="40" r="3.5" fill="rgba(0,0,0,0.18)"/>
+        <circle cx="70" cy="56" r="2.5" fill="rgba(0,0,0,0.14)"/>
+        <circle cx="110" cy="48" r="2" fill="rgba(0,0,0,0.16)"/>
+        <circle cx="58" cy="70" r="3" fill="rgba(0,0,0,0.12)"/>
+        <circle cx="128" cy="36" r="2" fill="rgba(0,0,0,0.14)"/>
+        <circle cx="258" cy="86" r="2.5" fill="rgba(0,0,0,0.1)"/>
+        <text x="170" y="168" text-anchor="middle" textLength="278" lengthAdjust="spacing" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="44" fill="white" font-weight="300">lemon</text>
+        <text x="170" y="193" text-anchor="middle" textLength="118" lengthAdjust="spacing" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" fill="white" font-weight="300">paris</text>
+      </svg>
     </a>
     <button class="hero-menu-btn" onclick="openMobileNav()" aria-label="Menu"><span></span><span></span><span></span></button>
   </header>
@@ -1056,7 +1067,20 @@ footer{background:var(--dark);padding:64px 50px 32px;color:var(--white)}
 </section>
 
 <header class="site-header" id="siteHeader">
-  <a href="#hero" class="shf-logo"><img class="shf-logo-img" src="{{ 'img-003.jpg' | asset_url }}" alt="Lemon Paris"/></a>
+  <a href="#hero" class="shf-logo">
+    <svg class="shf-logo-svg" viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg" aria-label="Lemon Paris">
+      <path d="M8,68 C52,8 128,4 170,4 C212,4 288,8 332,68 C288,128 212,132 170,132 C128,132 52,128 8,68Z" fill="#1a1a1a"/>
+      <circle cx="88" cy="40" r="3.5" fill="rgba(255,255,255,0.72)"/>
+      <circle cx="70" cy="56" r="2.5" fill="rgba(255,255,255,0.62)"/>
+      <circle cx="110" cy="48" r="2" fill="rgba(255,255,255,0.68)"/>
+      <circle cx="58" cy="70" r="3" fill="rgba(255,255,255,0.55)"/>
+      <circle cx="128" cy="36" r="2" fill="rgba(255,255,255,0.65)"/>
+      <circle cx="258" cy="86" r="2.5" fill="rgba(255,255,255,0.45)"/>
+      <circle cx="242" cy="74" r="1.8" fill="rgba(255,255,255,0.4)"/>
+      <text x="170" y="168" text-anchor="middle" textLength="278" lengthAdjust="spacing" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="44" fill="#1a1a1a" font-weight="300">lemon</text>
+      <text x="170" y="193" text-anchor="middle" textLength="118" lengthAdjust="spacing" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" fill="#1a1a1a" font-weight="300">paris</text>
+    </svg>
+  </a>
   <nav class="shf-nav">
     <div class="nav-dropdown"><a href="#collection">Collection <span class="nav-arrow"></span></a><div class="nav-sub"><a href="#collection" onclick="filterCat('ensembles')">Ensembles</a><a href="#collection" onclick="filterCat('tshirts')">T-shirts &amp; Shorts</a><a href="#collection" onclick="filterCat('casquettes')">Casquettes</a></div></div><a href="#about">La Marque</a>
     <a href="#newsletter" class="shf-cta">Newsletter</a>
