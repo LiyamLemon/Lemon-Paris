@@ -1,0 +1,2422 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {{ content_for_header }}
+
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lemon Paris — Summer Riviera 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--white:#FFFFFF;--cream:#FAFAF8;--light:#F5F3EF;--gold:#C9AA6A;--dark:#111111;--gray:#6B6B6B;--gray-light:#D4D4D4;--fd:'Cormorant Garamond',serif;--fb:'Montserrat',sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--white);color:var(--dark);overflow-x:hidden}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s cubic-bezier(0.22,1,0.36,1),transform 0.7s cubic-bezier(0.22,1,0.36,1);will-change:opacity,transform}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.08s}.reveal-delay-2{transition-delay:0.16s}.reveal-delay-3{transition-delay:0.24s}.reveal-delay-4{transition-delay:0.32s}
+
+/* HERO */
+#hero{position:relative;width:100%;height:100vh;min-height:640px;overflow:hidden;display:flex;flex-direction:column}
+.hero-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;transform:scale(1.03);animation:heroZoom 12s cubic-bezier(0.25,0.46,0.45,0.94) forwards}
+@keyframes heroZoom{0%{transform:scale(1.03)}100%{transform:scale(1.0)}}
+.hero-bg-img-mobile{display:none}@media(max-width:768px){.hero-bg-img{display:none}.hero-bg-img-mobile{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.08) 35%,rgba(0,0,0,0.18) 65%,rgba(0,0,0,0.55) 100%);z-index:1}
+.hero-header{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:22px 28px}
+.hero-logo-img{height:52px;width:auto;filter:brightness(0) invert(1);opacity:0;animation:fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.2s forwards}
+@keyframes fadeUp{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
+.hero-menu-btn{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;gap:6px;padding:4px}
+.hero-menu-btn span{display:block;width:26px;height:1.5px;background:var(--white)}
+.hero-content{position:relative;z-index:5;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;padding:10px 24px 48px}
+.hero-center{display:flex;flex-direction:column;align-items:center;margin-top:auto;margin-bottom:auto;padding-top:30px}
+.hero-main-title{font-family:var(--fb);font-size:clamp(52px,11vw,110px);font-weight:300;letter-spacing:clamp(8px,2vw,22px);line-height:1;color:var(--white);margin-bottom:6px;opacity:0;animation:fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.5s forwards}
+.hero-main-subtitle-word{font-family:var(--fb);font-size:clamp(18px,3.5vw,36px);font-weight:300;letter-spacing:clamp(10px,3vw,28px);color:var(--white);margin-bottom:20px;opacity:0;animation:fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.7s forwards}
+.hero-phrase{font-family:var(--fd);font-size:clamp(14px,2vw,20px);font-weight:300;font-style:italic;color:rgba(255,255,255,0.82);letter-spacing:0.5px;line-height:1.6;max-width:400px;opacity:0;animation:fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.9s forwards}
+.hero-buttons{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;opacity:0;animation:fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 1.3s forwards}
+.hero-btn-primary{font-family:var(--fb);font-size:10px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--dark);background:rgba(255,255,255,0.92);text-decoration:none;padding:16px 0;width:min(440px,85vw);display:block;text-align:center;border:1px solid rgba(255,255,255,0.9);transition:background .3s,color .3s,transform .3s}
+.hero-btn-primary:hover{background:var(--gold);color:var(--white);border-color:var(--gold);transform:translateY(-2px)}
+.hero-btn-secondary{font-family:var(--fb);font-size:10px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.88);background:transparent;text-decoration:none;padding:15px 0;width:min(440px,85vw);display:block;text-align:center;border:1px solid rgba(255,255,255,0.45);transition:border-color .3s,background .3s,transform .3s}
+.hero-btn-secondary:hover{border-color:var(--white);background:rgba(255,255,255,0.1);transform:translateY(-2px)}
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:5;display:flex;flex-direction:column;align-items:center;gap:9px;opacity:0;animation:fadeIn 1s ease 2.2s forwards}
+.hero-scroll-label{font-family:var(--fb);font-size:8px;font-weight:300;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.45)}
+.hero-scroll-line{width:1px;height:44px;background:rgba(255,255,255,0.2);position:relative;overflow:hidden}
+.hero-scroll-line::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:rgba(255,255,255,0.7);animation:scrollAnim 2s ease infinite}
+@keyframes scrollAnim{0%{top:-100%}100%{top:100%}}
+
+/* FIXED HEADER */
+.site-header{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,0,0,0.05);transform:translateY(-100%);transition:transform .45s cubic-bezier(0.22,1,0.36,1)}
+.site-header.visible{transform:translateY(0)}
+.shf-logo{display:flex;align-items:center;text-decoration:none}
+.shf-logo-img{height:36px;width:auto}
+.shf-nav{display:flex;gap:34px;align-items:center}
+.shf-nav a{font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--dark);text-decoration:none;transition:color .3s}
+.shf-nav a:hover{color:var(--gold)}
+.shf-cta{background:var(--dark);color:var(--white)!important;padding:10px 22px}
+.shf-cta:hover{background:var(--gold)!important}
+
+/* MOBILE NAV */
+.mobile-nav{display:none;position:fixed;inset:0;background:rgba(10,10,10,0.97);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:40px}
+.mobile-nav.open{display:flex}
+.mobile-nav a{font-family:var(--fb);font-size:12px;font-weight:300;letter-spacing:6px;text-transform:uppercase;color:var(--white);text-decoration:none;transition:color .3s}
+.mobile-nav a:hover{color:var(--gold)}
+.mobile-nav-close{position:absolute;top:28px;right:28px;background:none;border:none;color:var(--white);font-size:24px;cursor:pointer}
+
+/* REASSURANCE */
+#reassurance{padding:52px 50px;background:var(--white);border-bottom:1px solid rgba(0,0,0,0.06)}
+.reassurance-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:0}
+.reassurance-item{display:flex;flex-direction:column;align-items:center;text-align:center;flex:1;padding:0 32px;position:relative}
+.reassurance-item+.reassurance-item::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:1px;height:36px;background:rgba(0,0,0,0.1)}
+.reassurance-icon{font-size:18px;margin-bottom:10px;color:var(--dark);line-height:1}
+.reassurance-stars{color:var(--gold);font-size:13px;letter-spacing:2px;margin-bottom:8px}
+.reassurance-label{font-family:var(--fb);font-size:11px;font-weight:500;letter-spacing:2px;color:var(--dark);text-transform:uppercase;margin-bottom:3px}
+.reassurance-sub{font-family:var(--fb);font-size:10px;font-weight:300;letter-spacing:1px;color:var(--gray)}
+
+/* NEWSLETTER */
+#newsletter{padding:80px 50px;background:var(--dark);text-align:center}
+.nl-eye{font-size:9px;font-weight:500;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.nl-title{font-family:var(--fd);font-size:clamp(28px,5vw,52px);font-weight:300;color:var(--white);margin-bottom:10px}
+.nl-sub{font-size:12px;font-weight:300;color:rgba(255,255,255,0.4);margin-bottom:36px}
+.nl-form{display:flex;max-width:440px;margin:0 auto;border:1px solid rgba(201,170,106,0.4)}
+.nl-input{flex:1;background:transparent;border:none;outline:none;padding:15px 18px;font-family:var(--fb);font-size:12px;color:var(--white)}
+.nl-input::placeholder{color:rgba(255,255,255,0.3)}
+.nl-btn{background:var(--gold);color:var(--white);border:none;padding:15px 24px;font-family:var(--fb);font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:background .3s}
+.nl-btn:hover{background:#b8962f}
+
+/* COLLECTION */
+#collection{padding:90px 40px;background:var(--white)}
+.sec-header{text-align:center;margin-bottom:56px}
+.sec-eye{font-size:9px;font-weight:500;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.sec-title{font-family:var(--fd);font-size:clamp(34px,6vw,60px);font-weight:300;color:var(--dark);line-height:1}
+.sec-title em{font-style:italic;color:var(--gold)}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1400px;margin:0 auto;width:100%}
+.product-card{cursor:pointer;opacity:0;transform:translateY(24px);transition:opacity 0.7s cubic-bezier(0.22,1,0.36,1),transform 0.7s cubic-bezier(0.22,1,0.36,1)}
+.product-card.visible{opacity:1;transform:translateY(0)}
+.product-card:nth-child(1){transition-delay:0s}.product-card:nth-child(2){transition-delay:0.1s}.product-card:nth-child(3){transition-delay:0.2s}.product-card:nth-child(4){transition-delay:0s}.product-card:nth-child(5){transition-delay:0.1s}
+.product-img-wrap{position:relative;aspect-ratio:2/3;overflow:hidden;background:var(--light);margin-bottom:18px;cursor:pointer}
+@supports not (aspect-ratio: 1){.product-img-wrap::before{content:'';display:block;padding-top:150%}}
+.slider{position:absolute;inset:0}
+.slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:0;transition:opacity .45s ease,transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94)}
+.slide.active{opacity:1}
+.product-card:hover .product-img-wrap .slide.active{transform:scale(1.05)}
+.slide-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:5}
+.sdot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.5);cursor:pointer;transition:background .3s;border:1px solid rgba(255,255,255,0.6);touch-action:manipulation}
+.sdot.active{background:var(--white)}
+.slide-prev,.slide-next{position:absolute;top:50%;transform:translateY(-50%);z-index:5;background:rgba(255,255,255,0.88);border:none;cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--dark);opacity:0;transition:opacity .2s;border-radius:50%}
+.slide-prev{left:10px}.slide-next{right:10px}
+.product-img-wrap:hover .slide-prev,.product-img-wrap:hover .slide-next{opacity:1}
+.product-badge{position:absolute;top:12px;left:12px;z-index:3;background:var(--dark);color:var(--white);font-size:8px;font-weight:600;letter-spacing:3px;text-transform:uppercase;padding:4px 10px}
+.product-badge.new{background:var(--gold)}
+.product-info{padding:0 2px}
+.product-collection{font-size:9px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.product-name{font-family:var(--fd);font-size:19px;font-weight:400;color:var(--dark);margin-bottom:8px}
+.product-price{font-family:var(--fd);font-size:20px;font-weight:600;color:var(--dark)}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:9000;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.active{display:flex!important}
+.modal{background:var(--white);max-width:860px;width:100%;display:grid;grid-template-columns:1fr 1fr;position:relative;max-height:90vh;overflow-y:auto;border-radius:2px}
+.modal-close{position:absolute;top:12px;right:12px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--dark);z-index:10;width:32px;height:32px;display:flex;align-items:center;justify-content:center}
+.modal-img-area{background:var(--light);position:relative;overflow:hidden;min-height:340px}
+.mslider{position:absolute;inset:0}
+.mslide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:0;transition:opacity .45s}
+.mslide.active{opacity:1}
+.mslide-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:7px;z-index:5}
+.msdot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,0.5);cursor:pointer;border:1px solid rgba(255,255,255,0.6);transition:background .3s;touch-action:manipulation}
+.msdot.active{background:var(--white)}
+.mslide-prev,.mslide-next{position:absolute;top:50%;transform:translateY(-50%);z-index:5;background:rgba(255,255,255,0.88);border:none;cursor:pointer;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--dark);border-radius:50%}
+.mslide-prev{left:10px}.mslide-next{right:10px}
+.modal-content{padding:36px 30px;display:flex;flex-direction:column;justify-content:center}
+.modal-eyebrow{font-size:9px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.modal-title{font-family:var(--fd);font-size:28px;font-weight:400;color:var(--dark);margin-bottom:6px}
+.modal-price{font-family:var(--fd);font-size:22px;font-weight:600;color:var(--dark);margin-bottom:16px}
+.modal-desc{font-size:12px;font-weight:300;color:var(--gray);line-height:1.9;margin-bottom:22px}
+.sizes-label{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--dark);margin-bottom:8px}
+.sizes-grid{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
+.size-btn{width:38px;height:38px;border:1px solid var(--gray-light);background:none;font-family:var(--fb);font-size:11px;font-weight:500;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.size-btn:hover,.size-btn.active{background:var(--dark);color:var(--white);border-color:var(--dark)}
+.payment-methods{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.payment-chip{border:1px solid var(--gray-light);padding:6px 10px;font-size:10px;font-weight:500;border-radius:4px}
+.btn-buy{background:var(--dark);color:var(--white);border:none;padding:15px;font-family:var(--fb);font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;cursor:pointer;transition:background .3s;width:100%;margin-bottom:8px}
+.btn-buy:hover{background:var(--gold)}
+.btn-apple{background:var(--dark);color:var(--white);border:none;padding:13px;font-family:var(--fb);font-size:13px;font-weight:500;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:6px;border-radius:5px}
+.btn-apple:hover{background:#333}
+
+/* UPSELL */
+.modal-upsell{padding:24px 30px 32px;border-top:1px solid rgba(0,0,0,0.07);background:var(--cream);grid-column:1/-1}
+.modal-upsell-title{font-family:var(--fd);font-size:18px;font-weight:300;color:var(--dark);letter-spacing:1px;margin-bottom:18px;text-align:center}
+.modal-upsell-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.modal-upsell-card{cursor:pointer;transition:transform 0.35s cubic-bezier(0.22,1,0.36,1)}
+.modal-upsell-card:hover{transform:translateY(-4px)}
+.modal-upsell-img-wrap{overflow:hidden;aspect-ratio:2/3;background:var(--light);margin-bottom:8px}
+.modal-upsell-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94)}
+.modal-upsell-card:hover .modal-upsell-img-wrap img{transform:scale(1.06)}
+.modal-upsell-name{font-family:var(--fd);font-size:13px;font-weight:400;color:var(--dark);margin-bottom:3px;text-align:center}
+.modal-upsell-price{font-family:var(--fb);font-size:10px;font-weight:400;color:var(--gray);letter-spacing:1px;text-align:center}
+.modal-upsell-btn{display:block;width:100%;margin-top:8px;padding:7px 0;font-family:var(--fb);font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--dark);background:transparent;border:1px solid rgba(0,0,0,0.18);cursor:pointer;transition:background .3s,color .3s;text-align:center}
+.modal-upsell-btn:hover{background:var(--dark);color:var(--white);border-color:var(--dark)}
+
+/* ABOUT */
+.about-outer{background:var(--light)}
+#about{padding:90px 50px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1160px;margin:0 auto}
+.about-title{font-family:var(--fd);font-size:clamp(30px,5vw,46px);font-weight:300;color:var(--dark);line-height:1.15;margin-bottom:24px}
+.about-title em{font-style:italic;color:var(--gold)}
+.about-text{font-size:13px;font-weight:300;color:var(--gray);line-height:2;margin-bottom:14px}
+.about-sig{font-family:var(--fd);font-size:24px;font-style:italic;color:var(--gold);margin-top:28px}
+.about-card{background:var(--white);padding:30px;box-shadow:0 14px 44px rgba(0,0,0,0.06)}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.stat-num{font-family:var(--fd);font-size:46px;font-weight:300;color:var(--dark);line-height:1;margin-bottom:4px}
+.stat-lbl{font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
+
+/* FOOTER */
+footer{background:var(--dark);padding:64px 50px 32px;color:var(--white)}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 1fr;gap:36px;margin-bottom:44px}
+.footer-logo-wrap{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.footer-brand-col{line-height:1.4}
+.fl-lemon{font-family:var(--fb);font-size:14px;font-weight:400;letter-spacing:5px;color:rgba(255,255,255,0.8);text-transform:lowercase;display:block}
+.fl-paris{font-family:var(--fb);font-size:10px;font-weight:300;letter-spacing:6px;color:rgba(255,255,255,0.5);text-transform:lowercase;display:block}
+.footer-desc{font-size:12px;font-weight:300;color:rgba(255,255,255,0.4);line-height:1.8;max-width:260px}
+.footer-h{font-size:9px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-links a{font-size:12px;font-weight:300;color:rgba(255,255,255,0.5);text-decoration:none;transition:color .3s, transform .3s;display:inline-block}
+.footer-links a:hover{color:var(--gold);transform:translateX(4px)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:22px;display:flex;align-items:center;justify-content:space-between}
+.footer-copy{font-size:11px;font-weight:300;color:rgba(255,255,255,0.3)}
+.footer-ig a{font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);text-decoration:none;transition:color .3s}
+.footer-ig a:hover{color:var(--gold)}
+
+@media(max-width:768px){
+  .hero-header{padding:20px 20px}.hero-main-title{letter-spacing:clamp(5px,3vw,14px)}.hero-main-subtitle-word{letter-spacing:clamp(6px,4vw,18px)}
+  #hero{height:80vh;min-height:500px}
+  
+  .site-header{padding:12px 16px}.shf-nav{display:none}
+  #reassurance{padding:40px 24px}.reassurance-inner{flex-direction:column;gap:32px}.reassurance-item+.reassurance-item::before{width:40px;height:1px;top:-16px;left:50%;transform:translateX(-50%)}.reassurance-item{padding:0}
+  .products-grid{grid-template-columns:repeat(2,1fr);gap:10px}#collection{padding:64px 10px}
+  .product-card{touch-action:manipulation}.product-img-wrap{min-height:240px}
+  #about{grid-template-columns:1fr;padding:64px 16px;gap:40px}
+  .footer-top{grid-template-columns:1fr 1fr;gap:28px}footer{padding:48px 16px 26px}
+  #newsletter{padding:64px 16px}
+  .modal{grid-template-columns:1fr;border-radius:0}.modal-overlay{padding:0;align-items:flex-start}.modal-img-area{aspect-ratio:2/3;min-height:unset}
+  .modal-upsell{padding:18px 14px 24px}.modal-upsell-grid{gap:8px}.modal-upsell-name{font-size:11px}
+}
+
+/* ══ PRODUCT BADGES FEATURES ══ */
+.modal-features {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+.modal-feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--fb);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: var(--dark);
+}
+.modal-feature-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--dark);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* ══ PRODUCT DESCRIPTION BLOCK ══ */
+.modal-description {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+.modal-desc-label {
+  font-family: var(--fb);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--dark);
+  margin-bottom: 10px;
+}
+.modal-desc-text {
+  font-family: var(--fd);
+  font-size: 15px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--gray);
+  line-height: 1.8;
+}
+
+/* ══ PHOTO TRANSITION SMOOTH ══ */
+.mslide {
+  transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1) !important;
+}
+
+/* ══ HOVER ZOOM on modal image ══ */
+.modal-img-area {
+  overflow: hidden;
+}
+.modal-img-area .mslide {
+  transform-origin: center center;
+  transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94) !important;
+}
+.modal-img-area:hover .mslide.active {
+  transform: scale(1.04);
+}
+
+
+/* ══ REVIEWS SECTION ══ */
+#reviews {
+  padding: 0 0 100px;
+  background: var(--cream);
+  overflow: hidden;
+}
+
+/* Hero header with background photo */
+.reviews-header {
+  position: relative;
+  text-align: center;
+  padding: 130px 50px 100px;
+  margin-bottom: 72px;
+  overflow: hidden;
+}
+.reviews-header-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  transform: scale(1.05);
+  transition: transform 0.1s linear;
+  will-change: transform;
+}
+.reviews-header-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(250,250,248,0.92) 0%,
+    rgba(250,250,248,0.88) 50%,
+    rgba(250,250,248,0.96) 100%
+  );
+}
+.reviews-header-content {
+  position: relative;
+  z-index: 2;
+}
+.reviews-eyebrow {
+  font-family: var(--fb);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 7px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 18px;
+}
+.reviews-title {
+  font-family: var(--fd);
+  font-size: clamp(36px, 5.5vw, 64px);
+  font-weight: 200;
+  color: var(--dark);
+  line-height: 1.05;
+  margin-bottom: 18px;
+}
+.reviews-subtitle {
+  font-family: var(--fd);
+  font-size: clamp(14px, 1.8vw, 19px);
+  font-weight: 300;
+  font-style: italic;
+  color: #555;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Cards grid */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto 20px;
+}
+.reviews-grid-bottom {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 740px;
+  margin: 0 auto;
+}
+
+/* Card */
+.review-card {
+  background: var(--white);
+  border-radius: 6px;
+  padding: 36px 32px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s ease;
+}
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.09);
+}
+.review-stars {
+  color: var(--gold);
+  font-size: 14px;
+  letter-spacing: 3px;
+}
+.review-text {
+  font-family: var(--fd);
+  font-size: 16px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--dark);
+  line-height: 1.75;
+  flex: 1;
+}
+.review-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+.review-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--fb);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--white);
+  flex-shrink: 0;
+  letter-spacing: 0;
+}
+.review-name {
+  font-family: var(--fb);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: var(--dark);
+  text-transform: uppercase;
+}
+.review-label {
+  font-family: var(--fb);
+  font-size: 9px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  color: var(--gray);
+  margin-top: 2px;
+}
+
+/* Global rating strip */
+.reviews-rating-strip {
+  text-align: center;
+  margin-top: 60px;
+}
+.reviews-rating-number {
+  font-family: var(--fd);
+  font-size: 52px;
+  font-weight: 200;
+  color: var(--dark);
+  line-height: 1;
+}
+.reviews-rating-stars {
+  color: var(--gold);
+  font-size: 18px;
+  letter-spacing: 4px;
+  margin: 8px 0;
+}
+.reviews-rating-label {
+  font-family: var(--fb);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+@media (max-width: 900px) {
+  #reviews { padding: 0 0 72px; }
+  .reviews-header { padding: 90px 20px 72px; margin-bottom: 40px; }
+  .reviews-grid { grid-template-columns: 1fr; padding: 0 16px; }
+  .reviews-grid-bottom { grid-template-columns: 1fr; max-width: 100%; padding: 0 16px; }
+  .review-card { padding: 28px 24px; }
+}
+
+
+/* ══ RARITY BADGE ══ */
+.rarity-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--fb);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.rarity-badge::before {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.8;
+}
+
+
+/* ══ CART DRAWER ══ */
+.cart-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 400;
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.cart-overlay.open { display: block; }
+.cart-overlay.visible { opacity: 1; }
+
+.cart-drawer {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: 420px;
+  max-width: 100vw;
+  background: var(--white);
+  z-index: 401;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.45s cubic-bezier(0.22,1,0.36,1);
+  box-shadow: -8px 0 40px rgba(0,0,0,0.12);
+}
+.cart-drawer.open { transform: translateX(0); }
+
+.cart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 28px 20px;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+.cart-title {
+  font-family: var(--fd);
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--dark);
+  letter-spacing: 0.5px;
+}
+.cart-close {
+  width: 36px; height: 36px;
+  background: none; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--dark); font-size: 20px;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+.cart-close:hover { background: var(--light); }
+
+.cart-body { flex: 1; overflow-y: auto; padding: 24px 28px; }
+
+/* Added product card */
+.cart-item {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  animation: cartItemIn 0.4s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+@keyframes cartItemIn {
+  from { opacity:0; transform:translateY(12px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.cart-item-img {
+  width: 80px; height: 100px;
+  object-fit: cover; object-position: center top;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.cart-item-info { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.cart-item-collection {
+  font-family: var(--fb); font-size: 8px; font-weight: 500;
+  letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 4px;
+}
+.cart-item-name {
+  font-family: var(--fd); font-size: 16px; font-weight: 400; color: var(--dark);
+  margin-bottom: 4px;
+}
+.cart-item-size {
+  font-family: var(--fb); font-size: 10px; font-weight: 300;
+  letter-spacing: 2px; color: var(--gray); margin-bottom: 8px;
+}
+.cart-item-price {
+  font-family: var(--fd); font-size: 18px; font-weight: 600; color: var(--dark);
+}
+.cart-added-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--fb); font-size: 9px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase; color: #2d7a4f;
+  margin-bottom: 12px;
+}
+.cart-added-badge::before {
+  content: ''; display: block; width: 6px; height: 6px;
+  border-radius: 50%; background: #2d7a4f;
+}
+
+/* Upsell in cart */
+.cart-upsell { margin-top: 8px; }
+.cart-upsell-title {
+  font-family: var(--fb); font-size: 9px; font-weight: 500;
+  letter-spacing: 4px; text-transform: uppercase; color: var(--dark);
+  margin-bottom: 14px;
+}
+.cart-upsell-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px;
+}
+.cart-upsell-card {
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+}
+.cart-upsell-card:hover { transform: translateY(-3px); }
+.cart-upsell-img {
+  width: 100%; aspect-ratio: 3/4;
+  object-fit: cover; object-position: center top;
+  border-radius: 2px; margin-bottom: 6px;
+  transition: transform 0.4s ease;
+}
+.cart-upsell-card:hover .cart-upsell-img { transform: scale(1.04); overflow: hidden; }
+.cart-upsell-name {
+  font-family: var(--fd); font-size: 12px; font-weight: 400;
+  color: var(--dark); text-align: center; margin-bottom: 2px;
+}
+.cart-upsell-price {
+  font-family: var(--fb); font-size: 10px; font-weight: 300;
+  color: var(--gray); text-align: center;
+}
+
+/* Cart footer */
+.cart-footer {
+  padding: 20px 28px 28px;
+  border-top: 1px solid rgba(0,0,0,0.07);
+}
+.cart-total {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 18px;
+}
+.cart-total-label {
+  font-family: var(--fb); font-size: 10px; font-weight: 500;
+  letter-spacing: 3px; text-transform: uppercase; color: var(--dark);
+}
+.cart-total-price {
+  font-family: var(--fd); font-size: 24px; font-weight: 600; color: var(--dark);
+}
+.cart-btn-continue {
+  display: block; width: 100%; padding: 14px;
+  text-align: center; font-family: var(--fb);
+  font-size: 10px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--dark); background: transparent;
+  border: 1px solid rgba(0,0,0,0.15); cursor: pointer;
+  transition: all 0.3s; margin-bottom: 10px;
+}
+.cart-btn-continue:hover { border-color: var(--dark); background: var(--dark); color: var(--white); }
+
+.cart-btn-checkout {
+  display: block; width: 100%; padding: 16px;
+  text-align: center; font-family: var(--fb);
+  font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--white); background: var(--dark);
+  border: none; cursor: pointer;
+  transition: background 0.3s; margin-bottom: 10px;
+}
+.cart-btn-checkout:hover { background: #333; }
+
+/* Apple Pay button */
+.cart-btn-applepay {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; padding: 15px;
+  background: var(--dark); color: var(--white);
+  border: none; border-radius: 8px; cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px; font-weight: 500; letter-spacing: 0;
+  transition: background 0.3s; gap: 6px;
+}
+.cart-btn-applepay:hover { background: #1a1a1a; }
+.cart-btn-applepay svg { width: 32px; height: 20px; }
+
+/* ══ SIZE BUTTON IMPROVEMENTS ══ */
+.size-btn {
+  position: relative;
+  overflow: hidden;
+}
+.size-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--dark);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1);
+  z-index: 0;
+}
+.size-btn span { position: relative; z-index: 1; }
+.size-btn:hover::after { transform: scaleX(1); }
+.size-btn:hover { color: var(--white); border-color: var(--dark); }
+.size-btn.active::after { transform: scaleX(1); }
+.size-btn.active { color: var(--white); }
+
+/* ══ ADD TO CART BUTTON ══ */
+.btn-buy {
+  position: relative;
+  overflow: hidden;
+  transform: translateY(0);
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s !important;
+}
+.btn-buy:hover {
+  background: var(--gold) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+.btn-buy:active { transform: translateY(0); }
+.btn-buy.success {
+  background: #2d7a4f !important;
+  transform: translateY(-2px);
+}
+
+/* ══ APPLE PAY MODAL BUTTON ══ */
+.btn-apple {
+  background: #000 !important;
+  border-radius: 8px !important;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  padding: 15px !important;
+}
+
+@media (max-width: 768px) {
+  .cart-drawer { width: 100%; }
+  .cart-upsell-grid { grid-template-columns: repeat(3,1fr); }
+}
+
+
+@keyframes sizeshake {
+  0%,100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+
+/* ══ CART ITEM CONTROLS ══ */
+.cart-item-qty {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+.cart-qty-btn {
+  width: 26px; height: 26px;
+  border: 1px solid rgba(0,0,0,0.18);
+  background: none; cursor: pointer;
+  font-size: 14px; font-weight: 300;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; border-radius: 2px;
+  color: var(--dark);
+}
+.cart-qty-btn:hover { background: var(--dark); color: var(--white); border-color: var(--dark); }
+.cart-qty-num {
+  font-family: var(--fb); font-size: 12px; font-weight: 500;
+  color: var(--dark); min-width: 16px; text-align: center;
+}
+.cart-item-remove {
+  font-family: var(--fb); font-size: 9px; font-weight: 400;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gray); background: none; border: none;
+  cursor: pointer; padding: 0; margin-top: 6px;
+  transition: color 0.2s; display: block;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.cart-item-remove:hover { color: var(--dark); }
+.cart-empty {
+  text-align: center; padding: 60px 20px;
+}
+.cart-empty-title {
+  font-family: var(--fd); font-size: 24px; font-weight: 300;
+  color: var(--dark); margin-bottom: 10px;
+}
+.cart-empty-sub {
+  font-family: var(--fb); font-size: 11px; font-weight: 300;
+  letter-spacing: 2px; color: var(--gray);
+}
+.cart-count-badge {
+  position: absolute; top: -6px; right: -6px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--dark); color: var(--white);
+  font-family: var(--fb); font-size: 9px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  display: none;
+}
+
+
+/* ══ CART ICON ══ */
+.cart-icon-btn {
+  position: relative;
+  background: none; border: none; cursor: pointer;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--dark); transition: color 0.3s;
+  margin-left: 8px;
+}
+.cart-icon-btn:hover { color: var(--gold); }
+.cart-count {
+  position: absolute; top: 2px; right: 2px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--dark); color: var(--white);
+  font-family: var(--fb); font-size: 9px; font-weight: 600;
+  display: flex !important; align-items: center; justify-content: center;
+  line-height: 1;
+}
+
+/* ══ CHECKOUT PAGE ══ */
+.checkout-overlay {
+  display: none; position: fixed; inset: 0;
+  background: var(--cream); z-index: 500;
+  overflow-y: auto;
+}
+.checkout-overlay.open { display: block; }
+
+.checkout-page {
+  max-width: 560px; margin: 0 auto;
+  padding: 40px 24px 80px;
+  min-height: 100vh;
+}
+.checkout-logo {
+  text-align: center; margin-bottom: 36px;
+}
+.checkout-logo img { height: 48px; width: auto; }
+
+/* Progress bar */
+.checkout-progress {
+  display: flex; align-items: center;
+  margin-bottom: 44px; padding: 0 8px;
+}
+.cp-step {
+  display: flex; flex-direction: column; align-items: center;
+  flex: 1; position: relative;
+}
+.cp-step-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  border: 2px solid var(--gray-light);
+  background: var(--white); z-index: 1;
+  transition: all 0.3s;
+}
+.cp-step.active .cp-step-dot { background: var(--dark); border-color: var(--dark); }
+.cp-step.done .cp-step-dot { background: var(--dark); border-color: var(--dark); }
+.cp-step-label {
+  font-family: var(--fb); font-size: 8px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gray); margin-top: 6px; text-align: center;
+}
+.cp-step.active .cp-step-label { color: var(--dark); }
+.cp-step-line {
+  position: absolute; top: 5px; left: calc(50% + 8px);
+  right: calc(-50% + 8px); height: 1px;
+  background: var(--gray-light);
+}
+.cp-step.done .cp-step-line { background: var(--dark); }
+
+/* Checkout content */
+.checkout-title {
+  font-family: var(--fd); font-size: 28px; font-weight: 300;
+  color: var(--dark); margin-bottom: 6px;
+}
+.checkout-subtitle {
+  font-family: var(--fb); font-size: 11px; font-weight: 300;
+  letter-spacing: 1px; color: var(--gray); margin-bottom: 32px;
+}
+
+/* Cart summary */
+.co-item {
+  display: flex; gap: 16px;
+  padding: 20px 0; border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.co-item-img {
+  width: 72px; height: 90px; object-fit: cover;
+  object-position: center top; border-radius: 2px; flex-shrink: 0;
+}
+.co-item-info { flex: 1; }
+.co-item-name { font-family: var(--fd); font-size: 17px; font-weight: 400; color: var(--dark); margin-bottom: 4px; }
+.co-item-meta { font-family: var(--fb); font-size: 10px; font-weight: 300; letter-spacing: 1px; color: var(--gray); margin-bottom: 10px; }
+.co-item-row { display: flex; align-items: center; justify-content: space-between; }
+.co-item-price { font-family: var(--fd); font-size: 18px; font-weight: 600; color: var(--dark); }
+.co-qty { display: flex; align-items: center; gap: 10px; }
+.co-qty-btn {
+  width: 28px; height: 28px; border: 1px solid rgba(0,0,0,0.15);
+  background: none; cursor: pointer; font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; border-radius: 2px; color: var(--dark);
+}
+.co-qty-btn:hover { background: var(--dark); color: var(--white); }
+.co-qty-num { font-family: var(--fb); font-size: 13px; font-weight: 500; min-width: 20px; text-align: center; }
+.co-remove {
+  font-family: var(--fb); font-size: 9px; font-weight: 400;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gray); background: none; border: none; cursor: pointer;
+  text-decoration: underline; text-underline-offset: 3px;
+  transition: color 0.2s; padding: 0; margin-top: 8px; display: block;
+}
+.co-remove:hover { color: var(--dark); }
+
+/* Totals */
+.co-totals { margin-top: 28px; }
+.co-total-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.co-total-label { font-family: var(--fb); font-size: 11px; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); }
+.co-total-val { font-family: var(--fd); font-size: 18px; font-weight: 400; color: var(--dark); }
+.co-total-row.grand { border-bottom: none; margin-top: 4px; }
+.co-total-row.grand .co-total-label { color: var(--dark); font-weight: 600; font-size: 12px; }
+.co-total-row.grand .co-total-val { font-size: 26px; font-weight: 600; }
+
+/* Checkout buttons */
+.co-btn-primary {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; padding: 18px;
+  background: var(--dark); color: var(--white);
+  border: none; cursor: pointer; margin-top: 20px;
+  font-family: var(--fb); font-size: 11px; font-weight: 600;
+  letter-spacing: 4px; text-transform: uppercase;
+  transition: background 0.3s, transform 0.2s;
+}
+.co-btn-primary:hover { background: #333; transform: translateY(-2px); }
+
+.co-btn-apple {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; padding: 17px; gap: 8px;
+  background: #000; color: #fff;
+  border: none; cursor: pointer; margin-top: 10px;
+  border-radius: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px; font-weight: 500;
+  transition: background 0.3s;
+}
+.co-btn-apple:hover { background: #1a1a1a; }
+.co-btn-apple svg { width: 36px; height: 22px; }
+
+.co-btn-back {
+  display: block; text-align: center; margin-top: 20px;
+  font-family: var(--fb); font-size: 10px; font-weight: 500;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--dark); background: none; border: 1px solid rgba(0,0,0,0.15);
+  padding: 12px 0; cursor: pointer; transition: all 0.2s; width: 100%;
+}
+.co-btn-back:hover { background: var(--light); border-color: var(--dark); }
+
+/* Form */
+.co-form { margin-top: 8px; }
+.co-form-section { margin-bottom: 32px; }
+.co-form-title {
+  font-family: var(--fb); font-size: 10px; font-weight: 600;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--dark); margin-bottom: 20px;
+  padding-bottom: 10px; border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+.co-field { margin-bottom: 18px; position: relative; }
+.co-field label {
+  display: block; font-family: var(--fb); font-size: 10px;
+  font-weight: 400; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gray); margin-bottom: 8px;
+}
+.co-field input, .co-field select {
+  width: 100%; padding: 14px 0;
+  border: none; border-bottom: 1px solid rgba(0,0,0,0.15);
+  background: transparent; outline: none;
+  font-family: var(--fb); font-size: 14px; font-weight: 300;
+  color: var(--dark); transition: border-color 0.3s;
+  -webkit-appearance: none; border-radius: 0;
+}
+.co-field input:focus, .co-field select:focus { border-bottom-color: var(--dark); }
+.co-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* Confirmation */
+.co-confirm {
+  text-align: center; padding: 40px 0;
+}
+.co-confirm-icon {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: #f0f9f4; border: 2px solid #2d7a4f;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px; font-size: 28px; color: #2d7a4f;
+}
+.co-confirm-title { font-family: var(--fd); font-size: 32px; font-weight: 300; color: var(--dark); margin-bottom: 12px; }
+.co-confirm-sub { font-family: var(--fb); font-size: 12px; font-weight: 300; letter-spacing: 1px; color: var(--gray); line-height: 1.8; }
+.co-confirm-order { font-family: var(--fb); font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin: 20px 0 8px; }
+
+
+/* ══ CATEGORY FILTER TABS ══ */
+.cat-tabs{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:52px;border-bottom:1px solid rgba(0,0,0,0.08)}
+.cat-tab{font-family:var(--fb);font-size:9px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--gray);background:none;border:none;cursor:pointer;padding:14px 28px;position:relative;transition:color .3s}
+.cat-tab::after{content:'';position:absolute;bottom:-1px;left:0;width:100%;height:1.5px;background:var(--dark);transform:scaleX(0);transition:transform .35s cubic-bezier(0.22,1,0.36,1)}
+.cat-tab:hover{color:var(--dark)}
+.cat-tab.active{color:var(--dark)}
+.cat-tab.active::after{transform:scaleX(1)}
+.product-card.hidden{display:none!important}
+/* ══ NAV DROPDOWN ══ */
+.nav-dropdown{position:relative;display:flex;align-items:center}
+.nav-dropdown>a{display:flex;align-items:center;gap:5px}
+.nav-arrow{display:inline-block;width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-top:4px solid currentColor;transition:transform .25s;margin-top:1px}
+.nav-dropdown:hover .nav-arrow{transform:rotate(180deg)}
+.nav-sub{position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%) translateY(-6px);background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);border:1px solid rgba(0,0,0,0.06);box-shadow:0 12px 40px rgba(0,0,0,0.08);padding:8px 0;min-width:185px;opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility .25s}
+.nav-dropdown:hover .nav-sub{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.nav-sub a{display:block;font-family:var(--fb);font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--dark)!important;padding:10px 22px;transition:color .2s,background .2s;text-decoration:none}
+.nav-sub a:hover{color:var(--gold)!important;background:rgba(201,170,106,0.05)}
+/* ══ MOBILE SUB ══ */
+.mobile-sub{display:flex;flex-direction:column;gap:18px;align-items:center;padding:14px 0 6px;border-top:1px solid rgba(255,255,255,0.08)}
+.mobile-sub a{font-family:var(--fb)!important;font-size:9px!important;letter-spacing:5px!important;text-transform:uppercase;color:rgba(255,255,255,0.5)!important;text-decoration:none;transition:color .3s}
+.mobile-sub a:hover{color:var(--gold)!important}
+@media(max-width:768px){.cat-tabs{flex-wrap:wrap}.cat-tab{padding:11px 12px;font-size:8px;letter-spacing:2.5px}}
+
+
+/* ══ CAP PRODUCT SLIDES — full cap visible ══ */
+.slide-cap-product {
+  object-fit: contain !important;
+  object-position: center center !important;
+  background: #FAFAF8;
+}
+.mslide-cap-product {
+  object-fit: contain !important;
+  object-position: center center !important;
+  background: #FAFAF8;
+}
+
+</style>
+
+</head>
+<body>
+
+
+<section id="hero">
+  <img class="hero-bg-img-mobile" src="{{ 'img-001.jpg' | asset_url }}" alt="Lemon Paris mobile"/>
+  <img class="hero-bg-img" src="{{ 'img-002.jpg' | asset_url }}" alt="Lemon Paris"/>
+  <div class="hero-overlay"></div>
+  <header class="hero-header">
+    <a href="#" style="text-decoration:none"><img class="hero-logo-img" src="{{ 'img-003.jpg' | asset_url }}" alt="Lemon Paris"/></a>
+    <button class="hero-menu-btn" onclick="openMobileNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </header>
+  <div class="hero-content">
+    <div class="hero-center">
+      <p class="hero-main-title">lemon</p>
+      <p class="hero-main-subtitle-word">paris</p>
+      <p class="hero-phrase">Pour une g&#233;n&#233;ration qui construit quelque chose de grand.</p>
+    </div>
+    <div class="hero-buttons">
+      <a href="#collection" class="hero-btn-primary">Voir la collection</a>
+      <a href="#about" class="hero-btn-secondary">Notre histoire</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><span class="hero-scroll-label">Scroll</span><div class="hero-scroll-line"></div></div>
+</section>
+
+<header class="site-header" id="siteHeader">
+  <a href="#hero" class="shf-logo"><img class="shf-logo-img" src="{{ 'img-003.jpg' | asset_url }}" alt="Lemon Paris"/></a>
+  <nav class="shf-nav">
+    <div class="nav-dropdown"><a href="#collection">Collection <span class="nav-arrow"></span></a><div class="nav-sub"><a href="#collection" onclick="filterCat('ensembles')">Ensembles</a><a href="#collection" onclick="filterCat('tshirts')">T-shirts &amp; Shorts</a><a href="#collection" onclick="filterCat('casquettes')">Casquettes</a></div></div><a href="#about">La Marque</a>
+    <a href="#newsletter" class="shf-cta">Newsletter</a>
+  </nav>
+  <button class="cart-icon-btn" onclick="openCart()" aria-label="Panier">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    <span class="cart-count" id="cartCount" style="display:none">0</span>
+  </button>
+</header>
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="closeMobileNav()">&#x2715;</button>
+  <a href="#collection" onclick="closeMobileNav()">Collection</a>
+  <div class="mobile-sub"><a href="#collection" onclick="filterCat('ensembles');closeMobileNav()">Ensembles</a><a href="#collection" onclick="filterCat('tshirts');closeMobileNav()">T-shirts &amp; Shorts</a><a href="#collection" onclick="filterCat('casquettes');closeMobileNav()">Casquettes</a></div>
+  <a href="#about" onclick="closeMobileNav()">La Marque</a>
+  <a href="#newsletter" onclick="closeMobileNav()">Newsletter</a>
+</div>
+
+<section id="reassurance">
+  <div class="reassurance-inner">
+    <div class="reassurance-item reveal"><div class="reassurance-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="reassurance-label">+200 commandes</p><p class="reassurance-sub">exp&#233;di&#233;es avec soin</p></div>
+    <div class="reassurance-item reveal reveal-delay-1"><div class="reassurance-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div><p class="reassurance-label">Livraison offerte</p><p class="reassurance-sub">d&#232;s 100&#8364; d'achat</p></div>
+    <div class="reassurance-item reveal reveal-delay-2"><div class="reassurance-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><p class="reassurance-label">Paiement s&#233;curis&#233;</p><p class="reassurance-sub">Carte &amp; Apple Pay</p></div>
+  </div>
+</section>
+
+
+
+<section id="newsletter">
+  <p class="nl-eye reveal">Rejoindre la communaut&#233;</p>
+  <h2 class="nl-title reveal reveal-delay-1">Soyez les <em style="font-style:italic;color:var(--gold)">premiers</em> inform&#233;s</h2>
+  <p class="nl-sub reveal reveal-delay-2">Acc&#232;s exclusif aux nouvelles collections &amp; drops en avant-premi&#232;re.</p>
+  <form class="nl-form reveal reveal-delay-3" onsubmit="handleNL(event)">
+    <input type="email" class="nl-input" placeholder="Votre adresse e-mail" required/>
+    <button type="submit" class="nl-btn">S'inscrire</button>
+  </form>
+  <p id="nl-ok" style="display:none;margin-top:14px;font-size:12px;color:var(--gold);letter-spacing:2px;">&#x2713; Merci !</p>
+</section>
+
+<section id="collection">
+  <div class="sec-header">
+    <p class="sec-eye reveal">SS 2025</p>
+    <h2 class="sec-title reveal reveal-delay-1">La <em>Collection</em></h2>
+  </div>
+  <div class="cat-tabs" role="tablist">
+    <button class="cat-tab active" onclick="filterCat('all')">Tous</button>
+    <button class="cat-tab" onclick="filterCat('ensembles')">Ensembles</button>
+    <button class="cat-tab" onclick="filterCat('tshirts')">T-shirts &amp; Shorts</button>
+    <button class="cat-tab" onclick="filterCat('casquettes')">Casquettes</button>
+  </div>
+  <div class="products-grid">
+<div class="product-card" data-category="ensembles" onclick="openModal('e1')">
+      <div class="product-img-wrap">
+        <div class="product-badge new">Nouveau</div>
+        <div class="slider" id="slider-e1"><img class="slide active" src="{{ 'img-005.jpg' | asset_url }}"/><img class="slide" src="{{ 'img-006.jpg' | asset_url }}" loading="lazy"/></div>
+        <div class="slide-dots"><span class="sdot active" onclick="event.stopPropagation();slideTo('e1',0)"></span><span class="sdot" onclick="event.stopPropagation();slideTo('e1',1)"></span></div>
+        <button class="slide-prev" onclick="event.stopPropagation();slidePrev('e1')">&#8249;</button>
+        <button class="slide-next" onclick="event.stopPropagation();slideNext('e1')">&#8250;</button>
+      </div>
+      <div class="product-info">
+        <p class="product-collection">Collection Riviera</p>
+        <h3 class="product-name">Ensemble Riviera Rose</h3>
+        <span class="product-price">79,99 &euro;</span>
+      </div>
+    </div>
+<div class="product-card" data-category="ensembles" onclick="openModal('e2')">
+      <div class="product-img-wrap">
+        <div class="product-badge new">Nouveau</div>
+        <div class="slider" id="slider-e2"><img class="slide active" src="{{ 'img-007.jpg' | asset_url }}"/><img class="slide" src="{{ 'img-008.jpg' | asset_url }}" loading="lazy"/></div>
+        <div class="slide-dots"><span class="sdot active" onclick="event.stopPropagation();slideTo('e2',0)"></span><span class="sdot" onclick="event.stopPropagation();slideTo('e2',1)"></span></div>
+        <button class="slide-prev" onclick="event.stopPropagation();slidePrev('e2')">&#8249;</button>
+        <button class="slide-next" onclick="event.stopPropagation();slideNext('e2')">&#8250;</button>
+      </div>
+      <div class="product-info">
+        <p class="product-collection">Collection Riviera</p>
+        <h3 class="product-name">Ensemble Riviera Bleu</h3>
+        <span class="product-price">79,99 &euro;</span>
+      </div>
+    </div>
+<div class="product-card" data-category="ensembles" onclick="openModal('e3')">
+      <div class="product-img-wrap">
+        <div class="product-badge">Premium</div>
+        <div class="slider" id="slider-e3"><img class="slide  active" src="{{ 'img-009.jpg' | asset_url }}"/><img class="slide" src="{{ 'img-010.jpg' | asset_url }}" loading="lazy"/><img class="slide" src="{{ 'img-011.jpg' | asset_url }}" loading="lazy"/></div>
+        <div class="slide-dots"><span class="sdot  active" onclick="event.stopPropagation();slideTo('e3',0)"></span><span class="sdot" onclick="event.stopPropagation();slideTo('e3',1)"></span><span class="sdot" onclick="event.stopPropagation();slideTo('e3',2)"></span></div>
+        <button class="slide-prev" onclick="event.stopPropagation();slidePrev('e3')">&#8249;</button>
+        <button class="slide-next" onclick="event.stopPropagation();slideNext('e3')">&#8250;</button>
+      </div>
+      <div class="product-info">
+        <p class="product-collection">Collection Monaco</p>
+        <h3 class="product-name">Ensemble Monégasque</h3>
+        <span class="product-price">89,99 &euro;</span>
+      </div>
+    </div>
+<div class="product-card" data-category="ensembles" onclick="openModal('e4')">
+      <div class="product-img-wrap">
+        <div class="product-badge">Signature</div>
+        <div class="slider" id="slider-e4"><img class="slide  active" src="{{ 'img-012.jpg' | asset_url }}"/><img class="slide" src="{{ 'img-013.jpg' | asset_url }}" loading="lazy"/><img class="slide" src="{{ 'img-014.jpg' | asset_url }}" loading="lazy"/></div>
+        <div class="slide-dots"><span class="sdot  active" onclick="event.stopPropagation();slideTo('e4',0)"></span><span class="sdot" onclick="event.stopPropagation();slideTo('e4',1)"></span><span class="sdot" onclick="event.stopPropagation();slideTo('e4',2)"></span></div>
+        <button class="slide-prev" onclick="event.stopPropagation();slidePrev('e4')">&#8249;</button>
+        <button class="slide-next" onclick="event.stopPropagation();slideNext('e4')">&#8250;</button>
+      </div>
+      <div class="product-info">
+        <p class="product-collection">Collection Prestige</p>
+        <h3 class="product-name">Marbella</h3>
+        <span class="product-price">89,99 &euro;</span>
+      </div>
+    </div>
+<div class="product-card" data-category="tshirts" onclick="openModal('ts_rose')">
+      <div class="product-img-wrap">
+        <div class="product-badge new">Nouveau</div>
+        <div class="slider" id="slider-ts_rose"><img class="slide  active" src="{{ 'img-015.jpg' | asset_url }}"/></div>
+        <div class="slide-dots"><span class="sdot  active" onclick="event.stopPropagation();slideTo('ts_rose',0)"></span></div>
+        
+      </div>
+      <div class="product-info">
+        <p class="product-collection">Collection Riviera</p>
+        <h3 class="product-name">T-shirt Riviera Rose</h3>
+        <span class="product-price">39,99 &euro;</span>
+      </div>
+    </div>
+<div class="product-card" data-category="tshirts" onclick="openModal('ts_bleu')">
+      <div class="product-img-wrap">
+        <div class="product-badge new">Nouveau</div>
+        <div class="slider" id="slider-ts_bleu"><img class="slide  active" src="{{ 'img-016.jpg' | asset_url }}"/></div>
+        <div class="slide-dots"><span class="sdot  active" onclick="event.stopPropagation();slideTo('ts_bleu',0)"></span></div>
+        
+      </div>
+      <div class="product-info">
+        <p class="product-collection">Collection Riviera</p>
+        <h3 class="product-name">T-shirt Riviera Bleu</h3>
+        <span class="product-price">39,99 &euro;</span>
+      </div>
+    </div>
+<div class="product-card" data-category="tshirts" onclick="openModal('sh_rose')">
+      <div class="product-img-wrap">
+        <div class="product-badge new">Nouveau</div>
+        <div class="slider" id="slider-sh_rose"><img class="slide  active" src="{{ 'img-017.jpg' | asset_url }}"/></div>
+        <div class="slide-dots"><span class="sdot  active" onclick="event.stopPropagation();slideTo('sh_rose',0)"></span></div>
+        
+      </div>
+      <div class="product-info">
+        <p class="product-collection">Collection Riviera</p>
+        <h3 class="product-name">Short Riviera Rose</h3>
+        <span class="product-price">44,99 &euro;</span>
+      </div>
+    </div>
+<div class="product-card" data-category="tshirts" onclick="openModal('sh_bleu')">
+      <div class="product-img-wrap">
+        <div class="product-badge new">Nouveau</div>
+        <div class="slider" id="slider-sh_bleu"><img class="slide  active" src="{{ 'img-018.jpg' | asset_url }}"/></div>
+        <div class="slide-dots"><span class="sdot  active" onclick="event.stopPropagation();slideTo('sh_bleu',0)"></span></div>
+        
+      </div>
+      <div class="product-info">
+        <p class="product-collection">Collection Riviera</p>
+        <h3 class="product-name">Short Riviera Bleu</h3>
+        <span class="product-price">44,99 &euro;</span>
+      </div>
+    </div>
+
+<div class="product-card" data-category="casquettes" onclick="openModal('cap_bleu')">
+      <div class="product-img-wrap">
+        <div class="product-badge new">Nouveau</div>
+        <div class="slider" id="slider-cap_bleu"><img class="slide active" src="{{ 'img-019.jpg' | asset_url }}" alt="Casquette Riviera Bleu portée"></div>
+      </div>
+      <div class="product-info">
+        <p class="product-collection">Collection Riviera</p>
+        <h3 class="product-name">Casquette Riviera Bleu</h3>
+        <span class="product-price">39,99 &euro;</span>
+      </div>
+    </div>
+<div class="product-card" data-category="casquettes" onclick="openModal('cap_rose')">
+      <div class="product-img-wrap">
+        <div class="product-badge new">Nouveau</div>
+        <div class="slider" id="slider-cap_rose"><img class="slide active" src="{{ 'img-020.jpg' | asset_url }}" alt="Casquette Riviera Rose portée"></div>
+      </div>
+      <div class="product-info">
+        <p class="product-collection">Collection Riviera</p>
+        <h3 class="product-name">Casquette Riviera Rose</h3>
+        <span class="product-price">39,99 &euro;</span>
+      </div>
+    </div>
+</div></div>
+</section>
+
+<div class="about-outer">
+  <section id="about">
+    <div>
+      <h2 class="about-title reveal">Une marque<br>pour ceux qui<br><em>construisent</em></h2>
+      <p class="about-text reveal reveal-delay-1">Fond&#233;e sur l'exigence du d&#233;tail et une vision internationale, Lemon Paris d&#233;veloppe un vestiaire complet pour une g&#233;n&#233;ration qui construit quelque chose de grand.</p>
+      <p class="about-text reveal reveal-delay-2">De Monaco &#224; Marbella, de St Tropez &#224; S&#233;ville &#8212; une marque construite sur le temps long.</p>
+      <div class="about-sig reveal reveal-delay-3">Lemon Paris</div>
+    </div>
+    <div>
+      <div class="about-card reveal reveal-delay-1">
+        <div class="about-stats">
+          <div><div class="stat-num">5</div><div class="stat-lbl">Ensembles exclusifs</div></div>
+          <div><div class="stat-num">&#8734;</div><div class="stat-lbl">Vision long terme</div></div>
+          <div><div class="stat-num">100<span style="font-size:20px">%</span></div><div class="stat-lbl">Coton premium</div></div>
+          <div><div class="stat-num">4</div><div class="stat-lbl">Destinations</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══ REVIEWS ══ -->
+<section id="reviews">
+
+  <div class="reviews-header">
+    <img class="reviews-header-bg" src="{{ 'img-021.jpg' | asset_url }}" alt="Lemon Paris Lifestyle"/>
+    <div class="reviews-header-overlay"></div>
+    <div class="reviews-header-content">
+      <p class="reviews-eyebrow reveal">Communaut&#233; Lemon Paris</p>
+      <h2 class="reviews-title reveal reveal-delay-1">Ils portent<br><em style="font-style:italic;color:var(--gold)">Lemon Paris</em></h2>
+      <p class="reviews-subtitle reveal reveal-delay-2">Une communaut&#233; qui partage les m&#234;mes valeurs d'&#233;l&#233;gance, d'ambition et d'exigence.</p>
+    </div>
+  </div>
+
+  <div style="padding:0 50px">
+  <!-- Top row: 3 cards -->
+  <div class="reviews-grid">
+
+    <div class="review-card reveal">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">&#8220;Surpris des d&#233;tails m&#234;me &#224; l'int&#233;rieur des v&#234;tements, force &#224; vous l'&#233;quipe pour la suite plein de force.&#8221;</p>
+      <div class="review-author">
+        <div class="review-avatar">T</div>
+        <div>
+          <p class="review-name">Tommy</p>
+          <p class="review-label">Client v&#233;rifi&#233;</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card reveal reveal-delay-1">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">&#8220;Coup de c&#339;ur sur l'ensemble Marbella, la taille correspond parfaitement. Merci &#224; vous.&#8221;</p>
+      <div class="review-author">
+        <div class="review-avatar">L</div>
+        <div>
+          <p class="review-name">Lucas Pons</p>
+          <p class="review-label">Client v&#233;rifi&#233;</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card reveal reveal-delay-2">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">&#8220;Je suis content de la vibe que la marque apporte ainsi que les coupes. J'ai pris les deux ensemble Riviera.&#8221;</p>
+      <div class="review-author">
+        <div class="review-avatar">M</div>
+        <div>
+          <p class="review-name">Marcuus</p>
+          <p class="review-label">Client v&#233;rifi&#233;</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom row: 2 cards centered -->
+  <div class="reviews-grid-bottom" style="margin-top:20px">
+
+    <div class="review-card reveal">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">&#8220;Je mets rarement des avis mais pour le coup le packaging et les d&#233;tails sont au rendez-vous&#160;! Je recommande.&#8221;</p>
+      <div class="review-author">
+        <div class="review-avatar">A</div>
+        <div>
+          <p class="review-name">Adam_06</p>
+          <p class="review-label">Client v&#233;rifi&#233;</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card reveal reveal-delay-1">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">&#8220;Enfin une marque qui propose quelque chose de diff&#233;rent avec un vrai univers. Vamos por Marbella&#160;!&#8221;</p>
+      <div class="review-author">
+        <div class="review-avatar">N</div>
+        <div>
+          <p class="review-name">Nathan</p>
+          <p class="review-label">Paris &mdash; Client v&#233;rifi&#233;</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  </div>
+  <!-- Global rating -->
+  <div class="reviews-rating-strip reveal">
+    <div class="reviews-rating-number">5.0</div>
+    <div class="reviews-rating-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+    <p class="reviews-rating-label">Note moyenne &mdash; 200+ avis clients</p>
+  </div>
+
+</section>
+
+<footer>
+  <div class="footer-top">
+    <!-- Brand -->
+    <div>
+      <div class="footer-logo-wrap reveal"><svg width="30" height="18" viewBox="0 0 200 120" fill="none"><path d="M100,10 C65,10 30,28 12,52 C8,57 6,60 8,62 C6,64 8,67 12,72 C30,92 65,110 100,110 C135,110 170,92 188,72 C192,67 194,64 192,62 C194,60 192,57 188,52 C170,28 135,10 100,10Z" fill="white"/><circle cx="38" cy="38" r="2.8" fill="#1A1A1A" opacity="0.3"/><circle cx="28" cy="52" r="2.4" fill="#1A1A1A" opacity="0.25"/><circle cx="24" cy="66" r="2.8" fill="#1A1A1A" opacity="0.3"/><circle cx="162" cy="38" r="2.8" fill="#1A1A1A" opacity="0.3"/><circle cx="172" cy="52" r="2.4" fill="#1A1A1A" opacity="0.25"/><circle cx="176" cy="66" r="2.8" fill="#1A1A1A" opacity="0.3"/></svg>
+        <div class="footer-brand-col"><span class="fl-lemon">lemon</span><span class="fl-paris">paris</span></div>
+      </div>
+      <p class="footer-desc reveal reveal-delay-1">Une marque construite sur l'exigence du d&#233;tail et une vision internationale.</p>
+    </div>
+
+    <!-- Collections -->
+    <div>
+      <p class="footer-h">Collections</p>
+      <ul class="footer-links">
+        <li><a href="#collection" onclick="openModal('e4');return false;">Marbella</a></li>
+        <li><a href="#collection" onclick="openModal('e2');return false;">Riviera Bleu</a></li>
+        <li><a href="#collection" onclick="openModal('e1');return false;">Riviera Rose</a></li>
+        <li><a href="#collection" onclick="openModal('e3');return false;">Mon&#233;gasque</a></li>
+      </ul>
+    </div>
+
+    <!-- Navigation -->
+    <div>
+      <p class="footer-h">Navigation</p>
+      <ul class="footer-links">
+        <li><a href="#hero">Accueil</a></li>
+        <li><a href="#collection">Collection</a></li>
+        <li><a href="#about">La Marque</a></li>
+        <li><a href="#newsletter">Newsletter</a></li>
+      </ul>
+    </div>
+
+    <!-- Informations -->
+    <div>
+      <p class="footer-h">Informations</p>
+      <ul class="footer-links">
+        <li><a href="#">Livraison</a></li>
+        <li><a href="#">Retours</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">CGV</a></li>
+        <li><a href="#">Confidentialit&#233;</a></li>
+      </ul>
+    </div>
+
+    <!-- Réseaux -->
+    <div>
+      <p class="footer-h">R&#233;seaux</p>
+      <ul class="footer-links">
+        <li><a href="https://instagram.com/lemon.paris" target="_blank">Instagram</a></li>
+        <li><a href="https://tiktok.com/@lemon.paris" target="_blank">TikTok</a></li>
+        <li style="margin-top:16px"><a href="mailto:contact@lemonparis.com" style="font-size:11px;opacity:0.7">contact@lemonparis.com</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom"><div class="footer-bottom">
+    <span class="footer-copy">&#169; 2025 Lemon Paris. Tous droits r&#233;serv&#233;s.</span>
+    <div class="footer-ig"><a href="https://instagram.com/lemon.paris" target="_blank">Instagram</a></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="modal-e1" style="display:none" onclick="closeModalOutside(event,'e1')">
+    <div class="modal"><button class="modal-close" onclick="closeModal('e1')">&#x2715;</button>
+      <div class="modal-img-area"><div class="mslider" id="mslider-e1">
+          <img class="mslide active" src="{{ 'img-005.jpg' | asset_url }}"/>
+          <img class="mslide" src="{{ 'img-006.jpg' | asset_url }}"/>
+        </div>
+        <div class="mslide-dots">
+          <span class="msdot active" onclick="mSlideTo('e1',0)"></span>
+          <span class="msdot" onclick="mSlideTo('e1',1)"></span>
+        </div>
+        <button class="mslide-prev" onclick="mSlidePrev('e1')">&#8249;</button>
+        <button class="mslide-next" onclick="mSlideNext('e1')">&#8250;</button>
+      </div>
+      <div class="modal-content">
+        <p class="modal-eyebrow">Collection Riviera</p>
+        <p class="rarity-badge">&#201;dition limit&#233;e</p>
+        <h2 class="modal-title">Ensemble Riviera</h2>
+        <p class="modal-price">79,99 &euro;</p><p class="modal-desc">Short all-over print rose avec cap assortie. Style Côte d'Azur, 100% coton premium.</p>
+        <div class="modal-description">
+          <p class="modal-desc-label">Description</p>
+          <p class="modal-desc-text">L'Ensemble Riviera Rose s'inspire des couchers de soleil sur la Côte d'Azur. Pensé pour allier légèreté et présence, il accompagne aussi bien les journées en bord de mer que les soirées estivales les plus exclusives.</p>
+        </div>
+        <div class="modal-features">
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Coupe premium</div>
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Production limit&#233;e</div>
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Livraison rapide</div>
+        </div>
+        <p class="sizes-label">Choisir la taille</p>
+        <div class="sizes-grid">
+          <button class="size-btn" onclick="selectSize(this)">XS</button>
+          <button class="size-btn" onclick="selectSize(this)">S</button>
+          <button class="size-btn" onclick="selectSize(this)">M</button>
+          <button class="size-btn" onclick="selectSize(this)">L</button>
+          <button class="size-btn" onclick="selectSize(this)">XL</button>
+        </div>
+        <div class="payment-methods"><div class="payment-chip">&#x1F4B3; Carte</div><div class="payment-chip"> Apple Pay</div></div>
+        <button class="btn-buy" onclick="addToCart('Ensemble Riviera','79,99')">Ajouter au panier</button>
+        <button class="btn-apple" onclick="buyNow('Ensemble Riviera','79,99')"> Payer avec Apple Pay</button>
+      </div><div class="modal-upsell"><p class="modal-upsell-title">Vous pourriez aussi aimer</p><div class="modal-upsell-grid"><div class="modal-upsell-card" onclick="switchModal('e2')">
+            <div class="modal-upsell-img-wrap"><img data-pid="e2" src="" alt="Ensemble Riviera" loading="lazy"/></div>
+            <p class="modal-upsell-name">Ensemble Riviera</p>
+            <p class="modal-upsell-price">79,99 &euro;</p>
+            <button class="modal-upsell-btn">Voir le produit</button>
+          </div><div class="modal-upsell-card" onclick="switchModal('e3')">
+            <div class="modal-upsell-img-wrap"><img src="{{ 'img-024.jpg' | asset_url }}" alt="Ensemble Monégasque" loading="lazy"/></div>
+            <p class="modal-upsell-name">Ensemble Monégasque</p>
+            <p class="modal-upsell-price">89,99 &euro;</p>
+            <button class="modal-upsell-btn">Voir le produit</button>
+          </div><div class="modal-upsell-card" onclick="switchModal('e4')">
+            <div class="modal-upsell-img-wrap"><img src="{{ 'img-025.jpg' | asset_url }}" alt="Marbella" loading="lazy"/></div>
+            <p class="modal-upsell-name">Marbella</p>
+            <p class="modal-upsell-price">89,99 &euro;</p>
+            <button class="modal-upsell-btn">Voir le produit</button>
+          </div></div></div></div></div><div class="modal-overlay" id="modal-e2" style="display:none" onclick="closeModalOutside(event,'e2')">
+    <div class="modal"><button class="modal-close" onclick="closeModal('e2')">&#x2715;</button>
+      <div class="modal-img-area"><div class="mslider" id="mslider-e2">
+          <img class="mslide active" src="{{ 'img-007.jpg' | asset_url }}"/>
+          <img class="mslide" src="{{ 'img-008.jpg' | asset_url }}"/>
+        </div>
+        <div class="mslide-dots">
+          <span class="msdot active" onclick="mSlideTo('e2',0)"></span>
+          <span class="msdot" onclick="mSlideTo('e2',1)"></span>
+        </div>
+        <button class="mslide-prev" onclick="mSlidePrev('e2')">&#8249;</button>
+        <button class="mslide-next" onclick="mSlideNext('e2')">&#8250;</button>
+      </div>
+      <div class="modal-content">
+        <p class="modal-eyebrow">Collection Riviera</p>
+        <p class="rarity-badge">&#201;dition limit&#233;e</p>
+        <h2 class="modal-title">Ensemble Riviera</h2>
+        <p class="modal-price">79,99 &euro;</p><p class="modal-desc">Short all-over bleu ciel avec cap assortie. L'essence de la Méditerranée, 100% coton.</p>
+        <div class="modal-description">
+          <p class="modal-desc-label">Description</p>
+          <p class="modal-desc-text">L'Ensemble Riviera Bleu capture l'essence de la Méditerranée. Sa teinte bleu ciel évoque les eaux cristallines de Monaco et de Marbella, pour un style à la fois décontracté et distingué.</p>
+        </div>
+        <div class="modal-features">
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Coupe premium</div>
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Production limit&#233;e</div>
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Livraison rapide</div>
+        </div>
+        <p class="sizes-label">Choisir la taille</p>
+        <div class="sizes-grid">
+          <button class="size-btn" onclick="selectSize(this)">XS</button>
+          <button class="size-btn" onclick="selectSize(this)">S</button>
+          <button class="size-btn" onclick="selectSize(this)">M</button>
+          <button class="size-btn" onclick="selectSize(this)">L</button>
+          <button class="size-btn" onclick="selectSize(this)">XL</button>
+        </div>
+        <div class="payment-methods"><div class="payment-chip">&#x1F4B3; Carte</div><div class="payment-chip"> Apple Pay</div></div>
+        <button class="btn-buy" onclick="addToCart('Ensemble Riviera','79,99')">Ajouter au panier</button>
+        <button class="btn-apple" onclick="buyNow('Ensemble Riviera','79,99')"> Payer avec Apple Pay</button>
+      </div><div class="modal-upsell"><p class="modal-upsell-title">Vous pourriez aussi aimer</p><div class="modal-upsell-grid"><div class="modal-upsell-card" onclick="switchModal('e1')">
+            <div class="modal-upsell-img-wrap"><img data-pid="e1" src="" alt="Ensemble Riviera" loading="lazy"/></div>
+            <p class="modal-upsell-name">Ensemble Riviera</p>
+            <p class="modal-upsell-price">79,99 &euro;</p>
+            <button class="modal-upsell-btn">Voir le produit</button>
+          </div><div class="modal-upsell-card" onclick="switchModal('e3')">
+            <div class="modal-upsell-img-wrap"><img src="{{ 'img-024.jpg' | asset_url }}" alt="Ensemble Monégasque" loading="lazy"/></div>
+            <p class="modal-upsell-name">Ensemble Monégasque</p>
+            <p class="modal-upsell-price">89,99 &euro;</p>
+            <button class="modal-upsell-btn">Voir le produit</button>
+          </div><div class="modal-upsell-card" onclick="switchModal('e4')">
+            <div class="modal-upsell-img-wrap"><img src="{{ 'img-025.jpg' | asset_url }}" alt="Marbella" loading="lazy"/></div>
+            <p class="modal-upsell-name">Marbella</p>
+            <p class="modal-upsell-price">89,99 &euro;</p>
+            <button class="modal-upsell-btn">Voir le produit</button>
+          </div></div></div></div></div><div class="modal-overlay" id="modal-e3" style="display:none" onclick="closeModalOutside(event,'e3')">
+    <div class="modal"><button class="modal-close" onclick="closeModal('e3')">&#x2715;</button>
+      <div class="modal-img-area"><div class="mslider" id="mslider-e3"><img class="mslide active" src="{{ 'img-024.jpg' | asset_url }}"/><img class="mslide" src="{{ 'img-031.jpg' | asset_url }}"/><img class="mslide" src="{{ 'img-032.jpg' | asset_url }}"/></div>
+        <div class="mslide-dots"><span class="msdot active" onclick="mSlideTo('e3',0)"></span><span class="msdot" onclick="mSlideTo('e3',1)"></span><span class="msdot" onclick="mSlideTo('e3',2)"></span></div>
+        <button class="mslide-prev" onclick="mSlidePrev('e3')">&#8249;</button>
+        <button class="mslide-next" onclick="mSlideNext('e3')">&#8250;</button>
+      </div>
+      <div class="modal-content">
+        <p class="modal-eyebrow">Collection Monaco</p>
+        <p class="rarity-badge">&#201;dition limit&#233;e</p>
+        <h2 class="modal-title">Ensemble Monégasque</h2>
+        <p class="modal-price">89,99 &euro;</p><p class="modal-desc">T-shirt oversize logo + Short coton chiné. Finitions haut de gamme, style effortless.</p>
+        <div class="modal-description">
+          <p class="modal-desc-label">Description</p>
+          <p class="modal-desc-text">L'Ensemble Monégasque incarne l'élégance à la monégasque. Ses finitions haut de gamme en font la pièce incontournable pour ceux qui exigent le meilleur sans sacrifier le confort.</p>
+        </div>
+        <div class="modal-features">
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Coupe premium</div>
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Production limit&#233;e</div>
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Livraison rapide</div>
+        </div>
+        <p class="sizes-label">Choisir la taille</p>
+        <div class="sizes-grid">
+          <button class="size-btn" onclick="selectSize(this)">XS</button>
+          <button class="size-btn" onclick="selectSize(this)">S</button>
+          <button class="size-btn" onclick="selectSize(this)">M</button>
+          <button class="size-btn" onclick="selectSize(this)">L</button>
+          <button class="size-btn" onclick="selectSize(this)">XL</button>
+        </div>
+        <div class="payment-methods"><div class="payment-chip">&#x1F4B3; Carte</div><div class="payment-chip"> Apple Pay</div></div>
+        <button class="btn-buy" onclick="addToCart('Ensemble Monégasque','89,99')">Ajouter au panier</button>
+        <button class="btn-apple" onclick="buyNow('Ensemble Monégasque','89,99')"> Payer avec Apple Pay</button>
+      </div><div class="modal-upsell"><p class="modal-upsell-title">Vous pourriez aussi aimer</p><div class="modal-upsell-grid"><div class="modal-upsell-card" onclick="switchModal('e1')">
+            <div class="modal-upsell-img-wrap"><img data-pid="e1" src="" alt="Ensemble Riviera" loading="lazy"/></div>
+            <p class="modal-upsell-name">Ensemble Riviera</p>
+            <p class="modal-upsell-price">79,99 &euro;</p>
+            <button class="modal-upsell-btn">Voir le produit</button>
+          </div><div class="modal-upsell-card" onclick="switchModal('e2')">
+            <div class="modal-upsell-img-wrap"><img data-pid="e2" src="" alt="Ensemble Riviera" loading="lazy"/></div>
+            <p class="modal-upsell-name">Ensemble Riviera</p>
+            <p class="modal-upsell-price">79,99 &euro;</p>
+            <button class="modal-upsell-btn">Voir le produit</button>
+          </div><div class="modal-upsell-card" onclick="switchModal('e4')">
+            <div class="modal-upsell-img-wrap"><img src="{{ 'img-025.jpg' | asset_url }}" alt="Marbella" loading="lazy"/></div>
+            <p class="modal-upsell-name">Marbella</p>
+            <p class="modal-upsell-price">89,99 &euro;</p>
+            <button class="modal-upsell-btn">Voir le produit</button>
+          </div></div></div></div></div><div class="modal-overlay" id="modal-e4" style="display:none" onclick="closeModalOutside(event,'e4')">
+    <div class="modal"><button class="modal-close" onclick="closeModal('e4')">&#x2715;</button>
+      <div class="modal-img-area"><div class="mslider" id="mslider-e4"><img class="mslide active" src="{{ 'img-025.jpg' | asset_url }}"/><img class="mslide" src="{{ 'img-035.jpg' | asset_url }}"/><img class="mslide" src="{{ 'img-036.jpg' | asset_url }}"/></div>
+        <div class="mslide-dots"><span class="msdot active" onclick="mSlideTo('e4',0)"></span><span class="msdot" onclick="mSlideTo('e4',1)"></span><span class="msdot" onclick="mSlideTo('e4',2)"></span></div>
+        <button class="mslide-prev" onclick="mSlidePrev('e4')">&#8249;</button>
+        <button class="mslide-next" onclick="mSlideNext('e4')">&#8250;</button>
+      </div>
+      <div class="modal-content">
+        <p class="modal-eyebrow">Collection Prestige</p>
+        <p class="rarity-badge">&#201;dition limit&#233;e</p>
+        <h2 class="modal-title">Marbella</h2>
+        <p class="modal-price">89,99 &euro;</p><p class="modal-desc">T-shirt navy graphic exclusif + Short blanc structuré. Le duo semi-luxe de la collection Prestige.</p>
+        <div class="modal-description">
+          <p class="modal-desc-label">Description</p>
+          <p class="modal-desc-text">L'ensemble Marbella s'inspire des plus belles destinations méditerranéennes. Conçu pour offrir confort, élégance et polyvalence, il accompagne aussi bien les journées d'été que les moments les plus exclusifs.</p>
+        </div>
+        <div class="modal-features">
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Coupe premium</div>
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Production limit&#233;e</div>
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Livraison rapide</div>
+        </div>
+        <p class="sizes-label">Choisir la taille</p>
+        <div class="sizes-grid">
+          <button class="size-btn" onclick="selectSize(this)">XS</button>
+          <button class="size-btn" onclick="selectSize(this)">S</button>
+          <button class="size-btn" onclick="selectSize(this)">M</button>
+          <button class="size-btn" onclick="selectSize(this)">L</button>
+          <button class="size-btn" onclick="selectSize(this)">XL</button>
+        </div>
+        <div class="payment-methods"><div class="payment-chip">&#x1F4B3; Carte</div><div class="payment-chip"> Apple Pay</div></div>
+        <button class="btn-buy" onclick="addToCart('Marbella','89,99')">Ajouter au panier</button>
+        <button class="btn-apple" onclick="buyNow('Marbella','89,99')"> Payer avec Apple Pay</button>
+      </div><div class="modal-upsell"><p class="modal-upsell-title">Vous pourriez aussi aimer</p><div class="modal-upsell-grid"><div class="modal-upsell-card" onclick="switchModal('e1')">
+            <div class="modal-upsell-img-wrap"><img data-pid="e1" src="" alt="Ensemble Riviera" loading="lazy"/></div>
+            <p class="modal-upsell-name">Ensemble Riviera</p>
+            <p class="modal-upsell-price">79,99 &euro;</p>
+            <button class="modal-upsell-btn">Voir le produit</button>
+          </div><div class="modal-upsell-card" onclick="switchModal('e2')">
+            <div class="modal-upsell-img-wrap"><img data-pid="e2" src="" alt="Ensemble Riviera" loading="lazy"/></div>
+            <p class="modal-upsell-name">Ensemble Riviera</p>
+            <p class="modal-upsell-price">79,99 &euro;</p>
+            <button class="modal-upsell-btn">Voir le produit</button>
+          </div><div class="modal-upsell-card" onclick="switchModal('e3')">
+            <div class="modal-upsell-img-wrap"><img src="{{ 'img-024.jpg' | asset_url }}" alt="Ensemble Monégasque" loading="lazy"/></div>
+            <p class="modal-upsell-name">Ensemble Monégasque</p>
+            <p class="modal-upsell-price">89,99 &euro;</p>
+            <button class="modal-upsell-btn">Voir le produit</button>
+          </div></div></div></div></div>
+        <script>
+const slideState={};
+function slideTo(id,idx){
+  const sl=document.getElementById('slider-'+id);
+  const slides=sl.querySelectorAll('.slide');
+  const total=slides.length;
+  idx=((idx%total)+total)%total;
+  slideState[id]=idx;
+  slides.forEach((s,i)=>s.classList.toggle('active',i===idx));
+  sl.closest('.product-img-wrap').querySelectorAll('.sdot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+}
+function slideNext(id){slideTo(id,(slideState[id]||0)+1)}
+function slidePrev(id){slideTo(id,(slideState[id]||0)-1)}
+function mSlideTo(id,idx){
+  const ms=document.getElementById('mslider-'+id);
+  const slides=ms.querySelectorAll('.mslide');
+  const total=slides.length;
+  idx=((idx%total)+total)%total;
+  slides.forEach((s,i)=>s.classList.toggle('active',i===idx));
+  ms.closest('.modal-img-area').querySelectorAll('.msdot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+}
+function mSlideNext(id){const ms=document.getElementById('mslider-'+id);let c=0;ms.querySelectorAll('.mslide').forEach((s,i)=>{if(s.classList.contains('active'))c=i});mSlideTo(id,c+1)}
+function mSlidePrev(id){const ms=document.getElementById('mslider-'+id);let c=0;ms.querySelectorAll('.mslide').forEach((s,i)=>{if(s.classList.contains('active'))c=i});mSlideTo(id,c-1)}
+
+
+function fillUpsellImages(modalEl) {
+  if (!modalEl) return;
+  modalEl.querySelectorAll('img[data-pid]').forEach(function(img) {
+    var src = getSlide(img.dataset.pid);
+    if (src) img.src = src;
+  });
+}
+
+function openModal(id){var ov=document.getElementById('modal-'+id);ov.classList.add('active');ov.style.display='flex';var sy=window.scrollY||window.pageYOffset;document.body.dataset.scrolly=sy;document.body.style.top='-'+sy+'px';document.body.style.position='fixed';document.body.style.width='100%';document.body.style.overflow='hidden';document.documentElement.style.overflow='hidden';mSlideTo(id,0);fillUpsellImages(document.getElementById('modal-'+id));}
+function closeModal(id){var ov=document.getElementById('modal-'+id);ov.classList.remove('active');ov.style.display='none';var sy=parseInt(document.body.dataset.scrolly||'0');document.body.style.position='';document.body.style.top='';document.body.style.width='';document.body.style.overflow='';document.documentElement.style.overflow='';window.scrollTo(0,sy);}
+function closeModalOutside(e,id){if(e.target===e.currentTarget)closeModal(id)}
+function switchModal(newId){['e1','e2','e3','e4','e5','ts_rose','ts_bleu','sh_rose','sh_bleu','cap_bleu','cap_rose'].forEach(id=>{ const el=document.getElementById('modal-'+id); if(el) el.classList.remove('active');});document.getElementById('modal-'+newId).classList.add('active');mSlideTo(newId,0);fillUpsellImages(document.getElementById('modal-'+newId));}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')['e1','e2','e3','e4','e5','ts_rose','ts_bleu','sh_rose','sh_bleu','cap_bleu','cap_rose'].forEach(id=>closeModal(id))});
+
+
+function filterCat(cat) {
+  // update tabs
+  document.querySelectorAll('.cat-tab').forEach(t => {
+    const tc = t.getAttribute('onclick').match(/filterCat\('(.*?)'\)/)[1];
+    t.classList.toggle('active', tc === cat);
+  });
+  // filter cards
+  document.querySelectorAll('.product-card[data-category]').forEach(card => {
+    if (cat === 'all' || card.dataset.category === cat) {
+      card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+  // smooth scroll to collection
+  const col = document.getElementById('collection');
+  if (col) col.scrollIntoView({behavior: 'smooth', block: 'start'});
+}
+
+function selectSize(btn){btn.closest('.sizes-grid').querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
+
+
+function handleNL(e){e.preventDefault();document.getElementById('nl-ok').style.display='block';e.target.style.display='none'}
+
+/* Touch swipe */
+document.querySelectorAll('.product-img-wrap').forEach(wrap=>{
+  let sx=0;
+  wrap.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+  wrap.addEventListener('touchend',e=>{
+    const diff=sx-e.changedTouches[0].clientX;
+    const sl=wrap.querySelector('.slider');if(!sl)return;
+    const id=sl.id.replace('slider-','');
+    if(Math.abs(diff)>40){if(diff>0)slideNext(id);else slidePrev(id)}
+  },{passive:true});
+});
+document.querySelectorAll('.modal-img-area').forEach(area=>{
+  let sx=0;
+  area.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+  area.addEventListener('touchend',e=>{
+    const diff=sx-e.changedTouches[0].clientX;
+    const ms=area.querySelector('.mslider');if(!ms)return;
+    const id=ms.id.replace('mslider-','');
+    let c=0;ms.querySelectorAll('.mslide').forEach((s,i)=>{if(s.classList.contains('active'))c=i});
+    if(Math.abs(diff)>40){if(diff>0)mSlideTo(id,c+1);else mSlideTo(id,c-1)}
+  },{passive:true});
+});
+
+/* Mobile nav */
+function openMobileNav(){document.getElementById('mobileNav').classList.add('open');document.body.style.overflow='hidden'}
+function closeMobileNav(){document.getElementById('mobileNav').classList.remove('open');document.body.style.overflow=''}
+
+/* Scroll */
+window.addEventListener('scroll',()=>{
+  const scrollY=window.scrollY;
+  const bg=document.querySelector('.hero-bg-img');
+  if(bg&&scrollY<window.innerHeight)bg.style.transform='scale(1.0) translateY('+(scrollY*0.22)+'px)';
+  document.getElementById('siteHeader').classList.toggle('visible',scrollY>window.innerHeight*0.6);
+});
+
+/* Reveal observer */
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');io.unobserve(entry.target);}});
+},{threshold:0.07,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal,.product-card').forEach(el=>io.observe(el));
+
+/* Smooth scroll */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}});
+});
+
+/* ══ REVIEWS HEADER PARALLAX ══ */
+(function() {
+  const reviewsBg = document.querySelector('.reviews-header-bg');
+  if (!reviewsBg) return;
+  function onScroll() {
+    const rect = reviewsBg.closest('.reviews-header').getBoundingClientRect();
+    const center = rect.top + rect.height / 2 - window.innerHeight / 2;
+    const shift = center * 0.12;
+    reviewsBg.style.transform = 'scale(1.05) translateY(' + shift + 'px)';
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+
+
+
+/* ══ LEMON PARIS — CART & CHECKOUT ══ */
+let cartItems = [];
+
+const PRODUCTS = {
+  e1: { name:'Ensemble Riviera Rose', collection:'Collection Riviera', price:79.99, priceStr:'79,99' },
+  e2: { name:'Ensemble Riviera Bleu', collection:'Collection Riviera', price:79.99, priceStr:'79,99' },
+  e3: { name:'Ensemble Monégasque',   collection:'Collection Monaco',   price:89.99, priceStr:'89,99' },
+  e4: { name:'Marbella',              collection:'Collection Prestige', price:89.99, priceStr:'89,99' },
+  ts_rose: { name:'T-shirt Riviera Rose', collection:'Collection Riviera', price:39.99, priceStr:'39,99' },
+  ts_bleu: { name:'T-shirt Riviera Bleu', collection:'Collection Riviera', price:39.99, priceStr:'39,99' },
+  sh_rose: { name:'Short Riviera Rose',   collection:'Collection Riviera', price:44.99, priceStr:'44,99' },
+  sh_bleu: { name:'Short Riviera Bleu',   collection:'Collection Riviera', price:44.99, priceStr:'44,99' },
+  cap_bleu: { name:'Casquette Riviera Bleu', collection:'Collection Riviera', price:39.99, priceStr:'39,99' },
+  cap_rose: { name:'Casquette Riviera Rose', collection:'Collection Riviera', price:39.99, priceStr:'39,99' },
+  e5:       { name:'Gentleman Parisien',     collection:'Collection Monaco',   price:89.99, priceStr:'89,99' },
+};
+
+/* ── Helpers ── */
+function getSlide(pid) {
+  const sl = document.getElementById('slider-'+pid);
+  if (!sl) return '';
+  const slide = sl.querySelector('.slide');
+  return slide ? slide.src : '';
+}
+function fmtPrice(n) { return n.toFixed(2).replace('.',',') + ' €'; }
+function cartTotal() { return cartItems.reduce((s,i)=>s+i.price*i.qty,0); }
+function cartCount() { return cartItems.reduce((s,i)=>s+i.qty,0); }
+function updateBadge() {
+  const el = document.getElementById('cartCount');
+  if (!el) return;
+  const n = cartCount();
+  el.textContent = n;
+  el.style.display = n > 0 ? 'flex' : 'none';
+}
+
+/* ── Add to cart ── */
+
+const SHOPIFY_HANDLES = {
+  'e1': 'ensemble-riveira-rose',
+  'e2': 'ensemble-riveira-bleu',
+  'e3': 'ensemble-monegasque',
+  'e4': 'ensemble-marbella',
+  'ts_rose': 't-shirt-riviera-rose',
+  'ts_bleu': 't-shirt-riviera-bleu',
+  'sh_rose': 'short-riviera-rose',
+  'sh_bleu': 'short-riviera-bleu',
+  'cap_bleu': 'casquette-riviera-bleu',
+  'cap_rose': 'casquette-riviera-rose'
+};
+function addToCart(name, price) {
+  const modal = document.querySelector('.modal-overlay.active');
+  const sz = modal ? modal.querySelector('.size-btn.active') : null;
+  if (!sz) {
+    if (modal) modal.querySelectorAll('.size-btn').forEach(b=>{
+      b.style.animation='none'; b.offsetHeight; b.style.animation='sizeshake 0.35s ease';
+    });
+    return;
+  }
+  let pid = null;
+  ['e1','e2','e3','e4','ts_rose','ts_bleu','sh_rose','sh_bleu','cap_bleu','cap_rose'].forEach(id=>{
+    const mel=document.getElementById('modal-'+id); if(mel && mel.classList.contains('active')) pid=id;
+  });
+  if (!pid) return;
+  const handle = SHOPIFY_HANDLES[pid];
+  const size = sz.textContent.replace(/<[^>]*>/g,'').trim();
+  if (handle) {
+    window.location = 'https://6krybw-gu.myshopify.com/products/' + handle + '?variant_hint=' + encodeURIComponent(size);
+    return;
+  }
+  const p = PRODUCTS[pid];
+  const key = pid+'_'+size;
+  const img = getSlide(pid);
+  const existing = cartItems.find(i=>i.key===key);
+  if (existing) { existing.qty++; }
+  else { cartItems.push({key,pid,name:p.name,collection:p.collection,price:p.price,priceStr:p.priceStr,size,qty:1,img}); }
+  updateBadge();
+  const btn = modal.querySelector('.btn-buy');
+  if (btn) {
+    btn.classList.add('success');
+    btn.querySelector('span') ? btn.querySelector('span').textContent='✓ Ajouté' : btn.textContent='✓ Ajouté';
+    setTimeout(()=>{ btn.classList.remove('success'); btn.querySelector('span') ? btn.querySelector('span').textContent='Ajouter au panier' : btn.textContent='Ajouter au panier'; },1800);
+  }
+  renderCartDrawer(); openCart();
+}
+
+function buyNow(name, price) {
+  const modal = document.querySelector('.modal-overlay.active');
+  const sz = modal ? modal.querySelector('.size-btn.active') : null;
+  if (!sz) {
+    if (modal) modal.querySelectorAll('.size-btn').forEach(b=>{
+      b.style.animation='none'; b.offsetHeight; b.style.animation='sizeshake 0.35s ease';
+    });
+    return;
+  }
+  let pid = null;
+  ['e1','e2','e3','e4','ts_rose','ts_bleu','sh_rose','sh_bleu','cap_bleu','cap_rose'].forEach(id=>{
+    const mel=document.getElementById('modal-'+id); if(mel && mel.classList.contains('active')) pid=id;
+  });
+  if (!pid) return;
+  const handle = SHOPIFY_HANDLES[pid];
+  if (handle) {
+    window.location = 'https://6krybw-gu.myshopify.com/products/' + handle;
+    return;
+  }
+  addToCart(name, price);
+}
+
+function removeFromCart(key) { cartItems=cartItems.filter(i=>i.key!==key); updateBadge(); renderCartDrawer(); }
+
+function changeQty(key,delta) {
+  const it=cartItems.find(i=>i.key===key);
+  if(!it) return;
+  it.qty+=delta;
+  if(it.qty<=0) cartItems=cartItems.filter(i=>i.key!==key);
+  updateBadge(); renderCartDrawer();
+}
+
+/* ── Cart Drawer ── */
+function renderCartDrawer() {
+  const body=document.getElementById('cartBody');
+  const footer=document.getElementById('cartFooter');
+  if(!body) return;
+  if(cartItems.length===0){
+    body.innerHTML='<div class="cart-empty"><p class="cart-empty-title">Votre panier est vide</p><p class="cart-empty-sub">Découvrez la collection</p></div>';
+    if(footer) footer.style.display='none';
+    return;
+  }
+  const itemsHtml=cartItems.map(it=>`
+    <div class="cart-item">
+      <img class="cart-item-img" src="${it.img}" alt="${it.name}"/>
+      <div class="cart-item-info">
+        <p class="cart-item-collection">${it.collection}</p>
+        <p class="cart-item-name">${it.name}</p>
+        <p class="cart-item-size">Taille : ${it.size}</p>
+        <p class="cart-item-price">${it.priceStr} €</p>
+        <div class="cart-item-qty">
+          <button class="cart-qty-btn" onclick="changeQty('${it.key}',-1)">−</button>
+          <span class="cart-qty-num">${it.qty}</span>
+          <button class="cart-qty-btn" onclick="changeQty('${it.key}',1)">+</button>
+        </div>
+        <button class="cart-item-remove" onclick="removeFromCart('${it.key}')">Supprimer</button>
+      </div>
+    </div>`).join('');
+  const inCart=[...new Set(cartItems.map(i=>i.pid))];
+  const upPids=['e1','e2','e3','e4','ts_rose','ts_bleu','sh_rose','sh_bleu','cap_bleu','cap_rose'].filter(p=>!inCart.includes(p)).slice(0,3);
+  const upsell=upPids.length?`<div class="cart-upsell"><p class="cart-upsell-title">Complétez votre look</p><div class="cart-upsell-grid">${upPids.map(pid=>{const p=PRODUCTS[pid];if(!p)return'';const img=getSlide(pid);return`<div class="cart-upsell-card" onclick="closeCart();openModal('${pid}')"><img class="cart-upsell-img" src="${img}" alt="${p.name}"/><p class="cart-upsell-name">${p.name}</p><p class="cart-upsell-price">${p.priceStr} €</p></div>`;}).join('')}</div></div>`:''
+  body.innerHTML=itemsHtml+upsell;
+  const tot=cartTotal();
+  const el=document.getElementById('cartTotalPrice');
+  if(el) el.textContent=fmtPrice(tot);
+  if(footer) footer.style.display='block';
+}
+
+function openCart(){
+  const overlay=document.getElementById('cartOverlay');
+  const drawer=document.getElementById('cartDrawer');
+  if(!overlay||!drawer) return;
+  renderCartDrawer();
+  overlay.classList.add('open'); drawer.classList.add('open');
+  requestAnimationFrame(()=>overlay.classList.add('visible'));
+  document.body.style.overflow='hidden';
+}
+function closeCart(){
+  const overlay=document.getElementById('cartOverlay');
+  const drawer=document.getElementById('cartDrawer');
+  if(!overlay||!drawer) return;
+  overlay.classList.remove('visible'); drawer.classList.remove('open');
+  setTimeout(()=>overlay.classList.remove('open'),350);
+  document.body.style.overflow='';
+}
+
+/* ── Checkout ── */
+let checkoutStep=1;
+
+function openCheckout(){
+  closeCart();
+  if(cartItems.length===0) return;
+  // Copy logo src to checkout
+  const logoSrc=document.querySelector('.hero-logo-img')||document.querySelector('.shf-logo-img');
+  const chLogo=document.getElementById('checkoutLogo');
+  if(chLogo&&logoSrc) chLogo.src=logoSrc.src;
+  checkoutStep=1;
+  renderCheckout();
+  document.getElementById('checkoutOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeCheckout(){
+  document.getElementById('checkoutOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function setProgress(step){
+  [1,2,3].forEach(n=>{
+    const el=document.getElementById('cps'+n);
+    el.classList.remove('active','done');
+    if(n<step) el.classList.add('done');
+    else if(n===step) el.classList.add('active');
+  });
+}
+
+function renderCheckout(){
+  setProgress(checkoutStep);
+  const content=document.getElementById('checkoutContent');
+  if(checkoutStep===1) renderCheckoutCart(content);
+  else if(checkoutStep===2) renderCheckoutForm(content);
+  else renderCheckoutConfirm(content);
+  document.getElementById('checkoutPage').scrollTop=0;
+  document.getElementById('checkoutOverlay').scrollTop=0;
+}
+
+function renderCheckoutCart(content){
+  const n=cartCount();
+  const items=cartItems.map(it=>`
+    <div class="co-item">
+      <img class="co-item-img" src="${it.img}" alt="${it.name}"/>
+      <div class="co-item-info">
+        <p class="co-item-name">${it.name}</p>
+        <p class="co-item-meta">${it.collection} &mdash; Taille : ${it.size}</p>
+        <div class="co-item-row">
+          <div class="co-qty">
+            <button class="co-qty-btn" onclick="coChangeQty('${it.key}',-1)">−</button>
+            <span class="co-qty-num">${it.qty}</span>
+            <button class="co-qty-btn" onclick="coChangeQty('${it.key}',1)">+</button>
+          </div>
+          <span class="co-item-price">${fmtPrice(it.price*it.qty)}</span>
+        </div>
+        <button class="co-remove" onclick="coRemove('${it.key}')">Retirer</button>
+      </div>
+    </div>`).join('');
+  const tot=cartTotal();
+  const delivery=tot>=100?'Offerte':'À calculer';
+  content.innerHTML=`
+    <h1 class="checkout-title">Votre panier</h1>
+    <p class="checkout-subtitle">Vous avez ${n} article${n>1?'s':''} dans votre panier.</p>
+    ${items}
+    <div class="co-totals">
+      <div class="co-total-row"><span class="co-total-label">Sous-total</span><span class="co-total-val">${fmtPrice(tot)}</span></div>
+      <div class="co-total-row"><span class="co-total-label">Livraison</span><span class="co-total-val" style="font-size:14px;font-family:var(--fb)">${delivery}</span></div>
+      <div class="co-total-row grand"><span class="co-total-label">Total</span><span class="co-total-val">${fmtPrice(tot)}</span></div>
+    </div>
+    <button class="co-btn-primary" onclick="checkoutStep=2;renderCheckout()">Continuer &rarr; Livraison</button>
+    <button class="co-btn-apple" onclick="alert('Apple Pay — À connecter via Stripe')">
+      <svg viewBox="0 0 165.521 105.965" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M150.698 0H14.823C6.638 0 0 6.638 0 14.823v76.319c0 8.185 6.638 14.823 14.823 14.823h135.875c8.185 0 14.823-6.638 14.823-14.823V14.823C165.521 6.638 158.883 0 150.698 0z" fill="black"/><path d="M42.369 35.174c1.633-2.047 2.737-4.754 2.441-7.522-2.379.119-5.264 1.574-6.957 3.621-1.516 1.750-2.855 4.576-2.501 7.224 2.647.207 5.384-1.277 7.017-3.323zM44.787 39.067c-3.875-.236-7.178 2.200-9.020 2.200-1.841 0-4.639-2.082-7.692-2.023-3.935.059-7.574 2.289-9.592 5.827-4.096 7.083-1.074 17.592 2.912 23.359 1.959 2.855 4.283 6.007 7.396 5.888 2.943-.117 4.075-1.900 7.635-1.900 3.559 0 4.579 1.900 7.692 1.841 3.204-.059 5.234-2.855 7.193-5.711 2.259-3.263 3.173-6.420 3.233-6.598-.072-.029-6.191-2.386-6.250-9.445-.059-5.930 4.841-8.756 5.059-8.903-2.771-4.107-7.100-4.535-8.566-4.535zM75.154 31.825c8.717 0 14.787 6.011 14.787 14.758 0 8.777-6.189 14.817-15.024 14.817h-9.654v15.342H58.450V31.825h16.704zm-9.891 23.891h8.007c6.071 0 9.525-3.275 9.525-8.986 0-5.711-3.454-8.956-9.495-8.956h-8.037v17.942zM92.691 53.436c0-8.836 5.195-14.521 13.175-14.521 7.950 0 13.175 5.685 13.175 14.521 0 8.866-5.194 14.521-13.175 14.521-7.980 0-13.175-5.655-13.175-14.521zm21.767 0c0-6.071-2.796-9.643-6.592-9.643-3.796 0-6.592 3.572-6.592 9.643 0 6.101 2.796 9.643 6.592 9.643 3.796 0 6.592-3.542 6.592-9.643zM123.700 78.249V39.282h6.208v5.017h.148c1.602-3.424 5.018-5.373 9.110-5.373 6.830 0 11.285 4.936 11.285 12.354v.089c0 7.387-4.484 12.264-11.344 12.264-4.003 0-7.389-1.900-8.961-5.165h-.119v13.781H123.700zm15.758-21.795c0-4.577-2.739-7.600-6.800-7.600-4.033 0-6.830 3.082-6.830 7.600 0 4.489 2.797 7.541 6.830 7.541 4.061 0 6.800-3.023 6.800-7.541z" fill="white"/></svg>
+      &nbsp;Pay
+    </button>
+    <button class="co-btn-back" onclick="closeCheckout()">← Continuer mes achats</button>
+    <p style="text-align:center;margin-top:12px;font-family:var(--fb);font-size:10px;letter-spacing:2px;color:var(--gray)">Paiement 100% sécurisé · Livraison offerte dès 100€</p>`;
+}
+
+function renderCheckoutForm(content){
+  content.innerHTML=`
+    <h1 class="checkout-title">Livraison &amp; Paiement</h1>
+    <p class="checkout-subtitle">Renseignez vos informations de livraison.</p>
+    <div class="co-form">
+      <div class="co-form-section">
+        <p class="co-form-title">Coordonnées</p>
+        <div class="co-field-row">
+          <div class="co-field"><label>Prénom *</label><input type="text" placeholder="Votre prénom" required/></div>
+          <div class="co-field"><label>Nom *</label><input type="text" placeholder="Votre nom" required/></div>
+        </div>
+        <div class="co-field"><label>Email *</label><input type="email" placeholder="votre@email.com" required/></div>
+        <div class="co-field"><label>Téléphone</label><input type="tel" placeholder="+33 6 XX XX XX XX"/></div>
+      </div>
+      <div class="co-form-section">
+        <p class="co-form-title">Adresse de livraison</p>
+        <div class="co-field"><label>Adresse *</label><input type="text" placeholder="Numéro et nom de rue" required/></div>
+        <div class="co-field"><label>Complément</label><input type="text" placeholder="Appartement, bâtiment..."/></div>
+        <div class="co-field-row">
+          <div class="co-field"><label>Code postal *</label><input type="text" placeholder="75001" required/></div>
+          <div class="co-field"><label>Ville *</label><input type="text" placeholder="Paris" required/></div>
+        </div>
+        <div class="co-field"><label>Pays</label>
+          <select><option>France</option><option>Belgique</option><option>Suisse</option><option>Luxembourg</option><option>Monaco</option><option>Autre</option></select>
+        </div>
+      </div>
+      <div class="co-form-section">
+        <p class="co-form-title">Récapitulatif</p>
+        <div class="co-total-row"><span class="co-total-label">Total</span><span class="co-total-val">${fmtPrice(cartTotal())}</span></div>
+        <div class="co-total-row"><span class="co-total-label" style="font-size:9px;color:var(--gray)">Livraison ${cartTotal()>=100?'offerte':'à calculer'}</span></div>
+      </div>
+    </div>
+    <button class="co-btn-primary" onclick="checkoutStep=3;renderCheckout()">Confirmer la commande</button>
+    <button class="co-btn-apple" onclick="alert('Apple Pay — À connecter via Stripe')">
+      <svg viewBox="0 0 165.521 105.965" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M150.698 0H14.823C6.638 0 0 6.638 0 14.823v76.319c0 8.185 6.638 14.823 14.823 14.823h135.875c8.185 0 14.823-6.638 14.823-14.823V14.823C165.521 6.638 158.883 0 150.698 0z" fill="black"/><path d="M42.369 35.174c1.633-2.047 2.737-4.754 2.441-7.522-2.379.119-5.264 1.574-6.957 3.621-1.516 1.750-2.855 4.576-2.501 7.224 2.647.207 5.384-1.277 7.017-3.323zM44.787 39.067c-3.875-.236-7.178 2.200-9.020 2.200-1.841 0-4.639-2.082-7.692-2.023-3.935.059-7.574 2.289-9.592 5.827-4.096 7.083-1.074 17.592 2.912 23.359 1.959 2.855 4.283 6.007 7.396 5.888 2.943-.117 4.075-1.900 7.635-1.900 3.559 0 4.579 1.900 7.692 1.841 3.204-.059 5.234-2.855 7.193-5.711 2.259-3.263 3.173-6.420 3.233-6.598-.072-.029-6.191-2.386-6.250-9.445-.059-5.930 4.841-8.756 5.059-8.903-2.771-4.107-7.100-4.535-8.566-4.535zM75.154 31.825c8.717 0 14.787 6.011 14.787 14.758 0 8.777-6.189 14.817-15.024 14.817h-9.654v15.342H58.450V31.825h16.704zm-9.891 23.891h8.007c6.071 0 9.525-3.275 9.525-8.986 0-5.711-3.454-8.956-9.495-8.956h-8.037v17.942zM92.691 53.436c0-8.836 5.195-14.521 13.175-14.521 7.950 0 13.175 5.685 13.175 14.521 0 8.866-5.194 14.521-13.175 14.521-7.980 0-13.175-5.655-13.175-14.521zm21.767 0c0-6.071-2.796-9.643-6.592-9.643-3.796 0-6.592 3.572-6.592 9.643 0 6.101 2.796 9.643 6.592 9.643 3.796 0 6.592-3.542 6.592-9.643zM123.700 78.249V39.282h6.208v5.017h.148c1.602-3.424 5.018-5.373 9.110-5.373 6.830 0 11.285 4.936 11.285 12.354v.089c0 7.387-4.484 12.264-11.344 12.264-4.003 0-7.389-1.900-8.961-5.165h-.119v13.781H123.700zm15.758-21.795c0-4.577-2.739-7.600-6.800-7.600-4.033 0-6.830 3.082-6.830 7.600 0 4.489 2.797 7.541 6.830 7.541 4.061 0 6.800-3.023 6.800-7.541z" fill="white"/></svg>
+      &nbsp;Pay
+    </button>
+    <button class="co-btn-back" onclick="checkoutStep=1;renderCheckout()">← Retour au panier</button>`;
+}
+
+function renderCheckoutConfirm(content){
+  const orderNum='LP-'+Math.floor(10000+Math.random()*90000);
+  content.innerHTML=`
+    <div class="co-confirm">
+      <div class="co-confirm-icon">✓</div>
+      <h1 class="co-confirm-title">Commande confirmée</h1>
+      <p class="co-confirm-order">Commande ${orderNum}</p>
+      <p class="co-confirm-sub">Merci pour votre confiance.<br>Vous recevrez une confirmation par email.<br><br>
+      Lemon Paris — une marque pour ceux<br>qui construisent quelque chose de grand.</p>
+      <button class="co-btn-primary" style="margin-top:40px" onclick="cartItems=[];updateBadge();closeCheckout();">Retour à la boutique</button>
+    </div>`;
+  cartItems=[]; updateBadge();
+}
+
+function coChangeQty(key,delta){
+  const it=cartItems.find(i=>i.key===key);
+  if(!it) return;
+  it.qty+=delta;
+  if(it.qty<=0) cartItems=cartItems.filter(i=>i.key!==key);
+  updateBadge(); renderCheckout();
+}
+function coRemove(key){ cartItems=cartItems.filter(i=>i.key!==key); updateBadge(); renderCheckout(); }
+
+/* Wire up checkout button in cart drawer */
+document.addEventListener('DOMContentLoaded',()=>{
+  const btn=document.querySelector('.cart-btn-checkout');
+  if(btn) btn.onclick=openCheckout;
+});
+
+/* Size button span wrap */
+document.querySelectorAll('.size-btn').forEach(btn=>{
+  if(!btn.querySelector('span')) btn.innerHTML='<span>'+btn.textContent+'</span>';
+});
+
+/* ── Existing functions (keep) ── */
+function switchModal(newId){['e1','e2','e3','e4','e5','ts_rose','ts_bleu','sh_rose','sh_bleu','cap_bleu','cap_rose'].forEach(id=>{ const el=document.getElementById('modal-'+id); if(el) el.classList.remove('active');});document.getElementById('modal-'+newId).classList.add('active');mSlideTo(newId,0);;fillUpsellImages(document.getElementById('modal-'+newId));}
+
+// Init des images upsell dynamiques + masquage forcé des modales
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.modal-overlay').forEach(function(m) {
+    m.style.display='none';
+    fillUpsellImages(m);
+  });
+});
+
+</script>
+
+
+
+<!-- ══ CART DRAWER ══ -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <p class="cart-title">Mon panier</p>
+    <button class="cart-close" onclick="closeCart()">&#x2715;</button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <!-- Filled dynamically -->
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-total-price" id="cartTotalPrice">0,00 &euro;</span>
+    </div>
+    <button class="cart-btn-continue" onclick="closeCart()">Continuer mes achats</button>
+    <button class="cart-btn-checkout" onclick="alert('Connectez votre système de paiement (Stripe / Shopify)')">Commander</button>
+    <button class="cart-btn-applepay" onclick="alert('Apple Pay — à connecter via Stripe')">
+      <svg viewBox="0 0 165.521 105.965" xmlns="http://www.w3.org/2000/svg" fill="white">
+        <path d="M150.698 0H14.823C6.638 0 0 6.638 0 14.823v76.319c0 8.185 6.638 14.823 14.823 14.823h135.875c8.185 0 14.823-6.638 14.823-14.823V14.823C165.521 6.638 158.883 0 150.698 0z" fill="black"/>
+        <path d="M42.369 35.174c1.633-2.047 2.737-4.754 2.441-7.522-2.379.119-5.264 1.574-6.957 3.621-1.516 1.750-2.855 4.576-2.501 7.224 2.647.207 5.384-1.277 7.017-3.323zM44.787 39.067c-3.875-.236-7.178 2.200-9.020 2.200-1.841 0-4.639-2.082-7.692-2.023-3.935.059-7.574 2.289-9.592 5.827-4.096 7.083-1.074 17.592 2.912 23.359 1.959 2.855 4.283 6.007 7.396 5.888 2.943-.117 4.075-1.900 7.635-1.900 3.559 0 4.579 1.900 7.692 1.841 3.204-.059 5.234-2.855 7.193-5.711 2.259-3.263 3.173-6.420 3.233-6.598-.072-.029-6.191-2.386-6.250-9.445-.059-5.930 4.841-8.756 5.059-8.903-2.771-4.107-7.100-4.535-8.566-4.535zM75.154 31.825c8.717 0 14.787 6.011 14.787 14.758 0 8.777-6.189 14.817-15.024 14.817h-9.654v15.342H58.450V31.825h16.704zm-9.891 23.891h8.007c6.071 0 9.525-3.275 9.525-8.986 0-5.711-3.454-8.956-9.495-8.956h-8.037v17.942zM92.691 53.436c0-8.836 5.195-14.521 13.175-14.521 7.950 0 13.175 5.685 13.175 14.521 0 8.866-5.194 14.521-13.175 14.521-7.980 0-13.175-5.655-13.175-14.521zm21.767 0c0-6.071-2.796-9.643-6.592-9.643-3.796 0-6.592 3.572-6.592 9.643 0 6.101 2.796 9.643 6.592 9.643 3.796 0 6.592-3.542 6.592-9.643zM123.700 78.249V39.282h6.208v5.017h.148c1.602-3.424 5.018-5.373 9.110-5.373 6.830 0 11.285 4.936 11.285 12.354v.089c0 7.387-4.484 12.264-11.344 12.264-4.003 0-7.389-1.900-8.961-5.165h-.119v13.781H123.700zm15.758-21.795c0-4.577-2.739-7.600-6.800-7.600-4.033 0-6.830 3.082-6.830 7.600 0 4.489 2.797 7.541 6.830 7.541 4.061 0 6.800-3.023 6.800-7.541z" fill="white"/>
+      </svg>
+      &nbsp;Pay
+    </button>
+  </div>
+</div>
+
+
+<!-- ══ CHECKOUT PAGE ══ -->
+<div class="checkout-overlay" id="checkoutOverlay">
+  <div class="checkout-page" id="checkoutPage">
+    <div class="checkout-logo">
+      <img src="" id="checkoutLogo" alt="Lemon Paris" style="height:48px"/>
+    </div>
+    <!-- Progress -->
+    <div class="checkout-progress" id="checkoutProgress">
+      <div class="cp-step active" id="cps1">
+        <div class="cp-step-dot"></div>
+        <div class="cp-step-line"></div>
+        <span class="cp-step-label">Panier</span>
+      </div>
+      <div class="cp-step" id="cps2">
+        <div class="cp-step-dot"></div>
+        <div class="cp-step-line"></div>
+        <span class="cp-step-label">Livraison &amp; Paiement</span>
+      </div>
+      <div class="cp-step" id="cps3">
+        <div class="cp-step-dot"></div>
+        <span class="cp-step-label">Confirmation</span>
+      </div>
+    </div>
+    <!-- Content injected by JS -->
+    <div id="checkoutContent"></div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-ts_rose" style="display:none" onclick="closeModalOutside(event,'ts_rose')">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('ts_rose')">&#x2715;</button>
+      <div class="modal-img-area">
+        <div class="mslider" id="mslider-ts_rose">
+          <img class="mslide active" src="{{ 'img-038.jpg' | asset_url }}" />
+        </div>
+        <div class="mslide-dots"></div>
+        <button class="mslide-prev" onclick="mSlidePrev('ts_rose')">&#8249;</button>
+        <button class="mslide-next" onclick="mSlideNext('ts_rose')">&#8250;</button>
+      </div>
+      <div class="modal-content">
+        <p class="modal-eyebrow">Collection Riviera</p>
+        <p class="rarity-badge">&#201;dition limit&#233;e</p>
+        <h2 class="modal-title">T-shirt Riviera Rose</h2>
+        <p class="modal-price">39,99 &euro;</p>
+        <div class="modal-description">
+          <p class="modal-desc-label">Description</p>
+          <p class="modal-desc-text">T-shirt blanc oversize avec logo Lemon Paris brodé en rose. Coupe décontractée et premium, conçu pour les journées estivales les plus ensoleillées.</p>
+        </div>
+        <div class="modal-features">
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Coupe premium</div>
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Production limit&#233;e</div>
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Livraison rapide</div>
+        </div>
+        <p class="sizes-label">Choisir la taille</p>
+        <div class="sizes-grid">
+          <button class="size-btn" onclick="selectSize(this)">XS</button>
+          <button class="size-btn" onclick="selectSize(this)">S</button>
+          <button class="size-btn" onclick="selectSize(this)">M</button>
+          <button class="size-btn" onclick="selectSize(this)">L</button>
+          <button class="size-btn" onclick="selectSize(this)">XL</button>
+        </div>
+        <div class="payment-methods">
+          <div class="payment-chip">&#x1F4B3; Carte bancaire</div>
+          <div class="payment-chip"> Apple Pay</div>
+        </div>
+        <button class="btn-buy" onclick="addToCart('T-shirt Riviera Rose','39,99')">Ajouter au panier</button>
+        <button class="btn-apple" onclick="buyNow('T-shirt Riviera Rose','39,99')"> Payer avec Apple Pay</button>
+      </div>
+    </div>
+  </div>
+<div class="modal-overlay" id="modal-ts_bleu" style="display:none" onclick="closeModalOutside(event,'ts_bleu')">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('ts_bleu')">&#x2715;</button>
+      <div class="modal-img-area">
+        <div class="mslider" id="mslider-ts_bleu">
+          <img class="mslide active" src="{{ 'img-016.jpg' | asset_url }}" />
+        </div>
+        <div class="mslide-dots"></div>
+        <button class="mslide-prev" onclick="mSlidePrev('ts_bleu')">&#8249;</button>
+        <button class="mslide-next" onclick="mSlideNext('ts_bleu')">&#8250;</button>
+      </div>
+      <div class="modal-content">
+        <p class="modal-eyebrow">Collection Riviera</p>
+        <p class="rarity-badge">&#201;dition limit&#233;e</p>
+        <h2 class="modal-title">T-shirt Riviera Bleu</h2>
+        <p class="modal-price">39,99 &euro;</p>
+        <div class="modal-description">
+          <p class="modal-desc-label">Description</p>
+          <p class="modal-desc-text">T-shirt blanc oversize avec logo Lemon Paris brodé en bleu. L'essentiel du style Riviera, à porter seul ou en ensemble complet.</p>
+        </div>
+        <div class="modal-features">
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Coupe premium</div>
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Production limit&#233;e</div>
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Livraison rapide</div>
+        </div>
+        <p class="sizes-label">Choisir la taille</p>
+        <div class="sizes-grid">
+          <button class="size-btn" onclick="selectSize(this)">XS</button>
+          <button class="size-btn" onclick="selectSize(this)">S</button>
+          <button class="size-btn" onclick="selectSize(this)">M</button>
+          <button class="size-btn" onclick="selectSize(this)">L</button>
+          <button class="size-btn" onclick="selectSize(this)">XL</button>
+        </div>
+        <div class="payment-methods">
+          <div class="payment-chip">&#x1F4B3; Carte bancaire</div>
+          <div class="payment-chip"> Apple Pay</div>
+        </div>
+        <button class="btn-buy" onclick="addToCart('T-shirt Riviera Bleu','39,99')">Ajouter au panier</button>
+        <button class="btn-apple" onclick="buyNow('T-shirt Riviera Bleu','39,99')"> Payer avec Apple Pay</button>
+      </div>
+    </div>
+  </div>
+<div class="modal-overlay" id="modal-sh_rose" style="display:none" onclick="closeModalOutside(event,'sh_rose')">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('sh_rose')">&#x2715;</button>
+      <div class="modal-img-area">
+        <div class="mslider" id="mslider-sh_rose">
+          <img class="mslide active" src="{{ 'img-017.jpg' | asset_url }}"/>
+        </div>
+        <div class="mslide-dots"></div>
+        <button class="mslide-prev" onclick="mSlidePrev('sh_rose')">&#8249;</button>
+        <button class="mslide-next" onclick="mSlideNext('sh_rose')">&#8250;</button>
+      </div>
+      <div class="modal-content">
+        <p class="modal-eyebrow">Collection Riviera</p>
+        <p class="rarity-badge">&#201;dition limit&#233;e</p>
+        <h2 class="modal-title">Short Riviera Rose</h2>
+        <p class="modal-price">44,99 &euro;</p>
+        <div class="modal-description">
+          <p class="modal-desc-label">Description</p>
+          <p class="modal-desc-text">Short all-over print rose avec motifs Lemon Paris. Coupe légère et premium, idéal pour la plage, la piscine ou la ville.</p>
+        </div>
+        <div class="modal-features">
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Coupe premium</div>
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Production limit&#233;e</div>
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Livraison rapide</div>
+        </div>
+        <p class="sizes-label">Choisir la taille</p>
+        <div class="sizes-grid">
+          <button class="size-btn" onclick="selectSize(this)">XS</button>
+          <button class="size-btn" onclick="selectSize(this)">S</button>
+          <button class="size-btn" onclick="selectSize(this)">M</button>
+          <button class="size-btn" onclick="selectSize(this)">L</button>
+          <button class="size-btn" onclick="selectSize(this)">XL</button>
+        </div>
+        <div class="payment-methods">
+          <div class="payment-chip">&#x1F4B3; Carte bancaire</div>
+          <div class="payment-chip"> Apple Pay</div>
+        </div>
+        <button class="btn-buy" onclick="addToCart('Short Riviera Rose','44,99')">Ajouter au panier</button>
+        <button class="btn-apple" onclick="buyNow('Short Riviera Rose','44,99')"> Payer avec Apple Pay</button>
+      </div>
+    </div>
+  </div>
+<div class="modal-overlay" id="modal-sh_bleu" style="display:none" onclick="closeModalOutside(event,'sh_bleu')">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('sh_bleu')">&#x2715;</button>
+      <div class="modal-img-area">
+        <div class="mslider" id="mslider-sh_bleu">
+          <img class="mslide active" src="{{ 'img-018.jpg' | asset_url }}"/>
+        </div>
+        <div class="mslide-dots"></div>
+        <button class="mslide-prev" onclick="mSlidePrev('sh_bleu')">&#8249;</button>
+        <button class="mslide-next" onclick="mSlideNext('sh_bleu')">&#8250;</button>
+      </div>
+      <div class="modal-content">
+        <p class="modal-eyebrow">Collection Riviera</p>
+        <p class="rarity-badge">&#201;dition limit&#233;e</p>
+        <h2 class="modal-title">Short Riviera Bleu</h2>
+        <p class="modal-price">44,99 &euro;</p>
+        <div class="modal-description">
+          <p class="modal-desc-label">Description</p>
+          <p class="modal-desc-text">Short all-over print bleu ciel avec motifs Lemon Paris. La pièce signature de la Collection Riviera, pensée pour le voyage et l'élégance décontractée.</p>
+        </div>
+        <div class="modal-features">
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Coupe premium</div>
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Production limit&#233;e</div>
+          <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Livraison rapide</div>
+        </div>
+        <p class="sizes-label">Choisir la taille</p>
+        <div class="sizes-grid">
+          <button class="size-btn" onclick="selectSize(this)">XS</button>
+          <button class="size-btn" onclick="selectSize(this)">S</button>
+          <button class="size-btn" onclick="selectSize(this)">M</button>
+          <button class="size-btn" onclick="selectSize(this)">L</button>
+          <button class="size-btn" onclick="selectSize(this)">XL</button>
+        </div>
+        <div class="payment-methods">
+          <div class="payment-chip">&#x1F4B3; Carte bancaire</div>
+          <div class="payment-chip"> Apple Pay</div>
+        </div>
+        <button class="btn-buy" onclick="addToCart('Short Riviera Bleu','44,99')">Ajouter au panier</button>
+        <button class="btn-apple" onclick="buyNow('Short Riviera Bleu','44,99')"> Payer avec Apple Pay</button>
+      </div>
+    </div>
+  </div>
+
+<div class="modal-overlay" id="modal-cap_bleu" style="display:none" onclick="closeModalOutside(event,'cap_bleu')">
+  <div class="modal"><button class="modal-close" onclick="closeModal('cap_bleu')">&#x2715;</button>
+    <div class="modal-img-area">
+      <div class="mslider" id="mslider-cap_bleu">
+        <img class="mslide active" src="{{ 'img-019.jpg' | asset_url }}" alt="Casquette Riviera Bleu portée">
+      </div>
+    </div>
+    <div class="modal-content">
+      <p class="modal-eyebrow">Collection Riviera</p>
+      <h2 class="modal-title">Casquette Riviera Bleu</h2>
+      <p class="modal-price">39,99 &euro;</p>
+      <div class="modal-description">
+        <p class="modal-desc-label">Description</p>
+        <p class="modal-desc-text">Incarnez l&#8217;esprit de la C&#244;te d&#8217;Azur avec la Casquette Riviera Bleu. Trucker cap bicolore en coton premium bleu ciel et mesh beige naturel, ornée du logo Lemon Paris brod&#233; ton sur ton. L&#233;g&#232;re, ajustable et pens&#233;e pour les journ&#233;es ensoleill&#233;es — de Monaco &#224; Marbella.</p>
+      </div>
+      <div class="modal-features">
+        <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Logo brod&#233; ton sur ton</div>
+        <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Coton premium &amp; mesh respirant</div>
+        <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Taille unique ajustable</div>
+        <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Livraison rapide</div>
+      </div>
+      <p class="sizes-label">Taille</p>
+      <div class="sizes-grid">
+        <button class="size-btn active" onclick="selectSize(this)"><span>Unique</span></button>
+      </div>
+      <div class="payment-methods">
+        <div class="payment-chip">&#x1F4B3; Carte bancaire</div>
+        <div class="payment-chip"> Apple Pay</div>
+      </div>
+      <button class="btn-buy" onclick="addToCart('Casquette Riviera Bleu','39,99')">Ajouter au panier</button>
+      <button class="btn-apple" onclick="buyNow('Casquette Riviera Bleu','39,99')"> Payer avec Apple Pay</button>
+    </div>
+    <div class="modal-upsell"><p class="modal-upsell-title">Vous pourriez aussi aimer</p>
+      <div class="modal-upsell-grid">
+        <div class="modal-upsell-card" onclick="switchModal('cap_rose')">
+          <div class="modal-upsell-img-wrap"><img data-pid="cap_rose" src="" alt="Casquette Rose" style="width:100%;height:100%;object-fit:cover;object-position:center top"></div>
+          <p class="modal-upsell-name">Casquette Riviera Rose</p>
+          <p class="modal-upsell-price">39,99 &euro;</p>
+          <button class="modal-upsell-btn">Voir le produit</button>
+        </div>
+        <div class="modal-upsell-card" onclick="switchModal('e2')">
+          <div class="modal-upsell-img-wrap"><img data-pid="e2" src="" alt="Ensemble Bleu" style="width:100%;height:100%;object-fit:cover;object-position:center top"></div>
+          <p class="modal-upsell-name">Ensemble Riviera Bleu</p>
+          <p class="modal-upsell-price">79,99 &euro;</p>
+          <button class="modal-upsell-btn">Voir le produit</button>
+        </div>
+        <div class="modal-upsell-card" onclick="switchModal('ts_bleu')">
+          <div class="modal-upsell-img-wrap"><img data-pid="ts_bleu" src="" alt="T-shirt Bleu" style="width:100%;height:100%;object-fit:cover;object-position:center top"></div>
+          <p class="modal-upsell-name">T-shirt Riviera Bleu</p>
+          <p class="modal-upsell-price">39,99 &euro;</p>
+          <button class="modal-upsell-btn">Voir le produit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-cap_rose" style="display:none" onclick="closeModalOutside(event,'cap_rose')">
+  <div class="modal"><button class="modal-close" onclick="closeModal('cap_rose')">&#x2715;</button>
+    <div class="modal-img-area">
+      <div class="mslider" id="mslider-cap_rose">
+        <img class="mslide active" src="{{ 'img-020.jpg' | asset_url }}" alt="Casquette Riviera Rose portée">
+      </div>
+    </div>
+    <div class="modal-content">
+      <p class="modal-eyebrow">Collection Riviera</p>
+      <h2 class="modal-title">Casquette Riviera Rose</h2>
+      <p class="modal-price">39,99 &euro;</p>
+      <div class="modal-description">
+        <p class="modal-desc-label">Description</p>
+        <p class="modal-desc-text">La Casquette Riviera Rose capture l&#8217;&#233;l&#233;gance d&#233;contract&#233;e de l&#8217;&#233;t&#233; m&#233;diterran&#233;en. Trucker cap en coton premium rose poudr&#233; et mesh naturel, avec le logo Lemon Paris brod&#233; avec pr&#233;cision. Pi&#232;ce signature de la Collection Riviera — elle se porte seule ou compl&#232;te l&#8217;Ensemble Riviera Rose.</p>
+      </div>
+      <div class="modal-features">
+        <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Logo brod&#233; ton sur ton</div>
+        <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Coton premium &amp; mesh respirant</div>
+        <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Taille unique ajustable</div>
+        <div class="modal-feature"><span class="modal-feature-icon">&#10003;</span>Livraison rapide</div>
+      </div>
+      <p class="sizes-label">Taille</p>
+      <div class="sizes-grid">
+        <button class="size-btn active" onclick="selectSize(this)"><span>Unique</span></button>
+      </div>
+      <div class="payment-methods">
+        <div class="payment-chip">&#x1F4B3; Carte bancaire</div>
+        <div class="payment-chip"> Apple Pay</div>
+      </div>
+      <button class="btn-buy" onclick="addToCart('Casquette Riviera Rose','39,99')">Ajouter au panier</button>
+      <button class="btn-apple" onclick="buyNow('Casquette Riviera Rose','39,99')"> Payer avec Apple Pay</button>
+    </div>
+    <div class="modal-upsell"><p class="modal-upsell-title">Vous pourriez aussi aimer</p>
+      <div class="modal-upsell-grid">
+        <div class="modal-upsell-card" onclick="switchModal('cap_bleu')">
+          <div class="modal-upsell-img-wrap"><img data-pid="cap_bleu" src="" alt="Casquette Bleu" style="width:100%;height:100%;object-fit:cover;object-position:center top"></div>
+          <p class="modal-upsell-name">Casquette Riviera Bleu</p>
+          <p class="modal-upsell-price">39,99 &euro;</p>
+          <button class="modal-upsell-btn">Voir le produit</button>
+        </div>
+        <div class="modal-upsell-card" onclick="switchModal('e1')">
+          <div class="modal-upsell-img-wrap"><img data-pid="e1" src="" alt="Ensemble Rose" style="width:100%;height:100%;object-fit:cover;object-position:center top"></div>
+          <p class="modal-upsell-name">Ensemble Riviera Rose</p>
+          <p class="modal-upsell-price">79,99 &euro;</p>
+          <button class="modal-upsell-btn">Voir le produit</button>
+        </div>
+        <div class="modal-upsell-card" onclick="switchModal('ts_rose')">
+          <div class="modal-upsell-img-wrap"><img data-pid="ts_rose" src="" alt="T-shirt Rose" style="width:100%;height:100%;object-fit:cover;object-position:center top"></div>
+          <p class="modal-upsell-name">T-shirt Riviera Rose</p>
+          <p class="modal-upsell-price">39,99 &euro;</p>
+          <button class="modal-upsell-btn">Voir le produit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
