@@ -2105,61 +2105,11 @@ document.querySelectorAll('.size-btn').forEach(btn=>{
 /* ── Existing functions (keep) ── */
 function switchModal(newId){['e1','e2','e3','e4','e5','ts_rose','ts_bleu','sh_rose','sh_bleu','cap_bleu','cap_rose'].forEach(id=>{ const el=document.getElementById('modal-'+id); if(el) el.classList.remove('active');});document.getElementById('modal-'+newId).classList.add('active');mSlideTo(newId,0);;fillUpsellImages(document.getElementById('modal-'+newId));}
 
-function switchModalTab(btn, pane) {
-  var content = btn.closest('.modal-content');
-  content.querySelectorAll('.modal-pane').forEach(function(p){ p.style.display='none'; p.classList.remove('active'); });
-  var target = content.querySelector('[data-pane="'+pane+'"]');
-  if(target){ target.style.display='block'; target.classList.add('active'); }
-  btn.closest('.modal-tab-bar').querySelectorAll('.modal-tab-btn').forEach(function(b){ b.classList.remove('active'); });
-  btn.classList.add('active');
-}
-
-// Init — masquage modales + injection onglets Description
+// Init
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.modal-overlay').forEach(function(m) {
     m.style.display='none';
     fillUpsellImages(m);
-
-    var content = m.querySelector('.modal-content');
-    if(!content) return;
-    var descDiv = content.querySelector('.modal-description');
-    if(!descDiv) return;
-
-    // Build tab bar
-    var tabBar = document.createElement('div');
-    tabBar.className = 'modal-tab-bar';
-    tabBar.innerHTML = '<button class="modal-tab-btn active" onclick="switchModalTab(this,\'details\')">Détails</button>'
-      + '<button class="modal-tab-btn" onclick="switchModalTab(this,\'description\')">Description</button>';
-
-    // Details pane: features + sizes + payment + buttons
-    var detailsPane = document.createElement('div');
-    detailsPane.className = 'modal-pane active';
-    detailsPane.dataset.pane = 'details';
-    detailsPane.style.display = 'block';
-    ['modal-features','sizes-label','sizes-grid','payment-methods','btn-buy','btn-apple'].forEach(function(cls){
-      var el = content.querySelector('.'+cls);
-      if(el) detailsPane.appendChild(el);
-    });
-
-    // Description pane
-    var descPane = document.createElement('div');
-    descPane.className = 'modal-pane';
-    descPane.dataset.pane = 'description';
-    descPane.style.display = 'none';
-    var descText = descDiv.querySelector('.modal-desc-text');
-    if(descText){
-      var p = document.createElement('p');
-      p.className = 'modal-desc-text';
-      p.style.padding = '8px 0';
-      p.textContent = descText.textContent;
-      descPane.appendChild(p);
-    }
-
-    // Remove original desc block, inject tabs
-    descDiv.remove();
-    content.appendChild(tabBar);
-    content.appendChild(detailsPane);
-    content.appendChild(descPane);
   });
 });
 
