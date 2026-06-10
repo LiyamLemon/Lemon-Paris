@@ -1807,7 +1807,7 @@ function addToCart(name, price) {
   const handle = SHOPIFY_HANDLES[pid];
   const size = sz.textContent.replace(/<[^>]*>/g,'').trim();
   if (handle) {
-    window.location = 'https://lemon-paris.myshopify.com/products/' + handle + '?variant_hint=' + encodeURIComponent(size);
+    window.top.location.href = 'https://lemon-paris.myshopify.com/products/' + handle + '?variant_hint=' + encodeURIComponent(size);
     return;
   }
   const p = PRODUCTS[pid];
@@ -1842,7 +1842,7 @@ function buyNow(name, price) {
   if (!pid) return;
   const handle = SHOPIFY_HANDLES[pid];
   if (handle) {
-    window.location = 'https://lemon-paris.myshopify.com/products/' + handle;
+    window.top.location.href = 'https://lemon-paris.myshopify.com/products/' + handle;
     return;
   }
   addToCart(name, price);
