@@ -1784,20 +1784,7 @@ const SHOPIFY_HANDLES = {
   'cap_bleu': 'casquette-riviera-bleu',
   'cap_rose': 'casquette-riviera-rose'
 };
-const _variantCache = {};
-async function _getVariantId(pid, size) {
-  const handle = SHOPIFY_HANDLES[pid];
-  if (!handle) return null;
-  if (!_variantCache[handle]) {
-    try {
-      const r = await fetch('/products/' + handle + '.js');
-      _variantCache[handle] = (await r.json()).variants;
-    } catch(e) { return null; }
-  }
-  const v = (_variantCache[handle] || []).find(v => v.option1 === size || v.title === size);
-  return v ? v.id : null;
-}
-async function addToCart(name, price) {
+function addToCart(name, price) {
   const modal = document.querySelector('.modal-overlay.active');
   const sz = modal ? modal.querySelector('.size-btn.active') : null;
   if (!sz) {
@@ -1811,16 +1798,11 @@ async function addToCart(name, price) {
     const mel=document.getElementById('modal-'+id); if(mel && mel.classList.contains('active')) pid=id;
   });
   if (!pid) return;
+  const handle = SHOPIFY_HANDLES[pid];
   const size = sz.textContent.replace(/<[^>]*>/g,'').trim();
-  const variantId = await _getVariantId(pid, size);
-  if (variantId) {
-    try {
-      const r = await fetch('/cart/add.js', {
-        method:'POST', headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({id: variantId, quantity: 1})
-      });
-      if (r.ok) { window.location = '/cart'; return; }
-    } catch(e) {}
+  if (handle) {
+    window.location = 'https://6krybw-gu.myshopify.com/products/' + handle + '?variant_hint=' + encodeURIComponent(size);
+    return;
   }
   const p = PRODUCTS[pid];
   const key = pid+'_'+size;
@@ -1838,7 +1820,7 @@ async function addToCart(name, price) {
   renderCartDrawer(); openCart();
 }
 
-async function buyNow(name, price) {
+function buyNow(name, price) {
   const modal = document.querySelector('.modal-overlay.active');
   const sz = modal ? modal.querySelector('.size-btn.active') : null;
   if (!sz) {
@@ -1852,9 +1834,11 @@ async function buyNow(name, price) {
     const mel=document.getElementById('modal-'+id); if(mel && mel.classList.contains('active')) pid=id;
   });
   if (!pid) return;
-  const size = sz.textContent.replace(/<[^>]*>/g,'').trim();
-  const variantId = await _getVariantId(pid, size);
-  if (variantId) { window.location = '/cart/' + variantId + ':1'; return; }
+  const handle = SHOPIFY_HANDLES[pid];
+  if (handle) {
+    window.location = 'https://6krybw-gu.myshopify.com/products/' + handle;
+    return;
+  }
   addToCart(name, price);
 }
 
