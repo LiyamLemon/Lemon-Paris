@@ -2062,12 +2062,6 @@ function coChangeQty(key,delta){
 }
 function coRemove(key){ cartItems=cartItems.filter(i=>i.key!==key); updateBadge(); renderCheckout(); }
 
-/* Wire up checkout button in cart drawer */
-document.addEventListener('DOMContentLoaded',()=>{
-  const btn=document.querySelector('.cart-btn-checkout');
-  if(btn) btn.onclick=openCheckout;
-});
-
 /* Size button span wrap */
 document.querySelectorAll('.size-btn').forEach(btn=>{
   if(!btn.querySelector('span')) btn.innerHTML='<span>'+btn.textContent+'</span>';
