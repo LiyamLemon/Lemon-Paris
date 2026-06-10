@@ -539,14 +539,15 @@ footer{background:var(--dark);padding:64px 50px 32px;color:var(--white)}
   letter-spacing: 0.5px;
 }
 .cart-close {
-  width: 36px; height: 36px;
-  background: none; border: none; cursor: pointer;
+  width: 48px; height: 48px;
+  background: var(--light); border: none; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  color: var(--dark); font-size: 20px;
+  color: var(--dark); font-size: 22px; font-weight: 700;
   border-radius: 50%;
   transition: background 0.2s;
+  flex-shrink: 0;
 }
-.cart-close:hover { background: var(--light); }
+.cart-close:hover { background: #e0e0e0; }
 
 .cart-body { flex: 1; overflow-y: auto; padding: 24px 28px; }
 
@@ -1822,6 +1823,7 @@ async function addToCart(name, price) {
         const sp = btn.querySelector('span'); if(sp) sp.textContent='✓ Ajouté'; else btn.textContent='✓ Ajouté';
         setTimeout(()=>{ btn.classList.remove('success'); const s=btn.querySelector('span'); if(s) s.textContent='Ajouter au panier'; else btn.textContent='Ajouter au panier'; }, 1800);
       }
+      closeModal(pid);
       await renderCartDrawer(); openCart();
     } catch(e) { console.error('Cart error:', e); }
     return;
@@ -2086,8 +2088,11 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
 <div class="cart-drawer" id="cartDrawer">
   <div class="cart-header">
-    <p class="cart-title">Mon panier</p>
-    <button class="cart-close" onclick="closeCart()">&#x2715;</button>
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <p style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#b8860b;font-weight:700;margin:0">🍋 LEMON PARIS</p>
+      <p class="cart-title" style="margin:0">Mon panier</p>
+    </div>
+    <button class="cart-close" onclick="closeCart()" aria-label="Fermer">&#x2715;</button>
   </div>
   <div class="cart-body" id="cartBody">
     <!-- Filled dynamically -->
