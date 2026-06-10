@@ -1,0 +1,99 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Helvetica Neue',Arial,sans-serif;background:#fdf6ee;color:#1a1a1a}
+.product-page{max-width:1100px;margin:0 auto;padding:40px 20px}
+.back-link{display:inline-block;margin-bottom:30px;color:#b8860b;text-decoration:none;font-size:14px;letter-spacing:1px;text-transform:uppercase}
+.back-link:hover{text-decoration:underline}
+.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+@media(max-width:700px){.product-grid{grid-template-columns:1fr;gap:30px}}
+.product-images img{width:100%;border-radius:4px;display:block}
+.product-thumbs{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+.product-thumbs img{width:70px;height:70px;object-fit:cover;border-radius:4px;cursor:pointer;border:2px solid transparent}
+.product-thumbs img.active{border-color:#b8860b}
+.product-info h1{font-size:26px;font-weight:700;letter-spacing:1px;margin-bottom:10px}
+.product-vendor{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:16px}
+.product-price{font-size:24px;font-weight:700;color:#b8860b;margin-bottom:24px}
+.product-desc{font-size:15px;line-height:1.7;color:#555;margin-bottom:30px}
+.variant-label{font-size:12px;letter-spacing:1px;text-transform:uppercase;font-weight:600;margin-bottom:10px}
+.variant-select{width:100%;padding:12px;border:1px solid #ddd;border-radius:4px;font-size:15px;background:#fff;margin-bottom:24px;cursor:pointer}
+.btn-cart{width:100%;padding:16px;background:#1a1a1a;color:#fff;border:none;border-radius:4px;font-size:15px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;margin-bottom:12px;transition:background 0.2s}
+.btn-cart:hover{background:#333}
+.btn-buy{width:100%;padding:16px;background:#b8860b;color:#fff;border:none;border-radius:4px;font-size:15px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:background 0.2s}
+.btn-buy:hover{background:#9a720a}
+.added-msg{display:none;text-align:center;color:#2e7d32;font-size:14px;margin-top:12px;font-weight:600}
+.nav-bar{background:#1a1a1a;padding:16px 30px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{color:#f5c842;font-size:20px;font-weight:700;letter-spacing:2px;text-decoration:none;text-transform:uppercase}
+.nav-cart{color:#fff;text-decoration:none;font-size:13px;letter-spacing:1px}
+</style>
+
+<nav class="nav-bar">
+  <a class="nav-logo" href="/">🍋 Lemon Paris</a>
+  <a class="nav-cart" href="/cart">Panier ({{ cart.item_count }})</a>
+</nav>
+
+<div class="product-page">
+  <a class="back-link" href="/">← Retour à la boutique</a>
+
+  <div class="product-grid">
+    <div class="product-images">
+      {% if product.images.size > 0 %}
+        <img id="main-img" src="{{ product.featured_image | img_url: '800x' }}" alt="{{ product.title }}">
+        {% if product.images.size > 1 %}
+          <div class="product-thumbs">
+            {% for image in product.images %}
+              <img src="{{ image | img_url: '150x' }}" alt="{{ product.title }}" onclick="document.getElementById('main-img').src='{{ image | img_url: '800x' }}';this.parentNode.querySelectorAll('img').forEach(i=>i.classList.remove('active'));this.classList.add('active')" class="{% if forloop.first %}active{% endif %}">
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+
+    <div class="product-info">
+      <div class="product-vendor">{{ product.vendor }}</div>
+      <h1>{{ product.title }}</h1>
+      <div class="product-price">{{ product.price | money }}</div>
+
+      <div class="product-desc">{{ product.description }}</div>
+
+      {% form 'product', product, id: 'product-form' %}
+        {% if product.variants.size > 1 %}
+          <div class="variant-label">Taille</div>
+          <select name="id" class="variant-select">
+            {% for variant in product.variants %}
+              <option value="{{ variant.id }}" {% unless variant.available %}disabled{% endunless %}>
+                {{ variant.title }}{% unless variant.available %} — Épuisé{% endunless %}
+              </option>
+            {% endfor %}
+          </select>
+        {% else %}
+          <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+        {% endif %}
+
+        <button type="submit" name="add" class="btn-cart">Ajouter au panier</button>
+        <p class="added-msg" id="added-msg">✓ Ajouté au panier !</p>
+      {% endform %}
+
+      <a href="/cart" style="display:block;text-align:center;padding:16px;background:#b8860b;color:#fff;border-radius:4px;text-decoration:none;font-size:15px;letter-spacing:1px;text-transform:uppercase;margin-top:0">Voir mon panier</a>
+    </div>
+  </div>
+</div>
+
+<script>
+document.getElementById('product-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  const formData = new FormData(this);
+  fetch('/cart/add.js', {method:'POST', body: formData})
+    .then(r=>r.json())
+    .then(()=>{
+      document.getElementById('added-msg').style.display='block';
+      setTimeout(()=>window.location='/cart', 1200);
+    });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": []
+}
+{% endschema %}
