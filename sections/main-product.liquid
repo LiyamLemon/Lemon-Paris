@@ -2,33 +2,39 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Helvetica Neue',Arial,sans-serif;background:#fdf6ee;color:#1a1a1a}
 .product-page{max-width:1100px;margin:0 auto;padding:40px 20px}
-.back-link{display:inline-block;margin-bottom:30px;color:#b8860b;text-decoration:none;font-size:14px;letter-spacing:1px;text-transform:uppercase}
-.back-link:hover{text-decoration:underline}
+.back-link{display:inline-flex;align-items:center;gap:6px;margin-bottom:30px;color:#999;text-decoration:none;font-size:12px;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
+.back-link:hover{color:#1a1a1a}
 .product-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
 @media(max-width:700px){.product-grid{grid-template-columns:1fr;gap:30px}}
-.product-images img{width:100%;border-radius:4px;display:block}
-.product-thumbs{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
-.product-thumbs img{width:70px;height:70px;object-fit:cover;border-radius:4px;cursor:pointer;border:2px solid transparent}
+.product-images img{width:100%;border-radius:6px;display:block}
+.product-thumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.product-thumbs img{width:72px;height:90px;object-fit:cover;border-radius:4px;cursor:pointer;border:2px solid transparent;transition:border-color .2s}
 .product-thumbs img.active{border-color:#b8860b}
-.product-info h1{font-size:26px;font-weight:700;letter-spacing:1px;margin-bottom:10px}
-.product-vendor{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:16px}
-.product-price{font-size:24px;font-weight:700;color:#b8860b;margin-bottom:24px}
-.product-desc{font-size:15px;line-height:1.7;color:#555;margin-bottom:30px}
-.variant-label{font-size:12px;letter-spacing:1px;text-transform:uppercase;font-weight:600;margin-bottom:10px}
-.variant-select{width:100%;padding:12px;border:1px solid #ddd;border-radius:4px;font-size:15px;background:#fff;margin-bottom:24px;cursor:pointer}
-.btn-cart{width:100%;padding:16px;background:#1a1a1a;color:#fff;border:none;border-radius:4px;font-size:15px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;margin-bottom:12px;transition:background 0.2s}
-.btn-cart:hover{background:#333}
-.btn-buy{width:100%;padding:16px;background:#b8860b;color:#fff;border:none;border-radius:4px;font-size:15px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:background 0.2s}
-.btn-buy:hover{background:#9a720a}
-.added-msg{display:none;text-align:center;color:#2e7d32;font-size:14px;margin-top:12px;font-weight:600}
-.nav-bar{background:#1a1a1a;padding:16px 30px;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{color:#f5c842;font-size:20px;font-weight:700;letter-spacing:2px;text-decoration:none;text-transform:uppercase}
-.nav-cart{color:#fff;text-decoration:none;font-size:13px;letter-spacing:1px}
+.product-info{padding-top:8px}
+.product-collection{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#b8860b;font-weight:600;margin-bottom:8px}
+.product-info h1{font-size:28px;font-weight:700;letter-spacing:.5px;margin-bottom:12px;line-height:1.2}
+.product-price{font-size:26px;font-weight:700;color:#b8860b;margin-bottom:20px;letter-spacing:.5px}
+.product-desc{font-size:15px;line-height:1.75;color:#666;margin-bottom:28px;border-left:3px solid #b8860b;padding-left:16px}
+.variant-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:12px;color:#1a1a1a}
+.size-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.sz-btn{min-width:52px;height:52px;border:1.5px solid rgba(0,0,0,0.18);background:none;color:#1a1a1a;font-size:13px;font-weight:600;letter-spacing:1px;cursor:pointer;border-radius:4px;transition:all .2s;display:flex;align-items:center;justify-content:center;padding:0 14px}
+.sz-btn:hover,.sz-btn.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.sz-btn:disabled{opacity:.35;cursor:not-allowed}
+input[name="id"]{display:none}
+.btn-cart{width:100%;padding:18px;background:#1a1a1a;color:#fff;border:none;border-radius:4px;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;cursor:pointer;margin-bottom:10px;transition:background .2s}
+.btn-cart:hover{background:#b8860b}
+.btn-applepay{width:100%;padding:17px;background:#000;color:#fff;border:none;border-radius:8px;font-size:15px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-applepay:hover{background:#222}
+.added-msg{display:none;text-align:center;color:#2e7d32;font-size:13px;margin-top:12px;font-weight:600}
+.nav-bar{background:#1a1a1a;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-logo{color:#f5c842;font-size:18px;font-weight:700;letter-spacing:2px;text-decoration:none}
+.nav-cart-link{color:#fff;text-decoration:none;font-size:12px;letter-spacing:1px;text-transform:uppercase}
+.badge{background:#b8860b;color:#fff;border-radius:50%;width:18px;height:18px;font-size:10px;display:inline-flex;align-items:center;justify-content:center;margin-left:4px}
 </style>
 
 <nav class="nav-bar">
   <a class="nav-logo" href="/">🍋 Lemon Paris</a>
-  <a class="nav-cart" href="/cart">Panier ({{ cart.item_count }})</a>
+  <a class="nav-cart-link" href="/cart">Panier <span class="badge">{{ cart.item_count }}</span></a>
 </nav>
 
 <div class="product-page">
@@ -37,11 +43,13 @@ body{font-family:'Helvetica Neue',Arial,sans-serif;background:#fdf6ee;color:#1a1
   <div class="product-grid">
     <div class="product-images">
       {% if product.images.size > 0 %}
-        <img id="main-img" src="{{ product.featured_image | img_url: '800x' }}" alt="{{ product.title }}">
+        <img id="main-img" src="{{ product.featured_image | img_url: '900x' }}" alt="{{ product.title }}">
         {% if product.images.size > 1 %}
           <div class="product-thumbs">
             {% for image in product.images %}
-              <img src="{{ image | img_url: '150x' }}" alt="{{ product.title }}" onclick="document.getElementById('main-img').src='{{ image | img_url: '800x' }}';this.parentNode.querySelectorAll('img').forEach(i=>i.classList.remove('active'));this.classList.add('active')" class="{% if forloop.first %}active{% endif %}">
+              <img src="{{ image | img_url: '200x' }}" alt="{{ product.title }}"
+                onclick="document.getElementById('main-img').src='{{ image | img_url: '900x' }}';this.parentNode.querySelectorAll('img').forEach(i=>i.classList.remove('active'));this.classList.add('active')"
+                class="{% if forloop.first %}active{% endif %}">
             {% endfor %}
           </div>
         {% endif %}
@@ -49,51 +57,93 @@ body{font-family:'Helvetica Neue',Arial,sans-serif;background:#fdf6ee;color:#1a1
     </div>
 
     <div class="product-info">
-      <div class="product-vendor">{{ product.vendor }}</div>
+      <p class="product-collection">{{ product.vendor }}</p>
       <h1>{{ product.title }}</h1>
       <div class="product-price">{{ product.price | money }}</div>
 
-      <div class="product-desc">{{ product.description }}</div>
+      {% comment %} Description par handle si Shopify admin est vide {% endcomment %}
+      {% assign desc_text = product.description %}
+      {% if desc_text == blank %}
+        {% case product.handle %}
+          {% when 'ensemble-riveira-rose' %}
+            {% assign desc_text = "L'Ensemble Riviera Rose est la pièce signature de notre collection estivale. T-shirt oversize en coton premium et short assorti, ornés du motif exclusif Lemon Paris. Une ode à l'élégance décontractée de la Côte d'Azur — de Monaco à Marbella." %}
+          {% when 'ensemble-riveira-bleu' %}
+            {% assign desc_text = "L'Ensemble Riviera Bleu incarne l'esprit de la Méditerranée. T-shirt oversize et short coordonné en coton premium, avec le motif emblématique Lemon Paris. Le duo parfait pour les journées ensoleillées en bord de mer." %}
+          {% when 'ensemble-monegasque' %}
+            {% assign desc_text = "L'Ensemble Monégasque, c'est la sophistication de la Principauté à l'état pur. Coupe premium, finitions haut de gamme et silhouette sans effort — pour ceux qui exigent le meilleur." %}
+          {% when 'ensemble-marbella' %}
+            {% assign desc_text = "L'Ensemble Marbella capture l'essence du luxe méditerranéen. Style audacieux, qualité premium — pour les journées de prestige de la Costa del Sol à la Riviera Française." %}
+          {% when 't-shirt-riviera-rose' %}
+            {% assign desc_text = "T-shirt blanc oversize avec logo Lemon Paris brodé en rose. Coupe décontractée et premium, conçu pour les journées estivales les plus ensoleillées. À porter seul ou en ensemble complet." %}
+          {% when 't-shirt-riviera-bleu' %}
+            {% assign desc_text = "T-shirt blanc oversize avec logo Lemon Paris brodé en bleu marine. L'essentiel du style Riviera — élégant, confortable, intemporel. À porter seul ou avec le short assorti." %}
+          {% when 'short-riviera-rose' %}
+            {% assign desc_text = "Short en coton premium rose poudré, orné du motif Lemon Paris imprimé en ton sur ton. Coupe moderne et confortable — l'allié parfait pour les journées ensoleillées sur la Côte d'Azur." %}
+          {% when 'short-riviera-bleu' %}
+            {% assign desc_text = "Short en coton premium bleu, avec le motif Lemon Paris imprimé en ton sur ton. Finitions soignées, coupe ajustée — pour un style Riviera authentique et sans effort." %}
+          {% when 'casquette-riviera-bleu' %}
+            {% assign desc_text = "Trucker cap bicolore en coton premium bleu ciel et mesh beige naturel, ornée du logo Lemon Paris brodé ton sur ton. Légère, ajustable — pensée pour les journées ensoleillées de Monaco à Marbella." %}
+          {% when 'casquette-riviera-rose' %}
+            {% assign desc_text = "Trucker cap en coton premium rose poudré et mesh naturel, avec le logo Lemon Paris brodé avec précision. Pièce signature de la Collection Riviera — à porter seule ou avec l'Ensemble Riviera Rose." %}
+        {% endcase %}
+      {% endif %}
+      <p class="product-desc">{{ desc_text }}</p>
 
       {% form 'product', product, id: 'product-form' %}
+        <input type="hidden" name="id" id="selected-variant" value="{{ product.variants.first.id }}">
+
         {% if product.variants.size > 1 %}
           <div class="variant-label">Taille</div>
-          <select name="id" class="variant-select">
+          <div class="size-grid">
             {% for variant in product.variants %}
-              <option value="{{ variant.id }}" {% unless variant.available %}disabled{% endunless %}>
-                {{ variant.title }}{% unless variant.available %} — Épuisé{% endunless %}
-              </option>
+              <button type="button" class="sz-btn {% if forloop.first %}active{% endif %}"
+                onclick="selectVariant(this, {{ variant.id }})"
+                {% unless variant.available %}disabled{% endunless %}>
+                {{ variant.title }}
+              </button>
             {% endfor %}
-          </select>
-        {% else %}
-          <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+          </div>
         {% endif %}
 
-        <button type="submit" name="add" class="btn-cart">Ajouter au panier</button>
-        <p class="added-msg" id="added-msg">✓ Ajouté au panier !</p>
+        <button type="submit" name="add" class="btn-cart" id="add-btn">Ajouter au panier</button>
+        <p class="added-msg" id="added-msg">✓ Produit ajouté !</p>
       {% endform %}
 
-      <a href="/cart" style="display:block;text-align:center;padding:16px;background:#b8860b;color:#fff;border-radius:4px;text-decoration:none;font-size:15px;letter-spacing:1px;text-transform:uppercase;margin-top:0">Voir mon panier</a>
+      <a href="/checkout" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:17px;background:#000;color:#fff;border-radius:8px;text-decoration:none;font-size:15px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-weight:500;margin-top:0">
+        <svg width="28" height="18" viewBox="0 0 165 106" xmlns="http://www.w3.org/2000/svg" fill="white"><path d="M150.698 0H14.823C6.638 0 0 6.638 0 14.823v76.319c0 8.185 6.638 14.823 14.823 14.823h135.875c8.185 0 14.823-6.638 14.823-14.823V14.823C165.521 6.638 158.883 0 150.698 0z" fill="black"/><path d="M42.369 35.174c1.633-2.047 2.737-4.754 2.441-7.522-2.379.119-5.264 1.574-6.957 3.621-1.516 1.75-2.855 4.576-2.501 7.224 2.647.207 5.384-1.277 7.017-3.323zM44.787 39.067c-3.875-.236-7.178 2.2-9.02 2.2-1.841 0-4.639-2.082-7.692-2.023-3.935.059-7.574 2.289-9.592 5.827-4.096 7.083-1.074 17.592 2.912 23.359 1.959 2.855 4.283 6.007 7.396 5.888 2.943-.117 4.075-1.9 7.635-1.9 3.559 0 4.579 1.9 7.692 1.841 3.204-.059 5.234-2.855 7.193-5.711 2.259-3.263 3.173-6.42 3.233-6.598-.072-.029-6.191-2.386-6.25-9.445-.059-5.93 4.841-8.756 5.059-8.903-2.771-4.107-7.1-4.535-8.566-4.535zM75.154 31.825c8.717 0 14.787 6.011 14.787 14.758 0 8.777-6.189 14.817-15.024 14.817h-9.654v15.342H58.45V31.825h16.704zm-9.891 23.891h8.007c6.071 0 9.525-3.275 9.525-8.986 0-5.711-3.454-8.956-9.495-8.956h-8.037v17.942zM92.691 53.436c0-8.836 5.195-14.521 13.175-14.521 7.95 0 13.175 5.685 13.175 14.521 0 8.866-5.194 14.521-13.175 14.521-7.98 0-13.175-5.655-13.175-14.521zm21.767 0c0-6.071-2.796-9.643-6.592-9.643-3.796 0-6.592 3.572-6.592 9.643 0 6.101 2.796 9.643 6.592 9.643 3.796 0 6.592-3.542 6.592-9.643z" fill="white"/></svg>
+        Pay
+      </a>
     </div>
   </div>
 </div>
 
 <script>
-document.getElementById('product-form').addEventListener('submit', function(e){
+function selectVariant(btn, variantId) {
+  btn.closest('.size-grid').querySelectorAll('.sz-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('selected-variant').value = variantId;
+}
+
+document.getElementById('product-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  const formData = new FormData(this);
-  fetch('/cart/add.js', {method:'POST', body: formData})
-    .then(r=>r.json())
-    .then(()=>{
-      document.getElementById('added-msg').style.display='block';
-      setTimeout(()=>window.location='/cart', 1200);
-    });
+  const addBtn = document.getElementById('add-btn');
+  addBtn.disabled = true;
+  addBtn.textContent = '...';
+  fetch('/cart/add.js', {method:'POST', body: new FormData(this)})
+    .then(r => r.json())
+    .then(() => {
+      addBtn.disabled = false;
+      addBtn.textContent = '✓ Ajouté !';
+      document.getElementById('added-msg').style.display = 'block';
+      setTimeout(() => {
+        addBtn.textContent = 'Ajouter au panier';
+        document.getElementById('added-msg').style.display = 'none';
+      }, 2000);
+    })
+    .catch(() => { addBtn.disabled = false; addBtn.textContent = 'Ajouter au panier'; });
 });
 </script>
 
 {% schema %}
-{
-  "name": "Product",
-  "settings": []
-}
+{ "name": "Product", "settings": [] }
 {% endschema %}

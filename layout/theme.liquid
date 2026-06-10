@@ -141,7 +141,7 @@ body{font-family:var(--fb);background:var(--white);color:var(--dark);overflow-x:
 .modal-desc{font-size:12px;font-weight:300;color:var(--gray);line-height:1.9;margin-bottom:22px}
 .sizes-label{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--dark);margin-bottom:8px}
 .sizes-grid{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
-.size-btn{min-width:52px;height:52px;border:1.5px solid rgba(0,0,0,0.18);background:none;font-family:var(--fb);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;border-radius:4px;letter-spacing:1px}
+.size-btn{min-width:52px;height:52px;border:1.5px solid rgba(0,0,0,0.18);background:none;color:var(--dark);font-family:var(--fb);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;border-radius:4px;letter-spacing:1px}
 .size-btn:hover,.size-btn.active{background:var(--dark);color:var(--white);border-color:var(--dark)}
 .payment-methods{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
 .payment-chip{border:1px solid var(--gray-light);padding:6px 10px;font-size:10px;font-weight:500;border-radius:4px}
@@ -2082,6 +2082,16 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.modal-overlay').forEach(function(m) {
     m.style.display='none';
     fillUpsellImages(m);
+    var startY=0, startX=0;
+    m.addEventListener('touchstart', function(e){ startY=e.touches[0].clientY; startX=e.touches[0].clientX; }, {passive:true});
+    m.addEventListener('touchend', function(e){
+      var dy=e.changedTouches[0].clientY - startY;
+      var dx=Math.abs(e.changedTouches[0].clientX - startX);
+      if(dy > 80 && dx < 60) {
+        var id = m.id.replace('modal-','');
+        closeModal(id);
+      }
+    }, {passive:true});
   });
 });
 
