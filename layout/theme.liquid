@@ -1766,14 +1766,13 @@ function getSlide(pid) {
   return slide ? slide.src : '';
 }
 function fmtPrice(n) { return n.toFixed(2).replace('.',',') + ' €'; }
-function cartTotal() { return cartItems.reduce((s,i)=>s+i.price*i.qty,0); }
-function cartCount() { return cartItems.reduce((s,i)=>s+i.qty,0); }
-function updateBadge() {
-  const el = document.getElementById('cartCount');
-  if (!el) return;
-  const n = cartCount();
-  el.textContent = n;
-  el.style.display = n > 0 ? 'flex' : 'none';
+async function updateBadge() {
+  try {
+    const res = await fetch('/cart.js');
+    const cart = await res.json();
+    const el = document.getElementById('cartCount');
+    if (el) { el.textContent = cart.item_count; el.style.display = cart.item_count > 0 ? 'flex' : 'none'; }
+  } catch(e) {}
 }
 
 /* ── Add to cart ── */
@@ -1790,7 +1789,46 @@ const SHOPIFY_HANDLES = {
   'cap_bleu': 'casquette-riviera-bleu',
   'cap_rose': 'casquette-riviera-rose'
 };
-function addToCart(name, price) {
+async function addToCart(name, price) {
+  const modal = document.querySelector('.modal-overlay.active');
+  const sz = modal ? modal.querySelector('.size-btn.active') : null;
+  if (!sz) {
+    if (modal) modal.querySelectorAll('.size-btn').forEach(b=>{
+      b.style.animation='none'; b.offsetHeight; b.style.animation='sizeshake 0.35s ease';
+    });
+    return;
+  }
+  let pid = null;
+  ['e1','e2','e3','e4','ts_rose','ts_bleu','sh_rose','sh_bleu','cap_bleu','cap_rose'].forEach(id=>{
+    const mel=document.getElementById('modal-'+id); if(mel && mel.classList.contains('active')) pid=id;
+  });
+  if (!pid) return;
+  const handle = SHOPIFY_HANDLES[pid];
+  const size = sz.textContent.replace(/<[^>]*>/g,'').trim();
+  const btn = modal ? modal.querySelector('.btn-buy') : null;
+  if (handle) {
+    try {
+      const res = await fetch('/products/' + handle + '.js');
+      const product = await res.json();
+      const variant = product.variants.find(v => v.title.toLowerCase() === size.toLowerCase()) || product.variants[0];
+      await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({id: variant.id, quantity: 1})
+      });
+      await updateBadge();
+      if (btn) {
+        btn.classList.add('success');
+        const sp = btn.querySelector('span'); if(sp) sp.textContent='✓ Ajouté'; else btn.textContent='✓ Ajouté';
+        setTimeout(()=>{ btn.classList.remove('success'); const s=btn.querySelector('span'); if(s) s.textContent='Ajouter au panier'; else btn.textContent='Ajouter au panier'; }, 1800);
+      }
+      await renderCartDrawer(); openCart();
+    } catch(e) { console.error('Cart error:', e); }
+    return;
+  }
+}
+
+async function buyNow(name, price) {
   const modal = document.querySelector('.modal-overlay.active');
   const sz = modal ? modal.querySelector('.size-btn.active') : null;
   if (!sz) {
@@ -1807,101 +1845,72 @@ function addToCart(name, price) {
   const handle = SHOPIFY_HANDLES[pid];
   const size = sz.textContent.replace(/<[^>]*>/g,'').trim();
   if (handle) {
-    window.open('https://lemon1paris.myshopify.com/products/' + handle, '_blank');
+    try {
+      const res = await fetch('/products/' + handle + '.js');
+      const product = await res.json();
+      const variant = product.variants.find(v => v.title.toLowerCase() === size.toLowerCase()) || product.variants[0];
+      await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({id: variant.id, quantity: 1})
+      });
+      window.location.href = '/checkout';
+    } catch(e) { console.error('Buy now error:', e); }
     return;
   }
-  const p = PRODUCTS[pid];
-  const key = pid+'_'+size;
-  const img = getSlide(pid);
-  const existing = cartItems.find(i=>i.key===key);
-  if (existing) { existing.qty++; }
-  else { cartItems.push({key,pid,name:p.name,collection:p.collection,price:p.price,priceStr:p.priceStr,size,qty:1,img}); }
-  updateBadge();
-  const btn = modal.querySelector('.btn-buy');
-  if (btn) {
-    btn.classList.add('success');
-    btn.querySelector('span') ? btn.querySelector('span').textContent='✓ Ajouté' : btn.textContent='✓ Ajouté';
-    setTimeout(()=>{ btn.classList.remove('success'); btn.querySelector('span') ? btn.querySelector('span').textContent='Ajouter au panier' : btn.textContent='Ajouter au panier'; },1800);
-  }
-  renderCartDrawer(); openCart();
 }
 
-function buyNow(name, price) {
-  const modal = document.querySelector('.modal-overlay.active');
-  const sz = modal ? modal.querySelector('.size-btn.active') : null;
-  if (!sz) {
-    if (modal) modal.querySelectorAll('.size-btn').forEach(b=>{
-      b.style.animation='none'; b.offsetHeight; b.style.animation='sizeshake 0.35s ease';
-    });
-    return;
-  }
-  let pid = null;
-  ['e1','e2','e3','e4','ts_rose','ts_bleu','sh_rose','sh_bleu','cap_bleu','cap_rose'].forEach(id=>{
-    const mel=document.getElementById('modal-'+id); if(mel && mel.classList.contains('active')) pid=id;
+async function shopifyChangeQty(variantId, newQty) {
+  await fetch('/cart/change.js', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({id: variantId, quantity: Math.max(0, newQty)})
   });
-  if (!pid) return;
-  const handle = SHOPIFY_HANDLES[pid];
-  if (handle) {
-    window.open('https://lemon1paris.myshopify.com/products/' + handle, '_blank');
-    return;
-  }
-  addToCart(name, price);
-}
-
-function removeFromCart(key) { cartItems=cartItems.filter(i=>i.key!==key); updateBadge(); renderCartDrawer(); }
-
-function changeQty(key,delta) {
-  const it=cartItems.find(i=>i.key===key);
-  if(!it) return;
-  it.qty+=delta;
-  if(it.qty<=0) cartItems=cartItems.filter(i=>i.key!==key);
-  updateBadge(); renderCartDrawer();
+  await updateBadge();
+  await renderCartDrawer();
 }
 
 /* ── Cart Drawer ── */
-function renderCartDrawer() {
+async function renderCartDrawer() {
   const body=document.getElementById('cartBody');
   const footer=document.getElementById('cartFooter');
   if(!body) return;
-  if(cartItems.length===0){
+  let cart;
+  try { const r=await fetch('/cart.js'); cart=await r.json(); } catch(e) { return; }
+  if(cart.item_count===0){
     body.innerHTML='<div class="cart-empty"><p class="cart-empty-title">Votre panier est vide</p><p class="cart-empty-sub">Découvrez la collection</p></div>';
     if(footer) footer.style.display='none';
     return;
   }
-  const itemsHtml=cartItems.map(it=>`
+  const itemsHtml=cart.items.map(it=>`
     <div class="cart-item">
-      <img class="cart-item-img" src="${it.img}" alt="${it.name}"/>
+      ${it.image?`<img class="cart-item-img" src="${it.image}" alt="${it.title}"/>`:''}
       <div class="cart-item-info">
-        <p class="cart-item-collection">${it.collection}</p>
-        <p class="cart-item-name">${it.name}</p>
-        <p class="cart-item-size">Taille : ${it.size}</p>
-        <p class="cart-item-price">${it.priceStr} €</p>
+        <p class="cart-item-name">${it.product_title}</p>
+        ${it.variant_title&&it.variant_title!=='Default Title'?`<p class="cart-item-size">Taille : ${it.variant_title}</p>`:''}
+        <p class="cart-item-price">${(it.price/100).toFixed(2).replace('.',',')} €</p>
         <div class="cart-item-qty">
-          <button class="cart-qty-btn" onclick="changeQty('${it.key}',-1)">−</button>
-          <span class="cart-qty-num">${it.qty}</span>
-          <button class="cart-qty-btn" onclick="changeQty('${it.key}',1)">+</button>
+          <button class="cart-qty-btn" onclick="shopifyChangeQty(${it.variant_id},${it.quantity-1})">−</button>
+          <span class="cart-qty-num">${it.quantity}</span>
+          <button class="cart-qty-btn" onclick="shopifyChangeQty(${it.variant_id},${it.quantity+1})">+</button>
         </div>
-        <button class="cart-item-remove" onclick="removeFromCart('${it.key}')">Supprimer</button>
+        <button class="cart-item-remove" onclick="shopifyChangeQty(${it.variant_id},0)">Supprimer</button>
       </div>
     </div>`).join('');
-  const inCart=[...new Set(cartItems.map(i=>i.pid))];
-  const upPids=['e1','e2','e3','e4','ts_rose','ts_bleu','sh_rose','sh_bleu','cap_bleu','cap_rose'].filter(p=>!inCart.includes(p)).slice(0,3);
-  const upsell=upPids.length?`<div class="cart-upsell"><p class="cart-upsell-title">Complétez votre look</p><div class="cart-upsell-grid">${upPids.map(pid=>{const p=PRODUCTS[pid];if(!p)return'';const img=getSlide(pid);return`<div class="cart-upsell-card" onclick="closeCart();openModal('${pid}')"><img class="cart-upsell-img" src="${img}" alt="${p.name}"/><p class="cart-upsell-name">${p.name}</p><p class="cart-upsell-price">${p.priceStr} €</p></div>`;}).join('')}</div></div>`:''
-  body.innerHTML=itemsHtml+upsell;
-  const tot=cartTotal();
+  body.innerHTML=itemsHtml;
   const el=document.getElementById('cartTotalPrice');
-  if(el) el.textContent=fmtPrice(tot);
+  if(el) el.textContent=(cart.total_price/100).toFixed(2).replace('.',',')+' €';
   if(footer) footer.style.display='block';
 }
 
-function openCart(){
+async function openCart(){
   const overlay=document.getElementById('cartOverlay');
   const drawer=document.getElementById('cartDrawer');
   if(!overlay||!drawer) return;
-  renderCartDrawer();
   overlay.classList.add('open'); drawer.classList.add('open');
   requestAnimationFrame(()=>overlay.classList.add('visible'));
   document.body.style.overflow='hidden';
+  await renderCartDrawer();
 }
 function closeCart(){
   const overlay=document.getElementById('cartOverlay');
@@ -2095,8 +2104,8 @@ document.addEventListener('DOMContentLoaded', function() {
       <span class="cart-total-price" id="cartTotalPrice">0,00 &euro;</span>
     </div>
     <button class="cart-btn-continue" onclick="closeCart()">Continuer mes achats</button>
-    <button class="cart-btn-checkout" onclick="alert('Connectez votre système de paiement (Stripe / Shopify)')">Commander</button>
-    <button class="cart-btn-applepay" onclick="alert('Apple Pay — à connecter via Stripe')">
+    <button class="cart-btn-checkout" onclick="window.location.href='/checkout'">Commander</button>
+    <button class="cart-btn-applepay" onclick="window.location.href='/checkout'">
       <svg viewBox="0 0 165.521 105.965" xmlns="http://www.w3.org/2000/svg" fill="white">
         <path d="M150.698 0H14.823C6.638 0 0 6.638 0 14.823v76.319c0 8.185 6.638 14.823 14.823 14.823h135.875c8.185 0 14.823-6.638 14.823-14.823V14.823C165.521 6.638 158.883 0 150.698 0z" fill="black"/>
         <path d="M42.369 35.174c1.633-2.047 2.737-4.754 2.441-7.522-2.379.119-5.264 1.574-6.957 3.621-1.516 1.750-2.855 4.576-2.501 7.224 2.647.207 5.384-1.277 7.017-3.323zM44.787 39.067c-3.875-.236-7.178 2.200-9.020 2.200-1.841 0-4.639-2.082-7.692-2.023-3.935.059-7.574 2.289-9.592 5.827-4.096 7.083-1.074 17.592 2.912 23.359 1.959 2.855 4.283 6.007 7.396 5.888 2.943-.117 4.075-1.900 7.635-1.900 3.559 0 4.579 1.900 7.692 1.841 3.204-.059 5.234-2.855 7.193-5.711 2.259-3.263 3.173-6.420 3.233-6.598-.072-.029-6.191-2.386-6.250-9.445-.059-5.930 4.841-8.756 5.059-8.903-2.771-4.107-7.100-4.535-8.566-4.535zM75.154 31.825c8.717 0 14.787 6.011 14.787 14.758 0 8.777-6.189 14.817-15.024 14.817h-9.654v15.342H58.450V31.825h16.704zm-9.891 23.891h8.007c6.071 0 9.525-3.275 9.525-8.986 0-5.711-3.454-8.956-9.495-8.956h-8.037v17.942zM92.691 53.436c0-8.836 5.195-14.521 13.175-14.521 7.950 0 13.175 5.685 13.175 14.521 0 8.866-5.194 14.521-13.175 14.521-7.980 0-13.175-5.655-13.175-14.521zm21.767 0c0-6.071-2.796-9.643-6.592-9.643-3.796 0-6.592 3.572-6.592 9.643 0 6.101 2.796 9.643 6.592 9.643 3.796 0 6.592-3.542 6.592-9.643zM123.700 78.249V39.282h6.208v5.017h.148c1.602-3.424 5.018-5.373 9.110-5.373 6.830 0 11.285 4.936 11.285 12.354v.089c0 7.387-4.484 12.264-11.344 12.264-4.003 0-7.389-1.900-8.961-5.165h-.119v13.781H123.700zm15.758-21.795c0-4.577-2.739-7.600-6.800-7.600-4.033 0-6.830 3.082-6.830 7.600 0 4.489 2.797 7.541 6.830 7.541 4.061 0 6.800-3.023 6.800-7.541z" fill="white"/>
