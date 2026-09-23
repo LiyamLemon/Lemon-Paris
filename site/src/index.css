@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", "Georgia", serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  --color-ink: #0a0a0a;
+  --color-ink-soft: #14130f;
+  --color-paper: #f7f5f1;
+  --color-paper-dim: #eeece6;
+  --color-mist: #8a8781;
+  --color-line: #26241d;
+  --color-line-soft: #e3e0d8;
+  --color-gold: #c9a24b;
+  --color-gold-soft: #ddc48a;
+  --color-gold-deep: #a8823a;
+
+  --animate-reveal: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade: fade 0.4s ease forwards;
+
+  @keyframes reveal {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+/* Reveal-on-scroll utility: elements start hidden and animate in once the
+   `is-visible` class is toggled on by the useReveal hook. */
+.reveal {
+  opacity: 0;
+}
+.reveal.is-visible {
+  animation: var(--animate-reveal);
+}
+
+/* Respect users who don't want motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .reveal.is-visible {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+.footer-link {
+  @apply text-sm text-mist transition-colors hover:text-gold w-fit;
+}
+
+.container-alma {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .container-alma {
+    padding-inline: 2.5rem;
+  }
+}
