@@ -6,15 +6,15 @@ const ICONS = [Truck, Undo2, LifeBuoy, Sparkles];
 
 export function Conciergerie() {
   return (
-    <section id="conciergerie" className="bg-ink py-20 md:py-28">
+    <section id="conciergerie" data-section className="bg-ink py-16 md:py-24">
       <div className="container-alma">
         <Reveal>
-          <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-gold">
+          <p className="eyebrow">
             <span className="h-px w-8 bg-gold" />
             Conciergerie
           </p>
           <h2 className="mt-4 max-w-lg font-serif text-3xl font-semibold text-paper sm:text-4xl">
-            Plus qu'une Location, <span className="italic text-gold-soft">une Expérience</span>
+            Plus qu'une Location, <span className="font-medium italic text-gold-soft">une Expérience</span>
           </h2>
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-mist md:text-base">
             ALMA LOCATION accompagne chaque location au-delà de la simple remise des clés.

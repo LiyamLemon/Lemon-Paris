@@ -14,10 +14,10 @@ const ROWS = [
 
 export function Contact() {
   return (
-    <section id="contact" className="bg-ink-soft py-20 md:py-28">
+    <section id="contact" data-section className="border-t border-line bg-ink-soft py-16 md:py-24">
       <div className="container-alma">
         <Reveal>
-          <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-gold">
+          <p className="eyebrow">
             <span className="h-px w-8 bg-gold" />
             Contact
           </p>
@@ -33,16 +33,16 @@ export function Contact() {
           {ROWS.map(({ icon: Icon, label, value }) => (
             <div
               key={label}
-              className="flex items-start gap-4 rounded-xl border border-line-soft/10 bg-ink p-5"
+              className="flex min-w-0 items-start gap-4 rounded-xl border border-line bg-ink p-5"
             >
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gold/30 text-gold">
                 <Icon size={18} strokeWidth={1.5} />
               </span>
-              <div>
+              <div className="min-w-0">
                 <p className="text-xs font-semibold uppercase tracking-[0.15em] text-mist">
                   {label}
                 </p>
-                <p className="mt-1 text-sm text-paper/90">{value}</p>
+                <p className="mt-1 break-words text-sm text-paper/90">{value}</p>
               </div>
             </div>
           ))}

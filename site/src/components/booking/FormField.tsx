@@ -8,7 +8,7 @@ interface FormFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 /** Champ de formulaire réutilisable : label, input et message d'erreur. */
 export function FormField({ label, error, id, required, ...inputProps }: FormFieldProps) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex min-w-0 flex-col gap-2">
       <label htmlFor={id} className="text-sm font-medium text-paper/80">
         {label} {required && <span className="text-gold">*</span>}
       </label>
@@ -17,8 +17,8 @@ export function FormField({ label, error, id, required, ...inputProps }: FormFie
         required={required}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${id}-error` : undefined}
-        className={`w-full rounded-lg border bg-ink px-4 py-3.5 text-base text-paper placeholder:text-mist/60 focus:outline-none focus:ring-2 focus:ring-gold/50 ${
-          error ? "border-red-400/70" : "border-line-soft/15"
+        className={`block w-full min-w-0 rounded-xl border bg-ink-soft px-4 py-3.5 text-base text-paper placeholder:text-mist/50 transition-colors focus:border-gold/60 focus:outline-none focus:ring-2 focus:ring-gold/25 ${
+          error ? "border-red-400/70" : "border-line"
         }`}
         {...inputProps}
       />

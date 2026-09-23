@@ -1,98 +1,134 @@
-import { useEffect } from "react";
+import { useEffect, useRef, type RefObject } from "react";
+import { createPortal } from "react-dom";
 import { X } from "lucide-react";
-import { Link } from "react-router-dom";
 import { NAV_LINKS } from "../../data/site";
 import { useBooking } from "../../context/BookingContext";
+import { useScrollLock } from "../../hooks/useScrollLock";
+import { SectionLink } from "../common/SectionLink";
+import { Logo } from "./Logo";
 
 interface MobileMenuProps {
   open: boolean;
   onClose: () => void;
+  /** Section actuellement lue, mise en évidence dans le menu. */
+  activeSection: string | null;
+  /** Bouton qui a ouvert le menu : il récupère le focus à la fermeture. */
+  returnFocusRef: RefObject<HTMLButtonElement | null>;
 }
 
 /**
- * Panneau de navigation mobile en plein écran, ouvert/fermé par le bouton
- * hamburger du Header. Se ferme au clic sur un lien, sur la croix, ou sur
- * l'overlay.
+ * Menu mobile plein écran.
+ *
+ * Rendu dans un portail directement sous <body> : il ne dépend ainsi
+ * d'aucun conteneur parent (header avec backdrop-filter, sections animées)
+ * et passe toujours au-dessus de tout le contenu. La page derrière est
+ * bloquée tant qu'il est ouvert.
  */
-export function MobileMenu({ open, onClose }: MobileMenuProps) {
+export function MobileMenu({ open, onClose, activeSection, returnFocusRef }: MobileMenuProps) {
   const { goToBooking } = useBooking();
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const wasOpen = useRef(false);
 
-  // Empêche le scroll du fond pendant que le menu est ouvert.
+  useScrollLock(open);
+
+  // Focus : sur la croix à l'ouverture, sur le hamburger à la fermeture.
   useEffect(() => {
     if (open) {
-      const previous = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = previous;
-      };
+      closeButtonRef.current?.focus({ preventScroll: true });
+    } else if (wasOpen.current) {
+      returnFocusRef.current?.focus({ preventScroll: true });
     }
-  }, [open]);
+    wasOpen.current = open;
+  }, [open, returnFocusRef]);
 
-  // Fermeture au clavier (touche Échap).
   useEffect(() => {
     if (!open) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
+    const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    // Le menu n'existe qu'en mobile : s'il reste ouvert pendant un passage
+    // en largeur desktop (rotation d'une tablette), on le ferme pour ne
+    // pas laisser la page bloquée.
+    const desktop = window.matchMedia("(min-width: 768px)");
+    const onBreakpoint = () => desktop.matches && onClose();
+    window.addEventListener("keydown", onKeyDown);
+    desktop.addEventListener("change", onBreakpoint);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      desktop.removeEventListener("change", onBreakpoint);
+    };
   }, [open, onClose]);
 
-  return (
+  return createPortal(
     <div
-      className={`fixed inset-0 z-50 md:hidden ${open ? "" : "pointer-events-none"}`}
-      aria-hidden={!open}
+      id="mobile-menu"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu de navigation"
+      inert={!open}
+      className={`fixed inset-0 z-[60] flex flex-col bg-ink transition-[opacity,visibility] duration-300 ease-out md:hidden ${
+        open ? "visible opacity-100" : "invisible opacity-0"
+      }`}
     >
-      {/* Overlay */}
-      <button
-        type="button"
-        aria-label="Fermer le menu"
-        tabIndex={open ? 0 : -1}
-        onClick={onClose}
-        className={`absolute inset-0 bg-ink/70 backdrop-blur-sm transition-opacity duration-300 ${
-          open ? "opacity-100" : "opacity-0"
-        }`}
-      />
+      <div className="container-alma flex h-[var(--header-h)] shrink-0 items-center justify-between border-b border-line">
+        <Logo onClick={onClose} />
+        <button
+          ref={closeButtonRef}
+          type="button"
+          onClick={onClose}
+          aria-label="Fermer le menu"
+          className="-mr-2 flex h-11 w-11 items-center justify-center text-paper transition-colors hover:text-gold"
+        >
+          <X size={26} strokeWidth={1.5} />
+        </button>
+      </div>
 
-      {/* Panneau */}
       <nav
-        id="mobile-menu"
-        aria-label="Navigation principale"
-        className={`absolute inset-y-0 right-0 flex w-[85%] max-w-sm flex-col bg-ink-soft px-7 pb-8 pt-6 shadow-2xl transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          open ? "translate-x-0" : "translate-x-full"
-        }`}
+        aria-label="Navigation mobile"
+        className="container-alma flex flex-1 flex-col overflow-y-auto overscroll-contain pb-[max(2rem,env(safe-area-inset-bottom))] pt-6"
       >
-        <div className="flex items-center justify-between">
-          <span className="font-serif text-lg font-semibold tracking-wide text-paper">
-            ALMA <span className="font-sans text-xs font-medium tracking-[0.3em] text-mist">LOCATION</span>
-          </span>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Fermer le menu"
-            className="flex h-10 w-10 items-center justify-center rounded-full text-paper transition-colors hover:bg-white/5 hover:text-gold"
-          >
-            <X size={22} strokeWidth={1.75} />
-          </button>
-        </div>
-
-        <ul className="mt-12 flex flex-1 flex-col gap-1">
-          {NAV_LINKS.map((link, i) => (
-            <li
-              key={link.section}
-              className={`border-b border-line ${open ? "animate-fade" : ""}`}
-              style={{ animationDelay: open ? `${80 + i * 45}ms` : undefined, opacity: open ? undefined : 0 }}
-            >
-              <Link
-                to="/"
-                state={{ section: link.section }}
-                onClick={onClose}
-                className="block py-4 font-serif text-2xl text-paper transition-colors hover:text-gold"
+        <ul>
+          {NAV_LINKS.map((link, i) => {
+            const isActive = activeSection === link.section;
+            return (
+              <li
+                key={link.section}
+                style={{ transitionDelay: open ? `${80 + i * 40}ms` : "0ms" }}
+                className={`border-b border-line transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  open ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+                }`}
               >
-                {link.label}
-              </Link>
-            </li>
-          ))}
+                <SectionLink
+                  section={link.section}
+                  onClick={onClose}
+                  aria-current={isActive ? "location" : undefined}
+                  className="flex items-center gap-4 py-[1.1rem]"
+                >
+                  <span
+                    aria-hidden="true"
+                    className={`h-px shrink-0 bg-gold transition-all duration-300 ${
+                      isActive ? "w-6 opacity-100" : "w-0 opacity-0"
+                    }`}
+                  />
+                  <span
+                    className={`font-serif text-[1.7rem] leading-tight transition-colors ${
+                      isActive ? "text-gold" : "text-paper"
+                    }`}
+                  >
+                    {link.label}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className={`ml-auto text-[0.7rem] tabular-nums tracking-[0.2em] ${
+                      isActive ? "text-gold" : "text-mist/60"
+                    }`}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </SectionLink>
+              </li>
+            );
+          })}
         </ul>
 
         <button
@@ -101,11 +137,14 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
             onClose();
             goToBooking();
           }}
-          className="mt-8 w-full rounded-full bg-gold px-6 py-4 text-center text-sm font-semibold uppercase tracking-[0.15em] text-ink transition-transform active:scale-[0.98]"
+          className={`mt-10 w-full rounded-full bg-gold px-6 py-4 text-center text-sm font-semibold uppercase tracking-[0.15em] text-ink transition-[opacity,transform] duration-500 active:scale-[0.98] ${
+            open ? "translate-y-0 opacity-100 delay-300" : "translate-y-2 opacity-0"
+          }`}
         >
           Réserver
         </button>
       </nav>
-    </div>
+    </div>,
+    document.body,
   );
 }

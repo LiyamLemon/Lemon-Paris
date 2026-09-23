@@ -6,15 +6,15 @@ const ICONS = [ShieldCheck, Headset, Star];
 
 export function Services() {
   return (
-    <section className="border-y border-line bg-ink-soft py-20 md:py-28">
+    <section id="engagements" data-section className="border-y border-line bg-ink-soft py-16 md:py-24">
       <div className="container-alma">
         <Reveal>
-          <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-gold">
+          <p className="eyebrow">
             <span className="h-px w-8 bg-gold" />
             Notre Engagement
           </p>
           <h2 className="mt-4 max-w-lg font-serif text-3xl font-semibold text-paper sm:text-4xl">
-            L'Excellence <span className="italic text-gold-soft">à Chaque Détail</span>
+            L'Excellence <span className="font-medium italic text-gold-soft">à Chaque Détail</span>
           </h2>
         </Reveal>
 

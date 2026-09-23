@@ -1,74 +1,104 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Menu } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
-import { NAV_LINKS } from "../../data/site";
+import { useLocation } from "react-router-dom";
+import { NAV_LINKS, SECTION_IDS } from "../../data/site";
 import { useBooking } from "../../context/BookingContext";
+import { useActiveSection } from "../../hooks/useActiveSection";
+import { SectionLink } from "../common/SectionLink";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 
+/**
+ * Header fixe, toujours visible et toujours au-dessus du contenu (z-50).
+ * Le menu mobile est rendu à part, dans un portail, au-dessus du header.
+ */
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const location = useLocation();
+  const burgerRef = useRef<HTMLButtonElement>(null);
+  const { pathname } = useLocation();
   const { goToBooking } = useBooking();
 
-  // Ferme le menu mobile automatiquement si l'URL change (ex. navigation
-  // vers la fiche d'un véhicule).
+  const isHome = pathname === "/";
+  const spiedSection = useActiveSection(SECTION_IDS, isHome);
+  // Hors de l'accueil : une fiche véhicule appartient à "Notre Flotte".
+  const activeSection = isHome ? spiedSection : pathname.startsWith("/flotte/") ? "flotte" : null;
+
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
+
   useEffect(() => {
     setMenuOpen(false);
-  }, [location.pathname]);
+  }, [pathname]);
 
-  // Le header devient opaque dès que l'utilisateur commence à scroller,
-  // pour rester lisible au-dessus de n'importe quelle section.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <header
-      className={`sticky top-0 z-40 transition-colors duration-300 ${
-        scrolled ? "bg-ink/90 backdrop-blur-md border-b border-line" : "bg-transparent border-b border-transparent"
-      }`}
-    >
-      <div className="container-alma flex h-16 items-center justify-between md:h-20">
-        <Logo />
+    <>
+      <header
+        data-site-header
+        className={`fixed inset-x-0 top-0 z-50 h-[var(--header-h)] border-b bg-ink/95 backdrop-blur-md transition-colors duration-300 ${
+          scrolled ? "border-line" : "border-transparent"
+        }`}
+      >
+        <div className="container-alma flex h-full items-center justify-between">
+          <Logo />
 
-        <nav aria-label="Navigation principale" className="hidden md:flex md:items-center md:gap-8">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.section}
-              to="/"
-              state={{ section: link.section }}
-              className="text-sm font-medium tracking-wide text-paper/85 transition-colors hover:text-gold"
+          <nav aria-label="Navigation principale" className="hidden md:flex md:items-center md:gap-7">
+            {NAV_LINKS.map((link) => {
+              const isActive = activeSection === link.section;
+              return (
+                <SectionLink
+                  key={link.section}
+                  section={link.section}
+                  aria-current={isActive ? "location" : undefined}
+                  className={`relative py-2 text-sm font-medium tracking-wide transition-colors hover:text-gold ${
+                    isActive ? "text-gold" : "text-paper/80"
+                  }`}
+                >
+                  {link.label}
+                  <span
+                    aria-hidden="true"
+                    className={`absolute inset-x-0 -bottom-0.5 mx-auto h-px bg-gold transition-all duration-300 ${
+                      isActive ? "w-full opacity-100" : "w-0 opacity-0"
+                    }`}
+                  />
+                </SectionLink>
+              );
+            })}
+            <button
+              type="button"
+              onClick={() => goToBooking()}
+              className="rounded-full bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.12em] text-ink transition hover:brightness-105 active:scale-[0.98]"
             >
-              {link.label}
-            </Link>
-          ))}
+              Réserver
+            </button>
+          </nav>
+
           <button
+            ref={burgerRef}
             type="button"
-            onClick={() => goToBooking()}
-            className="rounded-full bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.12em] text-ink transition-transform hover:brightness-105 active:scale-[0.98]"
+            onClick={() => setMenuOpen(true)}
+            aria-label="Ouvrir le menu"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            className="-mr-2 flex h-11 w-11 items-center justify-center text-paper transition-colors hover:text-gold md:hidden"
           >
-            Réserver
+            <Menu size={26} strokeWidth={1.5} />
           </button>
-        </nav>
+        </div>
+      </header>
 
-        <button
-          type="button"
-          onClick={() => setMenuOpen(true)}
-          aria-label="Ouvrir le menu"
-          aria-expanded={menuOpen}
-          aria-controls="mobile-menu"
-          className="flex h-10 w-10 items-center justify-center text-paper md:hidden"
-        >
-          <Menu size={26} strokeWidth={1.75} />
-        </button>
-      </div>
-
-      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
-    </header>
+      <MobileMenu
+        open={menuOpen}
+        onClose={closeMenu}
+        activeSection={activeSection}
+        returnFocusRef={burgerRef}
+      />
+    </>
   );
 }

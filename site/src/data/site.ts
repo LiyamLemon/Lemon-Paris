@@ -4,14 +4,31 @@
  * aucune coordonnée réelle n'a été inventée pour cette V1.
  */
 
-export const NAV_LINKS = [
+/**
+ * Ordre réel des sections de la page d'accueil, de haut en bas. Sert à la
+ * fois à la structure de la page et à la détection de la section active.
+ * "engagements" est une vraie section mais n'a pas d'entrée de menu.
+ */
+export const SECTION_IDS = [
+  "accueil",
+  "flotte",
+  "reservation",
+  "galerie",
+  "engagements",
+  "conciergerie",
+  "contact",
+] as const;
+
+export type SectionId = (typeof SECTION_IDS)[number];
+
+export const NAV_LINKS: readonly { label: string; section: SectionId }[] = [
   { label: "Accueil", section: "accueil" },
   { label: "Notre Flotte", section: "flotte" },
   { label: "Réservation", section: "reservation" },
   { label: "Galerie", section: "galerie" },
   { label: "Conciergerie", section: "conciergerie" },
   { label: "Contact", section: "contact" },
-] as const;
+];
 
 export const CONTACT_INFO = {
   phone: "À REMPLACER (ex. +33 1 23 45 67 89)",
@@ -26,32 +43,26 @@ export const GALLERY_IMAGES = [
   {
     src: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1400&auto=format&fit=crop",
     alt: "Coupé sport premium sur route parisienne",
-    span: "tall",
   },
   {
     src: "https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1400&auto=format&fit=crop",
     alt: "Intérieur cuir d'une berline haut de gamme",
-    span: "wide",
   },
   {
     src: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?q=80&w=1400&auto=format&fit=crop",
     alt: "Citadine premium garée devant un immeuble haussmannien",
-    span: "normal",
   },
   {
     src: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=1400&auto=format&fit=crop",
     alt: "Détail de jante sur véhicule sportif",
-    span: "normal",
   },
   {
     src: "https://images.unsplash.com/photo-1519245659620-e859806a8d3b?q=80&w=1400&auto=format&fit=crop",
     alt: "SUV prestige de profil",
-    span: "wide",
   },
   {
     src: "https://images.unsplash.com/photo-1493238792000-8113da705763?q=80&w=1400&auto=format&fit=crop",
     alt: "Tableau de bord et instrumentation premium",
-    span: "tall",
   },
 ] as const;
 

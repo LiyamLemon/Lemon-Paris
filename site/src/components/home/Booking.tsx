@@ -3,8 +3,10 @@ import { CheckCircle2 } from "lucide-react";
 import { vehicles } from "../../data/vehicles";
 import { useBooking } from "../../context/BookingContext";
 import { submitBooking } from "../../lib/api";
+import { scrollToSection } from "../../lib/scroll";
 import {
   hasErrors,
+  localToday,
   validateBookingForm,
   type BookingFormErrors,
   type BookingFormValues,
@@ -24,23 +26,46 @@ const EMPTY_VALUES: BookingFormValues = {
   endTime: "",
 };
 
+/** Ordre des champs dans le formulaire : le premier en erreur reçoit le focus. */
+const FIELD_ORDER: (keyof BookingFormValues)[] = [
+  "lastName",
+  "firstName",
+  "email",
+  "phone",
+  "vehicleSlug",
+  "startDate",
+  "endDate",
+];
+
+/**
+ * Section Réservation : pensée comme une destination à part entière du
+ * site (bloc pleine hauteur, fond distinct), pas comme un formulaire perdu
+ * au milieu de la page.
+ */
 export function Booking() {
   const { selectedVehicleSlug, setSelectedVehicleSlug } = useBooking();
   const [values, setValues] = useState<BookingFormValues>(EMPTY_VALUES);
   const [errors, setErrors] = useState<BookingFormErrors>({});
   const [submitting, setSubmitting] = useState(false);
   const [confirmation, setConfirmation] = useState<string | null>(null);
+  const [vehicleFlash, setVehicleFlash] = useState(false);
 
-  // Reprend automatiquement le véhicule sélectionné depuis une carte ou une
-  // fiche véhicule.
+  // Reprend automatiquement le véhicule choisi depuis une carte ou une
+  // fiche, et le signale brièvement dans le formulaire.
   useEffect(() => {
-    if (selectedVehicleSlug) {
-      setValues((prev) => ({ ...prev, vehicleSlug: selectedVehicleSlug }));
-    }
+    if (!selectedVehicleSlug) return;
+    setValues((prev) => ({ ...prev, vehicleSlug: selectedVehicleSlug }));
+    setErrors((prev) => ({ ...prev, vehicleSlug: undefined }));
+    setConfirmation(null);
+    setVehicleFlash(true);
+    const timeout = window.setTimeout(() => setVehicleFlash(false), 1600);
+    return () => window.clearTimeout(timeout);
   }, [selectedVehicleSlug]);
 
   function updateField<K extends keyof BookingFormValues>(key: K, value: BookingFormValues[K]) {
     setValues((prev) => ({ ...prev, [key]: value }));
+    // L'erreur d'un champ disparaît dès qu'on le corrige.
+    if (errors[key]) setErrors((prev) => ({ ...prev, [key]: undefined }));
     if (key === "vehicleSlug") setSelectedVehicleSlug(value || null);
   }
 
@@ -48,7 +73,15 @@ export function Booking() {
     e.preventDefault();
     const validationErrors = validateBookingForm(values);
     setErrors(validationErrors);
-    if (hasErrors(validationErrors)) return;
+    if (hasErrors(validationErrors)) {
+      const firstInvalid = FIELD_ORDER.find((key) => validationErrors[key]);
+      if (firstInvalid) {
+        const field = document.getElementById(firstInvalid);
+        field?.focus({ preventScroll: true });
+        field?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+      return;
+    }
 
     setSubmitting(true);
     try {
@@ -57,31 +90,43 @@ export function Booking() {
       setValues(EMPTY_VALUES);
       setSelectedVehicleSlug(null);
       setErrors({});
+      scrollToSection("reservation");
     } finally {
       setSubmitting(false);
     }
   }
 
+  const today = localToday();
+
   return (
-    <section id="reservation" className="bg-ink py-20 md:py-28">
-      <div className="container-alma">
-        <Reveal>
-          <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-gold">
+    <section
+      id="reservation"
+      data-section
+      className="relative min-h-[calc(100svh-var(--header-h))] border-y border-line bg-ink-soft pb-20 pt-12 md:pb-28 md:pt-20"
+    >
+      <span
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent"
+      />
+
+      <div className="container-alma grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+        <Reveal className="lg:sticky lg:top-[calc(var(--header-h)+3rem)] lg:self-start">
+          <p className="eyebrow">
             <span className="h-px w-8 bg-gold" />
             Réservation
           </p>
-          <h2 className="mt-4 font-serif text-3xl font-semibold text-paper sm:text-4xl">
+          <h2 className="mt-4 font-serif text-[2.1rem] font-semibold leading-tight text-paper sm:text-4xl md:text-5xl">
             Réservez Votre Véhicule
           </h2>
-          <p className="mt-4 max-w-xl text-sm leading-relaxed text-mist md:text-base">
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-mist md:text-base">
             Complétez le formulaire ci-dessous. Notre équipe revient vers vous rapidement
             pour confirmer votre réservation.
           </p>
         </Reveal>
 
-        <Reveal delay={100} className="mt-10 max-w-2xl">
+        <Reveal delay={80} className="min-w-0">
           {confirmation ? (
-            <div className="flex flex-col items-start gap-3 rounded-2xl border border-gold/30 bg-ink-soft p-8">
+            <div className="flex flex-col items-start gap-3 rounded-2xl border border-gold/30 bg-ink p-7 sm:p-10">
               <CheckCircle2 className="text-gold" size={32} strokeWidth={1.5} />
               <h3 className="font-serif text-xl font-semibold text-paper">
                 Demande envoyée avec succès
@@ -93,15 +138,20 @@ export function Booking() {
               <button
                 type="button"
                 onClick={() => setConfirmation(null)}
-                className="mt-2 rounded-full border border-line-soft/20 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-paper transition-colors hover:border-gold hover:text-gold"
+                className="mt-2 rounded-full border border-paper/20 px-5 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-paper transition-colors hover:border-gold hover:text-gold"
               >
                 Faire une nouvelle demande
               </button>
             </div>
           ) : (
-            <form noValidate onSubmit={handleSubmit} className="flex flex-col gap-10">
-              <fieldset className="flex flex-col gap-5">
-                <legend className="mb-1 font-serif text-lg font-semibold text-paper">
+            <form
+              noValidate
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-10 rounded-2xl border border-line bg-ink p-5 sm:p-8 md:p-10"
+            >
+              <fieldset className="flex min-w-0 flex-col gap-5">
+                <legend className="mb-1 flex items-baseline gap-3 font-serif text-lg font-semibold text-paper">
+                  <span className="font-sans text-xs tabular-nums tracking-[0.2em] text-gold">01</span>
                   Informations Personnelles
                 </legend>
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -128,6 +178,7 @@ export function Booking() {
                   id="email"
                   label="Email"
                   type="email"
+                  inputMode="email"
                   required
                   autoComplete="email"
                   placeholder="vous@exemple.fr"
@@ -139,6 +190,7 @@ export function Booking() {
                   id="phone"
                   label="Téléphone"
                   type="tel"
+                  inputMode="tel"
                   required
                   autoComplete="tel"
                   placeholder="06 12 34 56 78"
@@ -148,12 +200,13 @@ export function Booking() {
                 />
               </fieldset>
 
-              <fieldset className="flex flex-col gap-5">
-                <legend className="mb-1 font-serif text-lg font-semibold text-paper">
+              <fieldset className="flex min-w-0 flex-col gap-5">
+                <legend className="mb-1 flex items-baseline gap-3 font-serif text-lg font-semibold text-paper">
+                  <span className="font-sans text-xs tabular-nums tracking-[0.2em] text-gold">02</span>
                   Détails de Réservation
                 </legend>
 
-                <div className="flex flex-col gap-2">
+                <div className="flex min-w-0 flex-col gap-2">
                   <label htmlFor="vehicleSlug" className="text-sm font-medium text-paper/80">
                     Véhicule souhaité <span className="text-gold">*</span>
                   </label>
@@ -162,8 +215,13 @@ export function Booking() {
                     value={values.vehicleSlug}
                     onChange={(e) => updateField("vehicleSlug", e.target.value)}
                     aria-invalid={Boolean(errors.vehicleSlug)}
-                    className={`w-full rounded-lg border bg-ink px-4 py-3.5 text-base text-paper focus:outline-none focus:ring-2 focus:ring-gold/50 ${
-                      errors.vehicleSlug ? "border-red-400/70" : "border-line-soft/15"
+                    aria-describedby={errors.vehicleSlug ? "vehicleSlug-error" : undefined}
+                    className={`block w-full min-w-0 rounded-xl border bg-ink-soft px-4 py-3.5 text-base text-paper transition-[border-color,box-shadow] duration-500 focus:border-gold/60 focus:outline-none focus:ring-2 focus:ring-gold/25 ${
+                      errors.vehicleSlug
+                        ? "border-red-400/70"
+                        : vehicleFlash
+                          ? "border-gold shadow-[0_0_0_4px_rgba(197,164,109,0.18)]"
+                          : "border-line"
                     }`}
                   >
                     <option value="">Sélectionnez un véhicule</option>
@@ -174,7 +232,9 @@ export function Booking() {
                     ))}
                   </select>
                   {errors.vehicleSlug && (
-                    <p className="text-xs text-red-300">{errors.vehicleSlug}</p>
+                    <p id="vehicleSlug-error" className="text-xs text-red-300">
+                      {errors.vehicleSlug}
+                    </p>
                   )}
                 </div>
 
@@ -184,6 +244,7 @@ export function Booking() {
                     label="Date début"
                     type="date"
                     required
+                    min={today}
                     value={values.startDate}
                     onChange={(e) => updateField("startDate", e.target.value)}
                     error={errors.startDate}
@@ -193,7 +254,7 @@ export function Booking() {
                     label="Date fin"
                     type="date"
                     required
-                    min={values.startDate || undefined}
+                    min={values.startDate || today}
                     value={values.endDate}
                     onChange={(e) => updateField("endDate", e.target.value)}
                     error={errors.endDate}
@@ -221,7 +282,7 @@ export function Booking() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full rounded-full bg-gold px-7 py-4 text-center text-sm font-semibold uppercase tracking-[0.12em] text-ink transition-transform hover:brightness-105 active:scale-[0.98] disabled:cursor-wait disabled:opacity-70 sm:w-fit"
+                className="w-full rounded-full bg-gold px-7 py-4 text-center text-sm font-semibold uppercase tracking-[0.12em] text-ink transition hover:brightness-105 active:scale-[0.98] disabled:cursor-wait disabled:opacity-70"
               >
                 {submitting ? "Envoi en cours…" : "Envoyer ma demande"}
               </button>

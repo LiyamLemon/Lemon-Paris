@@ -44,6 +44,8 @@ export function validateBookingForm(values: BookingFormValues): BookingFormError
 
   if (!values.startDate) {
     errors.startDate = "La date de début est obligatoire.";
+  } else if (values.startDate < localToday()) {
+    errors.startDate = "La date de début ne peut pas être dans le passé.";
   }
   if (!values.endDate) {
     errors.endDate = "La date de fin est obligatoire.";
@@ -60,6 +62,14 @@ export function validateBookingForm(values: BookingFormValues): BookingFormError
   return errors;
 }
 
+/** Date du jour au format AAAA-MM-JJ, dans le fuseau de l'utilisateur. */
+export function localToday(): string {
+  const now = new Date();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${now.getFullYear()}-${month}-${day}`;
+}
+
 export function hasErrors(errors: BookingFormErrors): boolean {
-  return Object.keys(errors).length > 0;
+  return Object.values(errors).some(Boolean);
 }

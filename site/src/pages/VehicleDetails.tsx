@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Fuel, Gauge, Gem, ShieldCheck, Users, Zap } from "lucide-react";
 import { getVehicleBySlug } from "../data/vehicles";
 import { useBooking } from "../context/BookingContext";
+import { SectionLink } from "../components/common/SectionLink";
+import { SmartImage } from "../components/common/SmartImage";
 
 export function VehicleDetails() {
   const { slug } = useParams<{ slug: string }>();
@@ -16,8 +18,8 @@ export function VehicleDetails() {
       : "Véhicule introuvable — ALMA LOCATION";
   }, [vehicle]);
 
+  // Le retour en haut de page est géré globalement par useSectionScroll.
   useEffect(() => {
-    window.scrollTo({ top: 0 });
     setActiveImage(0);
   }, [slug]);
 
@@ -26,13 +28,12 @@ export function VehicleDetails() {
       <div className="container-alma py-28 text-center">
         <h1 className="font-serif text-3xl font-semibold text-paper">Véhicule introuvable</h1>
         <p className="mt-4 text-mist">Ce véhicule n'existe pas ou n'est plus disponible.</p>
-        <Link
-          to="/"
-          state={{ section: "flotte" }}
+        <SectionLink
+          section="flotte"
           className="mt-8 inline-block rounded-full bg-gold px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-ink"
         >
           Retour à la flotte
-        </Link>
+        </SectionLink>
       </div>
     );
   }
@@ -52,9 +53,9 @@ export function VehicleDetails() {
     <article className="py-10 md:py-16">
       <div className="container-alma">
         <nav aria-label="Fil d'Ariane" className="mb-6 text-xs text-mist">
-          <Link to="/" state={{ section: "flotte" }} className="hover:text-gold">
+          <SectionLink section="flotte" className="hover:text-gold">
             Notre Flotte
-          </Link>
+          </SectionLink>
           <span className="mx-2">/</span>
           <span className="text-paper/80">{vehicle.name}</span>
         </nav>
@@ -62,10 +63,12 @@ export function VehicleDetails() {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-14">
           <div>
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-ink-soft">
-              <img
+              <SmartImage
+                key={vehicle.images[activeImage]}
                 src={vehicle.images[activeImage]}
                 alt={vehicle.name}
-                className="h-full w-full object-cover"
+                fallbackLabel={vehicle.name}
+                loading="eager"
               />
               <span
                 className={`absolute right-3 top-3 rounded-full px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.12em] ${
@@ -82,11 +85,13 @@ export function VehicleDetails() {
                     key={img}
                     type="button"
                     onClick={() => setActiveImage(i)}
-                    className={`h-16 w-20 overflow-hidden rounded-lg border transition-colors ${
-                      activeImage === i ? "border-gold" : "border-line-soft/15"
+                    aria-label={`Photo ${i + 1}`}
+                    aria-pressed={activeImage === i}
+                    className={`relative h-16 w-20 overflow-hidden rounded-lg border transition-colors ${
+                      activeImage === i ? "border-gold" : "border-line"
                     }`}
                   >
-                    <img src={img} alt="" className="h-full w-full object-cover" />
+                    <SmartImage src={img} alt="" />
                   </button>
                 ))}
               </div>
@@ -125,7 +130,7 @@ export function VehicleDetails() {
               </div>
             </dl>
 
-            <div className="mt-8 rounded-xl border border-line-soft/10 bg-ink-soft p-5">
+            <div className="mt-8 rounded-xl border border-line bg-ink-soft p-5">
               <h2 className="text-xs font-semibold uppercase tracking-[0.15em] text-gold">
                 Conditions principales
               </h2>

@@ -1,25 +1,24 @@
-import { Link } from "react-router-dom";
+import { SectionLink } from "../common/SectionLink";
 
 interface LogoProps {
   onClick?: () => void;
 }
 
-/** Identité ALMA LOCATION — cliquable, ramène toujours à l'accueil. */
+/** Identité ALMA LOCATION — cliquable, ramène toujours en haut de l'accueil. */
 export function Logo({ onClick }: LogoProps) {
   return (
-    <Link
-      to="/"
-      state={{ section: "accueil" }}
+    <SectionLink
+      section="accueil"
       onClick={onClick}
       className="group inline-flex items-baseline gap-2 font-serif tracking-wide"
       aria-label="ALMA LOCATION — retour à l'accueil"
     >
-      <span className="text-xl md:text-2xl font-semibold text-paper transition-colors group-hover:text-gold">
+      <span className="text-xl font-semibold text-paper transition-colors group-hover:text-gold md:text-2xl">
         ALMA
       </span>
-      <span className="text-[0.65rem] md:text-xs font-sans font-medium tracking-[0.3em] text-mist uppercase">
+      <span className="font-sans text-[0.65rem] font-medium uppercase tracking-[0.3em] text-mist md:text-xs">
         Location
       </span>
-    </Link>
+    </SectionLink>
   );
 }

@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 import { Music2 } from "lucide-react";
 import { CONTACT_INFO } from "../../data/site";
 import { InstagramIcon } from "../common/icons";
+import { SectionLink } from "../common/SectionLink";
+import type { SectionId } from "../../data/site";
 
-const NAV_COLUMN = [
+const NAV_COLUMN: { label: string; section: SectionId }[] = [
   { label: "Notre Flotte", section: "flotte" },
   { label: "Réservation", section: "reservation" },
   { label: "Conciergerie", section: "conciergerie" },
@@ -34,14 +36,9 @@ export function Footer() {
 
         <FooterColumn title="Navigation">
           {NAV_COLUMN.map((item) => (
-            <Link
-              key={item.section}
-              to="/"
-              state={{ section: item.section }}
-              className="footer-link"
-            >
+            <SectionLink key={item.section} section={item.section} className="footer-link">
               {item.label}
-            </Link>
+            </SectionLink>
           ))}
         </FooterColumn>
 

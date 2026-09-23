@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import type { Vehicle } from "../../data/vehicles";
 import { useBooking } from "../../context/BookingContext";
+import { SmartImage } from "../common/SmartImage";
 
 interface VehicleCardProps {
   vehicle: Vehicle;
@@ -8,45 +9,50 @@ interface VehicleCardProps {
 
 export function VehicleCard({ vehicle }: VehicleCardProps) {
   const { goToBooking } = useBooking();
+  const detailsUrl = `/flotte/${vehicle.slug}`;
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-ink-soft transition-colors hover:border-gold/40">
-      <Link to={`/flotte/${vehicle.slug}`} className="relative block aspect-[4/3] overflow-hidden">
-        <img
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-ink-soft transition-colors hover:border-gold/40">
+      <Link
+        to={detailsUrl}
+        className="relative block aspect-[4/3] overflow-hidden"
+        aria-label={`Voir le véhicule ${vehicle.name}`}
+      >
+        <SmartImage
           src={vehicle.images[0]}
           alt={vehicle.name}
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          fallbackLabel={vehicle.name}
+          imgClassName="transition-transform duration-700 group-hover:scale-[1.04]"
         />
         <span
           className={`absolute right-3 top-3 rounded-full px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.12em] ${
-            vehicle.available ? "bg-gold text-ink" : "bg-ink/80 text-paper/70"
+            vehicle.available ? "bg-gold text-ink" : "bg-ink/85 text-paper/70"
           }`}
         >
           {vehicle.available ? "Disponible" : "Indisponible"}
         </span>
       </Link>
 
-      <div className="flex flex-1 flex-col gap-3 p-5">
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
         <p className="text-xs font-medium uppercase tracking-[0.15em] text-mist">
           {vehicle.category} <span className="text-gold">•</span> {vehicle.transmission}
         </p>
 
-        <Link to={`/flotte/${vehicle.slug}`}>
-          <h3 className="font-serif text-xl font-semibold text-paper transition-colors hover:text-gold">
+        <h3 className="mt-3 font-serif text-xl font-semibold text-paper">
+          <Link to={detailsUrl} className="transition-colors hover:text-gold">
             {vehicle.name}
-          </h3>
-        </Link>
+          </Link>
+        </h3>
 
-        <p className="font-serif text-2xl text-gold">
+        <p className="mt-4 border-t border-line pt-4 font-serif text-2xl text-gold">
           {vehicle.pricePerDay} €{" "}
           <span className="font-sans text-sm font-normal text-mist">/ jour</span>
         </p>
 
-        <div className="mt-2 flex flex-col gap-2 sm:flex-row">
+        <div className="mt-auto flex gap-2 pt-5">
           <Link
-            to={`/flotte/${vehicle.slug}`}
-            className="flex-1 rounded-full border border-line-soft/20 px-4 py-3 text-center text-xs font-semibold uppercase tracking-[0.1em] text-paper transition-colors hover:border-gold hover:text-gold"
+            to={detailsUrl}
+            className="flex min-h-11 min-w-0 flex-1 items-center justify-center whitespace-nowrap rounded-full border border-paper/20 px-3 text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-paper transition-colors hover:border-gold hover:text-gold"
           >
             Voir le véhicule
           </Link>
@@ -54,7 +60,7 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
             type="button"
             disabled={!vehicle.available}
             onClick={() => goToBooking(vehicle.slug)}
-            className="flex-1 rounded-full bg-gold px-4 py-3 text-center text-xs font-semibold uppercase tracking-[0.1em] text-ink transition-transform hover:brightness-105 active:scale-[0.98] disabled:cursor-not-allowed disabled:bg-line disabled:text-mist"
+            className="flex min-h-11 min-w-0 flex-1 items-center justify-center whitespace-nowrap rounded-full bg-gold px-3 text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-ink transition hover:brightness-105 active:scale-[0.98] disabled:cursor-not-allowed disabled:bg-line disabled:text-mist"
           >
             Réserver
           </button>
