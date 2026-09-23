@@ -41,7 +41,8 @@ export function Hero() {
 
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
           <Link
-            to="/#flotte"
+            to="/"
+            state={{ section: "flotte" }}
             className="rounded-full bg-gold px-7 py-4 text-center text-sm font-semibold uppercase tracking-[0.12em] text-ink transition-transform hover:brightness-105 active:scale-[0.98]"
           >
             Découvrir la Flotte

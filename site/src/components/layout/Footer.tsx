@@ -4,10 +4,10 @@ import { CONTACT_INFO } from "../../data/site";
 import { InstagramIcon } from "../common/icons";
 
 const NAV_COLUMN = [
-  { label: "Notre Flotte", href: "/#flotte" },
-  { label: "Réservation", href: "/#reservation" },
-  { label: "Conciergerie", href: "/#conciergerie" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Notre Flotte", section: "flotte" },
+  { label: "Réservation", section: "reservation" },
+  { label: "Conciergerie", section: "conciergerie" },
+  { label: "Contact", section: "contact" },
 ];
 
 const LEGAL_COLUMN = [
@@ -34,7 +34,12 @@ export function Footer() {
 
         <FooterColumn title="Navigation">
           {NAV_COLUMN.map((item) => (
-            <Link key={item.href} to={item.href} className="footer-link">
+            <Link
+              key={item.section}
+              to="/"
+              state={{ section: item.section }}
+              className="footer-link"
+            >
               {item.label}
             </Link>
           ))}

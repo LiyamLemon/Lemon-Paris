@@ -8,7 +8,8 @@ interface LogoProps {
 export function Logo({ onClick }: LogoProps) {
   return (
     <Link
-      to="/#accueil"
+      to="/"
+      state={{ section: "accueil" }}
       onClick={onClick}
       className="group inline-flex items-baseline gap-2 font-serif tracking-wide"
       aria-label="ALMA LOCATION — retour à l'accueil"

@@ -24,7 +24,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
       setSelectedVehicleSlug,
       goToBooking: (slug?: string) => {
         if (slug) setSelectedVehicleSlug(slug);
-        navigate("/#reservation");
+        navigate("/", { state: { section: "reservation" } });
       },
     }),
     [selectedVehicleSlug, navigate],

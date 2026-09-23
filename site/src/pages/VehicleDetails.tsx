@@ -27,7 +27,8 @@ export function VehicleDetails() {
         <h1 className="font-serif text-3xl font-semibold text-paper">Véhicule introuvable</h1>
         <p className="mt-4 text-mist">Ce véhicule n'existe pas ou n'est plus disponible.</p>
         <Link
-          to="/#flotte"
+          to="/"
+          state={{ section: "flotte" }}
           className="mt-8 inline-block rounded-full bg-gold px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-ink"
         >
           Retour à la flotte
@@ -51,7 +52,7 @@ export function VehicleDetails() {
     <article className="py-10 md:py-16">
       <div className="container-alma">
         <nav aria-label="Fil d'Ariane" className="mb-6 text-xs text-mist">
-          <Link to="/#flotte" className="hover:text-gold">
+          <Link to="/" state={{ section: "flotte" }} className="hover:text-gold">
             Notre Flotte
           </Link>
           <span className="mx-2">/</span>

@@ -5,12 +5,12 @@
  */
 
 export const NAV_LINKS = [
-  { label: "Accueil", href: "#accueil" },
-  { label: "Notre Flotte", href: "#flotte" },
-  { label: "Réservation", href: "#reservation" },
-  { label: "Galerie", href: "#galerie" },
-  { label: "Conciergerie", href: "#conciergerie" },
-  { label: "Contact", href: "#contact" },
+  { label: "Accueil", section: "accueil" },
+  { label: "Notre Flotte", section: "flotte" },
+  { label: "Réservation", section: "reservation" },
+  { label: "Galerie", section: "galerie" },
+  { label: "Conciergerie", section: "conciergerie" },
+  { label: "Contact", section: "contact" },
 ] as const;
 
 export const CONTACT_INFO = {

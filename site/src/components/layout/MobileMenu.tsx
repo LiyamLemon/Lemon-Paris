@@ -79,12 +79,13 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
         <ul className="mt-12 flex flex-1 flex-col gap-1">
           {NAV_LINKS.map((link, i) => (
             <li
-              key={link.href}
+              key={link.section}
               className={`border-b border-line ${open ? "animate-fade" : ""}`}
               style={{ animationDelay: open ? `${80 + i * 45}ms` : undefined, opacity: open ? undefined : 0 }}
             >
               <Link
-                to={`/${link.href}`}
+                to="/"
+                state={{ section: link.section }}
                 onClick={onClose}
                 className="block py-4 font-serif text-2xl text-paper transition-colors hover:text-gold"
               >

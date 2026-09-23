@@ -39,8 +39,9 @@ export function Header() {
         <nav aria-label="Navigation principale" className="hidden md:flex md:items-center md:gap-8">
           {NAV_LINKS.map((link) => (
             <Link
-              key={link.href}
-              to={`/${link.href}`}
+              key={link.section}
+              to="/"
+              state={{ section: link.section }}
               className="text-sm font-medium tracking-wide text-paper/85 transition-colors hover:text-gold"
             >
               {link.label}

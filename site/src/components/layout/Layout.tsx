@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
-import { useHashScroll } from "../../hooks/useHashScroll";
+import { useSectionScroll } from "../../hooks/useSectionScroll";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 
 export function Layout() {
-  useHashScroll();
+  useSectionScroll();
 
   return (
     <div className="flex min-h-screen flex-col bg-ink">
