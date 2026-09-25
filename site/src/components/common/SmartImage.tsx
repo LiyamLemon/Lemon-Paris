@@ -1,33 +1,35 @@
 import { useEffect, useRef, useState } from "react";
-import { CarFront } from "lucide-react";
+import { PhotoPlaceholder } from "./PhotoPlaceholder";
 
 interface SmartImageProps {
-  src: string;
+  /** Chemin de la photo. Vide = visuel d'attente directement. */
+  src?: string;
   alt: string;
-  /** Texte discret affiché dans le visuel de remplacement (ex. nom du véhicule). */
-  fallbackLabel?: string;
+  /** Légende du visuel d'attente (ex. modèle du véhicule). */
+  placeholderLabel?: string;
+  placeholderTone?: "light" | "dark";
+  compact?: boolean;
   loading?: "lazy" | "eager";
   fetchPriority?: "high" | "low" | "auto";
-  className?: string;
-  /** Classes appliquées à l'image elle-même (ex. effet de zoom au survol). */
+  /** Classes appliquées à l'image elle-même (ex. zoom au survol). */
   imgClassName?: string;
 }
 
 /**
- * Image qui remplit toujours son conteneur (object-fit: cover) et ne
- * laisse jamais de zone vide : tant que la photo charge, ou si elle ne
- * peut pas être chargée, un visuel de remplacement sobre est affiché.
+ * Photo qui remplit toujours son cadre (object-fit: cover). Sans photo,
+ * pendant le chargement ou en cas d'échec, le visuel d'attente s'affiche :
+ * aucune zone n'est jamais vide.
  *
- * Le conteneur parent doit définir la taille (ratio ou hauteur) et être
- * positionné (relative).
+ * Le parent définit la taille (ratio ou hauteur) et doit être `relative`.
  */
 export function SmartImage({
   src,
   alt,
-  fallbackLabel,
+  placeholderLabel,
+  placeholderTone = "light",
+  compact,
   loading = "lazy",
   fetchPriority,
-  className = "",
   imgClassName = "",
 }: SmartImageProps) {
   const [status, setStatus] = useState<"loading" | "loaded" | "error">("loading");
@@ -35,31 +37,19 @@ export function SmartImage({
 
   useEffect(() => {
     setStatus("loading");
-    // Image déjà en cache : l'événement load a pu partir avant le montage.
     const img = imgRef.current;
+    // Image déjà en cache : l'événement load a pu partir avant le montage.
     if (img?.complete) setStatus(img.naturalWidth > 0 ? "loaded" : "error");
   }, [src]);
 
+  const showImage = Boolean(src) && status !== "error";
+
   return (
-    <div className={`absolute inset-0 overflow-hidden ${className}`}>
+    <div className="absolute inset-0 overflow-hidden">
       {status !== "loaded" && (
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[radial-gradient(ellipse_at_30%_20%,rgba(197,164,109,0.12),transparent_60%),linear-gradient(145deg,#1c1916,#0c0b09)]"
-        >
-          <CarFront
-            size={34}
-            strokeWidth={1}
-            className={`text-gold/50 ${status === "loading" ? "animate-pulse" : ""}`}
-          />
-          {fallbackLabel && (
-            <span className="px-4 text-center text-[0.65rem] font-medium uppercase tracking-[0.25em] text-mist">
-              {fallbackLabel}
-            </span>
-          )}
-        </div>
+        <PhotoPlaceholder label={placeholderLabel} tone={placeholderTone} compact={compact} />
       )}
-      {status !== "error" && (
+      {showImage && (
         <img
           ref={imgRef}
           src={src}

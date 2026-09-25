@@ -43,19 +43,19 @@ export function validateBookingForm(values: BookingFormValues): BookingFormError
   if (!values.vehicleSlug) errors.vehicleSlug = "Veuillez sélectionner un véhicule.";
 
   if (!values.startDate) {
-    errors.startDate = "La date de début est obligatoire.";
+    errors.startDate = "La date de départ est obligatoire.";
   } else if (values.startDate < localToday()) {
-    errors.startDate = "La date de début ne peut pas être dans le passé.";
+    errors.startDate = "La date de départ ne peut pas être dans le passé.";
   }
   if (!values.endDate) {
-    errors.endDate = "La date de fin est obligatoire.";
+    errors.endDate = "La date de retour est obligatoire.";
   }
 
   if (values.startDate && values.endDate) {
     const start = new Date(`${values.startDate}T${values.startTime || "00:00"}`);
     const end = new Date(`${values.endDate}T${values.endTime || "00:00"}`);
     if (end < start) {
-      errors.endDate = "La date de fin ne peut pas être antérieure à la date de début.";
+      errors.endDate = "Le retour ne peut pas être antérieur au départ.";
     }
   }
 

@@ -5,8 +5,10 @@
  * modifier ce tableau : aucune autre partie du code n'a besoin d'être
  * touchée (carte véhicule, fiche détaillée, formulaire de réservation).
  *
- * Les photos sont pour l'instant des placeholders (Unsplash) — à
- * remplacer par les visuels définitifs d'ALMA LOCATION.
+ * Photos : déposez les fichiers dans `public/images/vehicules/` et listez
+ * leurs chemins dans `images` (ex. "images/vehicules/berline-1.jpg"). La
+ * première sert de visuel principal. Tant que la liste est vide, un visuel
+ * d'attente « photo à venir » est affiché à la place.
  */
 
 export type FuelType = "Essence" | "Diesel" | "Hybride" | "Électrique";
@@ -31,7 +33,7 @@ export interface Vehicle {
   includedKmPerDay: number;
   description: string;
   conditions: string[];
-  /** La première image sert de visuel principal (carte + hero de la fiche). */
+  /** La première image sert de visuel principal (carte + fiche). Vide = visuel d'attente. */
   images: string[];
 }
 
@@ -55,10 +57,7 @@ export const vehicles: Vehicle[] = [
       "Conducteur supplémentaire sur demande",
       "Carburant restitué au niveau du départ",
     ],
-    images: [
-      "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1600&auto=format&fit=crop",
-    ],
+    images: [],
   },
   {
     slug: "coupe-sport-gt",
@@ -79,10 +78,7 @@ export const vehicles: Vehicle[] = [
       "Âge minimum 25 ans",
       "Conduite sportive sur circuit non autorisée",
     ],
-    images: [
-      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=1600&auto=format&fit=crop",
-    ],
+    images: [],
   },
   {
     slug: "citadine-elegance",
@@ -102,10 +98,7 @@ export const vehicles: Vehicle[] = [
       "Permis B valide depuis plus de 1 an",
       "Recharge à restituer à 80 % minimum",
     ],
-    images: [
-      "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?q=80&w=1600&auto=format&fit=crop",
-    ],
+    images: [],
   },
   {
     slug: "suv-prestige",
@@ -125,12 +118,11 @@ export const vehicles: Vehicle[] = [
       "Permis B valide depuis plus de 2 ans",
       "Siège enfant disponible sur demande",
     ],
-    images: [
-      "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1519245659620-e859806a8d3b?q=80&w=1600&auto=format&fit=crop",
-    ],
+    images: [],
   },
 ];
+
+export const VEHICLE_CATEGORIES = Array.from(new Set(vehicles.map((v) => v.category)));
 
 export function getVehicleBySlug(slug: string | null | undefined): Vehicle | undefined {
   if (!slug) return undefined;

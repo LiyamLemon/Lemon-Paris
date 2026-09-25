@@ -1,68 +1,103 @@
 /**
  * Contenu et configuration globale du site ALMA LOCATION.
- * Les valeurs marquées "À REMPLACER" sont des placeholders volontaires :
- * aucune coordonnée réelle n'a été inventée pour cette V1.
+ *
+ * Règle : aucune coordonnée, promesse commerciale ou photo n'est inventée.
+ * Tout champ laissé vide ("") est affiché comme « à communiquer » ou
+ * remplacé par un visuel d'attente, et se complète ici sans toucher au
+ * reste du code.
  */
 
-/**
- * Ordre réel des sections de la page d'accueil, de haut en bas. Sert à la
- * fois à la structure de la page et à la détection de la section active.
- * "engagements" est une vraie section mais n'a pas d'entrée de menu.
- */
-export const SECTION_IDS = [
-  "accueil",
-  "flotte",
-  "reservation",
-  "galerie",
-  "engagements",
-  "conciergerie",
-  "contact",
-] as const;
+/* ─────────────────────────── Navigation ─────────────────────────── */
 
-export type SectionId = (typeof SECTION_IDS)[number];
+export const ROUTES = {
+  home: "/",
+  fleet: "/flotte",
+  booking: "/reservation",
+  gallery: "/galerie",
+  concierge: "/conciergerie",
+  contact: "/contact",
+} as const;
 
-export const NAV_LINKS: readonly { label: string; section: SectionId }[] = [
-  { label: "Accueil", section: "accueil" },
-  { label: "Notre Flotte", section: "flotte" },
-  { label: "Réservation", section: "reservation" },
-  { label: "Galerie", section: "galerie" },
-  { label: "Conciergerie", section: "conciergerie" },
-  { label: "Contact", section: "contact" },
+export const NAV_LINKS: readonly { label: string; to: string }[] = [
+  { label: "Accueil", to: ROUTES.home },
+  { label: "Notre Flotte", to: ROUTES.fleet },
+  { label: "Réservation", to: ROUTES.booking },
+  { label: "Galerie", to: ROUTES.gallery },
+  { label: "Conciergerie", to: ROUTES.concierge },
+  { label: "Contact", to: ROUTES.contact },
 ];
 
-export const CONTACT_INFO = {
-  phone: "À REMPLACER (ex. +33 1 23 45 67 89)",
-  whatsapp: "À REMPLACER",
-  email: "À REMPLACER (ex. contact@alma-location.fr)",
-  instagram: "@alma.location — À REMPLACER",
-  tiktok: "@alma.location — À REMPLACER",
+/** URL de la page Réservation, avec un véhicule présélectionné si fourni. */
+export function bookingUrl(vehicleSlug?: string) {
+  return vehicleSlug
+    ? `${ROUTES.booking}?vehicule=${encodeURIComponent(vehicleSlug)}`
+    : ROUTES.booking;
+}
+
+/** Une rubrique est active sur sa page et ses sous-pages (ex. une fiche véhicule). */
+export function isNavActive(to: string, pathname: string) {
+  return to === "/" ? pathname === "/" : pathname === to || pathname.startsWith(`${to}/`);
+}
+
+/* ─────────────────────────── Coordonnées ────────────────────────── */
+
+/** À compléter. Un champ vide s'affiche « À communiquer » et n'est pas cliquable. */
+export const CONTACT = {
+  /** Format international conseillé, ex. "+33 6 12 34 56 78". */
+  phone: "",
+  /** Numéro WhatsApp, format international, ex. "+33612345678". */
+  whatsapp: "",
+  email: "",
+  /** Identifiant sans @, ex. "alma.location". */
+  instagram: "",
+  /** Identifiant sans @, ex. "alma.location". */
+  tiktok: "",
   zone: "Paris & région parisienne — adresse précise à confirmer",
 };
 
-export const GALLERY_IMAGES = [
+/* ─────────────────────────── Photos du site ─────────────────────── */
+
+/**
+ * Photos d'ambiance. Déposez les fichiers dans `public/images/` puis
+ * renseignez le chemin (ex. "images/hero.jpg"). Tant qu'un champ est
+ * vide, un fond graphique dessiné en CSS est affiché à la place.
+ */
+export const SITE_IMAGES = {
+  homeHero: "",
+  bookingBanner: "",
+  conciergeHero: "",
+};
+
+export const GALLERY_CATEGORIES = ["Extérieur", "Intérieur", "Détails"] as const;
+export type GalleryCategory = (typeof GALLERY_CATEGORIES)[number];
+
+/**
+ * Photos de la galerie. `src` vide = emplacement réservé, affiché comme
+ * « photo à venir ». Ajoutez autant d'entrées que nécessaire.
+ */
+export const GALLERY_ITEMS: { src: string; alt: string; category: GalleryCategory }[] = [
+  { src: "", alt: "Véhicule ALMA — vue extérieure", category: "Extérieur" },
+  { src: "", alt: "Véhicule ALMA — habitacle", category: "Intérieur" },
+  { src: "", alt: "Véhicule ALMA — détail", category: "Détails" },
+  { src: "", alt: "Véhicule ALMA — vue extérieure", category: "Extérieur" },
+  { src: "", alt: "Véhicule ALMA — détail", category: "Détails" },
+  { src: "", alt: "Véhicule ALMA — habitacle", category: "Intérieur" },
+];
+
+/* ─────────────────────────── Contenus éditoriaux ────────────────── */
+
+export const TRUST_POINTS = [
   {
-    src: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1400&auto=format&fit=crop",
-    alt: "Coupé sport premium sur route parisienne",
+    title: "Sécurité & Sérénité",
+    description: "Véhicules contrôlés et entretenus avec rigueur avant chaque location.",
   },
   {
-    src: "https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1400&auto=format&fit=crop",
-    alt: "Intérieur cuir d'une berline haut de gamme",
+    title: "Service Personnalisé",
+    description: "Une prise en charge simple avant, pendant et après votre location.",
   },
   {
-    src: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?q=80&w=1400&auto=format&fit=crop",
-    alt: "Citadine premium garée devant un immeuble haussmannien",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=1400&auto=format&fit=crop",
-    alt: "Détail de jante sur véhicule sportif",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1519245659620-e859806a8d3b?q=80&w=1400&auto=format&fit=crop",
-    alt: "SUV prestige de profil",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1493238792000-8113da705763?q=80&w=1400&auto=format&fit=crop",
-    alt: "Tableau de bord et instrumentation premium",
+    title: "Flotte Sélectionnée",
+    description: "Des véhicules choisis pour leur qualité, leur confort et leurs performances.",
   },
 ] as const;
 
@@ -86,20 +121,5 @@ export const CONCIERGE_SERVICES = [
     title: "Demandes personnalisées",
     description:
       "Durée, type de véhicule, besoins spécifiques : chaque demande particulière peut être étudiée au cas par cas.",
-  },
-] as const;
-
-export const TRUST_POINTS = [
-  {
-    title: "Sécurité & Sérénité",
-    description: "Véhicules contrôlés et entretenus avec rigueur avant chaque location.",
-  },
-  {
-    title: "Service Personnalisé",
-    description: "Une prise en charge simple avant, pendant et après votre location.",
-  },
-  {
-    title: "Flotte Sélectionnée",
-    description: "Des véhicules choisis pour leur qualité, leur confort et leurs performances.",
   },
 ] as const;

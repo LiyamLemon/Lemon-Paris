@@ -1,6 +1,6 @@
 /**
  * Utilitaires de défilement partagés par le menu mobile, la lightbox de la
- * galerie et la navigation entre sections.
+ * galerie et les changements de page.
  */
 
 let lockCount = 0;
@@ -55,18 +55,14 @@ export function getHeaderHeight() {
 }
 
 /**
- * Fait défiler jusqu'au début d'une section. Le décalage du header est
- * géré en CSS par `scroll-margin-top` sur `[data-section]`.
- *
- * Si la page est encore verrouillée (menu en cours de fermeture), on
- * attend son déverrouillage pour ne pas défiler un body figé.
+ * Remonte instantanément en haut de page (changement de page). Si la page
+ * est verrouillée par le menu, c'est la position restaurée au
+ * déverrouillage qui est remise à zéro.
  */
-export function scrollToSection(id: string, behavior: ScrollBehavior = "smooth", attempts = 20) {
-  if (isScrollLocked()) {
-    if (attempts > 0) {
-      requestAnimationFrame(() => scrollToSection(id, behavior, attempts - 1));
-    }
+export function scrollToTopInstant() {
+  if (lockCount > 0) {
+    savedScrollY = 0;
     return;
   }
-  document.getElementById(id)?.scrollIntoView({ behavior, block: "start" });
+  window.scrollTo({ top: 0, behavior: "instant" });
 }

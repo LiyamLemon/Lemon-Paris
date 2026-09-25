@@ -1,26 +1,31 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: "Playfair Display", "Georgia", serif;
+  --font-serif: "Cormorant Garamond", "Georgia", serif;
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
 
-  /* Noirs chauds */
-  --color-ink: #0c0b09;
-  --color-ink-soft: #141210;
-  --color-ink-raised: #1c1916;
-  /* Blanc cassé pour les titres */
-  --color-paper: #f2eee6;
-  /* Gris chaud pour les paragraphes */
-  --color-mist: #9d968b;
-  --color-line: #2b2722;
-  --color-line-soft: #e6dfd2;
-  /* Champagne — accent unique, volontairement peu saturé */
-  --color-gold: #c5a46d;
-  --color-gold-soft: #dcc79f;
-  --color-gold-deep: #9f8250;
+  /* ── Zones sombres ───────────────────────────── */
+  --color-ink: #0e0d0b; /* noir profond, légèrement chaud */
+  --color-ink-soft: #171512;
+  --color-ink-raised: #221f1b;
+  --color-line: #2e2a25; /* filets sur fond sombre */
+  --color-mist: #a39c91; /* paragraphes sur fond sombre */
+
+  /* ── Zones claires ───────────────────────────── */
+  --color-paper: #f8f6f2; /* blanc cassé : fond des pages claires */
+  --color-ivory: #f0ede7; /* cartes, header clair, panneaux */
+  --color-stone: #e2ddd4; /* filets sur fond clair */
+  --color-graphite: #6b665e; /* paragraphes sur fond clair */
+  --color-anthracite: #1d1b18; /* titres sur fond clair */
+
+  /* ── Accent — utilisé avec parcimonie ────────── */
+  --color-gold: #c39d5c; /* champagne : labels, filets, CTA importants */
+  --color-gold-soft: #dcc59a;
+  --color-gold-deep: #94733d; /* champagne lisible sur fond clair (prix) */
 
   --animate-reveal: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-fade: fade 0.4s ease forwards;
+  --animate-page: fade 0.45s ease both;
 
   @keyframes reveal {
     from {
@@ -42,10 +47,10 @@
   }
 }
 
-/* Hauteur du header fixe : utilisée pour décaler le contenu et pour que
-   le scroll vers une section s'arrête juste sous le header. */
+/* Hauteur du header fixe. Chaque page réserve cet espace en haut de sa
+   première section : aucun titre ne peut passer sous le header. */
 :root {
-  --header-h: 4rem;
+  --header-h: 4.25rem;
 }
 @media (min-width: 768px) {
   :root {
@@ -54,14 +59,13 @@
 }
 
 html {
-  scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   background-color: var(--color-ink);
 }
 
 body {
-  background-color: var(--color-ink);
-  color: var(--color-paper);
+  background-color: var(--color-paper);
+  color: var(--color-anthracite);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
@@ -72,13 +76,7 @@ body {
   color: var(--color-ink);
 }
 
-/* Chaque section navigable s'arrête sous le header lors d'un scroll. */
-[data-section] {
-  scroll-margin-top: var(--header-h);
-}
-
-/* Reveal-on-scroll : les éléments apparaissent une fois visibles
-   (classe `is-visible` ajoutée par le hook useReveal). */
+/* Reveal-on-scroll (classe `is-visible` ajoutée par useReveal). */
 .reveal {
   opacity: 0;
 }
@@ -87,20 +85,19 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
   .reveal,
   .reveal.is-visible {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
   }
+  .animate-page {
+    animation: none !important;
+  }
 }
 
 /* iOS Safari : les champs date/heure ont une largeur minimale intrinsèque
-   qui les fait déborder de leur conteneur, et perdent leur hauteur quand
-   ils sont vides. */
+   qui les fait déborder, et perdent leur hauteur quand ils sont vides. */
 input[type="date"],
 input[type="time"] {
   -webkit-appearance: none;
@@ -113,24 +110,15 @@ input::-webkit-date-and-time-value {
 }
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="time"]::-webkit-calendar-picker-indicator {
-  filter: invert(0.8) sepia(0.3);
-}
-
-.footer-link {
-  @apply text-sm text-mist transition-colors hover:text-gold w-fit;
-}
-
-.eyebrow {
-  @apply flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-gold sm:tracking-[0.3em];
+  filter: invert(0.75) sepia(0.3);
 }
 
 .container-alma {
   width: 100%;
   max-width: 1240px;
   margin-inline: auto;
-  padding-inline: 1.25rem;
+  padding-inline: 1.5rem;
 }
-
 @media (min-width: 768px) {
   .container-alma {
     padding-inline: 2.5rem;

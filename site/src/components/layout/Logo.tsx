@@ -1,24 +1,35 @@
-import { SectionLink } from "../common/SectionLink";
+import { Link } from "react-router-dom";
 
 interface LogoProps {
+  tone?: "light" | "dark";
   onClick?: () => void;
 }
 
-/** Identité ALMA LOCATION — cliquable, ramène toujours en haut de l'accueil. */
-export function Logo({ onClick }: LogoProps) {
+/** Identité ALMA LOCATION — ramène toujours à l'accueil. */
+export function Logo({ tone = "light", onClick }: LogoProps) {
+  const dark = tone === "dark";
   return (
-    <SectionLink
-      section="accueil"
+    <Link
+      to="/"
       onClick={onClick}
-      className="group inline-flex items-baseline gap-2 font-serif tracking-wide"
-      aria-label="ALMA LOCATION — retour à l'accueil"
+      aria-label="ALMA LOCATION — accueil"
+      className="group inline-flex items-center gap-3"
     >
-      <span className="text-xl font-semibold text-paper transition-colors group-hover:text-gold md:text-2xl">
-        ALMA
+      <span
+        aria-hidden="true"
+        className={`flex h-8 w-8 items-center justify-center rounded-full border font-serif text-lg font-semibold italic leading-none transition-colors ${
+          dark ? "border-paper/30 text-paper" : "border-anthracite/25 text-anthracite"
+        } group-hover:border-gold`}
+      >
+        A
       </span>
-      <span className="font-sans text-[0.65rem] font-medium uppercase tracking-[0.3em] text-mist md:text-xs">
-        Location
+      <span
+        className={`font-serif text-[1.35rem] font-semibold tracking-[0.12em] transition-colors md:text-2xl ${
+          dark ? "text-paper" : "text-anthracite"
+        }`}
+      >
+        ALMA <span className="font-medium">LOCATION</span>
       </span>
-    </SectionLink>
+    </Link>
   );
 }

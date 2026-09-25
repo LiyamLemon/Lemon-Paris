@@ -1,40 +1,32 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Fuel, Gauge, Gem, ShieldCheck, Users, Zap } from "lucide-react";
+import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { ArrowLeft, Fuel, Gauge, Gem, ShieldCheck, Route, Users, Zap } from "lucide-react";
 import { getVehicleBySlug } from "../data/vehicles";
-import { useBooking } from "../context/BookingContext";
-import { SectionLink } from "../components/common/SectionLink";
+import { ROUTES, bookingUrl } from "../data/site";
+import { Button } from "../components/common/Button";
 import { SmartImage } from "../components/common/SmartImage";
+import { AvailabilityBadge } from "../components/vehicles/AvailabilityBadge";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 export function VehicleDetails() {
   const { slug } = useParams<{ slug: string }>();
   const vehicle = getVehicleBySlug(slug);
-  const { goToBooking } = useBooking();
+  // La page est remontée à chaque changement de véhicule (clé = pathname
+  // dans Layout) : la photo active repart donc toujours de la première.
   const [activeImage, setActiveImage] = useState(0);
-
-  useEffect(() => {
-    document.title = vehicle
-      ? `${vehicle.name} — ALMA LOCATION`
-      : "Véhicule introuvable — ALMA LOCATION";
-  }, [vehicle]);
-
-  // Le retour en haut de page est géré globalement par useSectionScroll.
-  useEffect(() => {
-    setActiveImage(0);
-  }, [slug]);
+  usePageTitle(vehicle ? vehicle.name : "Véhicule introuvable");
 
   if (!vehicle) {
     return (
-      <div className="container-alma py-28 text-center">
-        <h1 className="font-serif text-3xl font-semibold text-paper">Véhicule introuvable</h1>
-        <p className="mt-4 text-mist">Ce véhicule n'existe pas ou n'est plus disponible.</p>
-        <SectionLink
-          section="flotte"
-          className="mt-8 inline-block rounded-full bg-gold px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-ink"
-        >
-          Retour à la flotte
-        </SectionLink>
-      </div>
+      <section data-tone="light" className="bg-paper pb-28 pt-[calc(var(--header-h)+5rem)] text-center">
+        <div className="container-alma">
+          <h1 className="font-serif text-5xl font-semibold text-anthracite">Véhicule introuvable</h1>
+          <p className="mt-4 text-graphite">Ce véhicule n'existe pas ou n'est plus proposé.</p>
+          <Button to={ROUTES.fleet} variant="dark" className="mt-8">
+            Retour à la flotte
+          </Button>
+        </div>
+      </section>
     );
   }
 
@@ -47,51 +39,47 @@ export function VehicleDetails() {
       ? [{ icon: Gauge, label: "Puissance", value: `${vehicle.horsepower} ch` }]
       : []),
     { icon: ShieldCheck, label: "Caution", value: `${vehicle.deposit} €` },
+    { icon: Route, label: "Km inclus / jour", value: `${vehicle.includedKmPerDay} km` },
   ];
+  const photos = vehicle.images.length > 0 ? vehicle.images : [""];
 
   return (
-    <article className="py-10 md:py-16">
+    <section data-tone="light" className="bg-paper pb-20 pt-[calc(var(--header-h)+2rem)] md:pb-28 md:pt-[calc(var(--header-h)+3rem)]">
       <div className="container-alma">
-        <nav aria-label="Fil d'Ariane" className="mb-6 text-xs text-mist">
-          <SectionLink section="flotte" className="hover:text-gold">
-            Notre Flotte
-          </SectionLink>
-          <span className="mx-2">/</span>
-          <span className="text-paper/80">{vehicle.name}</span>
-        </nav>
+        <Link
+          to={ROUTES.fleet}
+          className="inline-flex min-h-11 items-center gap-2 text-sm text-graphite transition-colors hover:text-anthracite"
+        >
+          <ArrowLeft size={16} strokeWidth={1.5} />
+          Notre Flotte
+        </Link>
 
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-14">
+        <div className="mt-4 grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
           <div>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-ink-soft">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] border border-stone">
               <SmartImage
-                key={vehicle.images[activeImage]}
-                src={vehicle.images[activeImage]}
+                key={photos[activeImage]}
+                src={photos[activeImage]}
                 alt={vehicle.name}
-                fallbackLabel={vehicle.name}
+                placeholderLabel={vehicle.name}
                 loading="eager"
               />
-              <span
-                className={`absolute right-3 top-3 rounded-full px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.12em] ${
-                  vehicle.available ? "bg-gold text-ink" : "bg-ink/80 text-paper/70"
-                }`}
-              >
-                {vehicle.available ? "Disponible" : "Indisponible"}
-              </span>
+              <AvailabilityBadge available={vehicle.available} className="absolute right-4 top-4" />
             </div>
-            {vehicle.images.length > 1 && (
-              <div className="mt-3 flex gap-3">
-                {vehicle.images.map((img, i) => (
+            {photos.length > 1 && (
+              <div className="mt-3 flex gap-3 overflow-x-auto">
+                {photos.map((img, i) => (
                   <button
                     key={img}
                     type="button"
                     onClick={() => setActiveImage(i)}
                     aria-label={`Photo ${i + 1}`}
                     aria-pressed={activeImage === i}
-                    className={`relative h-16 w-20 overflow-hidden rounded-lg border transition-colors ${
-                      activeImage === i ? "border-gold" : "border-line"
+                    className={`relative h-16 w-24 shrink-0 overflow-hidden rounded-xl border-2 transition-colors ${
+                      activeImage === i ? "border-gold" : "border-transparent"
                     }`}
                   >
-                    <SmartImage src={img} alt="" />
+                    <SmartImage src={img} alt="" compact />
                   </button>
                 ))}
               </div>
@@ -99,62 +87,63 @@ export function VehicleDetails() {
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-mist">
-              {vehicle.category} <span className="text-gold">•</span> {vehicle.transmission}
+            <p className="text-[0.7rem] font-medium uppercase tracking-[0.2em] text-graphite">
+              {vehicle.category}
+              <span className="mx-2 text-gold">•</span>
+              {vehicle.transmission}
             </p>
-            <h1 className="mt-2 font-serif text-3xl font-semibold text-paper sm:text-4xl">
+            <h1 className="mt-3 font-serif text-5xl font-semibold leading-none text-anthracite md:text-6xl">
               {vehicle.name}
             </h1>
-            <p className="mt-4 font-serif text-3xl text-gold">
-              {vehicle.pricePerDay} €{" "}
-              <span className="font-sans text-base font-normal text-mist">/ jour</span>
+            <p className="mt-6 text-graphite">
+              <span className="font-serif text-5xl font-semibold leading-none text-gold-deep">
+                {vehicle.pricePerDay}
+              </span>
+              <span className="ml-2">€ / jour</span>
             </p>
 
-            <p className="mt-6 max-w-lg text-sm leading-relaxed text-paper/80 md:text-base">
-              {vehicle.description}
-            </p>
+            <p className="mt-7 text-base leading-relaxed text-graphite">{vehicle.description}</p>
 
-            <dl className="mt-8 grid grid-cols-2 gap-5 sm:grid-cols-3">
+            <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-y border-stone py-7">
               {specs.map(({ icon: Icon, label, value }) => (
-                <div key={label} className="flex flex-col gap-1.5">
-                  <dt className="flex items-center gap-1.5 text-xs uppercase tracking-[0.1em] text-mist">
-                    <Icon size={14} strokeWidth={1.75} className="text-gold" />
+                <div key={label} className="min-w-0">
+                  <dt className="flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.15em] text-graphite">
+                    <Icon size={14} strokeWidth={1.5} className="shrink-0 text-gold-deep" />
                     {label}
                   </dt>
-                  <dd className="text-sm font-medium text-paper">{value}</dd>
+                  <dd className="mt-1.5 font-medium text-anthracite">{value}</dd>
                 </div>
               ))}
-              <div className="flex flex-col gap-1.5">
-                <dt className="text-xs uppercase tracking-[0.1em] text-mist">Km inclus / jour</dt>
-                <dd className="text-sm font-medium text-paper">{vehicle.includedKmPerDay} km</dd>
-              </div>
             </dl>
 
-            <div className="mt-8 rounded-xl border border-line bg-ink-soft p-5">
-              <h2 className="text-xs font-semibold uppercase tracking-[0.15em] text-gold">
+            <div className="mt-8">
+              <h2 className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-anthracite">
                 Conditions principales
               </h2>
-              <ul className="mt-3 flex flex-col gap-2 text-sm text-paper/80">
+              <ul className="mt-4 flex flex-col gap-2.5 text-graphite">
                 {vehicle.conditions.map((c) => (
-                  <li key={c} className="flex gap-2">
-                    <span className="text-gold">—</span>
+                  <li key={c} className="flex gap-3">
+                    <span className="mt-[0.7em] h-px w-4 shrink-0 bg-gold" />
                     {c}
                   </li>
                 ))}
               </ul>
             </div>
 
-            <button
-              type="button"
-              disabled={!vehicle.available}
-              onClick={() => goToBooking(vehicle.slug)}
-              className="mt-8 w-full rounded-full bg-gold px-7 py-4 text-center text-sm font-semibold uppercase tracking-[0.12em] text-ink transition-transform hover:brightness-105 active:scale-[0.98] disabled:cursor-not-allowed disabled:bg-line disabled:text-mist sm:w-fit"
-            >
-              {vehicle.available ? "Réserver ce véhicule" : "Véhicule indisponible"}
-            </button>
+            <div className="mt-10">
+              {vehicle.available ? (
+                <Button to={bookingUrl(vehicle.slug)} variant="dark" arrow fullWidth>
+                  Réserver ce véhicule
+                </Button>
+              ) : (
+                <Button variant="dark" disabled fullWidth>
+                  Véhicule indisponible
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </article>
+    </section>
   );
 }

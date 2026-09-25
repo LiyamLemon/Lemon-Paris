@@ -1,25 +1,22 @@
-import { Hero } from "../components/home/Hero";
-import { Fleet } from "../components/home/Fleet";
-import { Booking } from "../components/home/Booking";
-import { Gallery } from "../components/home/Gallery";
-import { Services } from "../components/home/Services";
-import { Conciergerie } from "../components/home/Conciergerie";
-import { Contact } from "../components/home/Contact";
+import { HomeHero } from "../components/home/HomeHero";
+import { FleetPreview } from "../components/home/FleetPreview";
+import { PromiseSection } from "../components/home/PromiseSection";
+import { BookingBanner } from "../components/home/BookingBanner";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 /**
- * Page d'accueil. L'ordre des sections doit rester aligné sur SECTION_IDS
- * (src/data/site.ts), utilisé pour détecter la section active.
+ * Accueil éditorial : il présente et oriente, sans tout contenir.
+ * Réservation, galerie, conciergerie et contact ont leurs propres pages.
  */
 export function Home() {
+  usePageTitle(null);
   return (
     <>
-      <Hero />
-      <Fleet />
-      <Booking />
-      <Gallery />
-      <Services />
-      <Conciergerie />
-      <Contact />
+      <HomeHero />
+      <FleetPreview />
+      <PromiseSection />
+      <BookingBanner />
+      {/* Témoignages : à ajouter ici lorsque les vrais avis seront disponibles. */}
     </>
   );
 }

@@ -1,92 +1,80 @@
+import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { Music2 } from "lucide-react";
-import { CONTACT_INFO } from "../../data/site";
-import { InstagramIcon } from "../common/icons";
-import { SectionLink } from "../common/SectionLink";
-import type { SectionId } from "../../data/site";
+import { CONTACT, NAV_LINKS } from "../../data/site";
+import { instagramUrl, tiktokUrl } from "../../lib/contact";
 
-const NAV_COLUMN: { label: string; section: SectionId }[] = [
-  { label: "Notre Flotte", section: "flotte" },
-  { label: "Réservation", section: "reservation" },
-  { label: "Conciergerie", section: "conciergerie" },
-  { label: "Contact", section: "contact" },
+const LEGAL_LINKS = [
+  { label: "Mentions légales", to: "/mentions-legales" },
+  { label: "Politique de confidentialité", to: "/confidentialite" },
+  { label: "CGV / Conditions de location", to: "/cgv" },
 ];
 
-const LEGAL_COLUMN = [
-  { label: "Mentions légales", href: "/mentions-legales" },
-  { label: "Politique de confidentialité", href: "/confidentialite" },
-  { label: "CGV / Conditions de location", href: "/cgv" },
-];
+const LINK = "w-fit text-sm text-mist transition-colors hover:text-paper";
 
 export function Footer() {
   const year = new Date().getFullYear();
+  const socials = [
+    { label: "Instagram", href: instagramUrl(CONTACT.instagram) },
+    { label: "TikTok", href: tiktokUrl(CONTACT.tiktok) },
+  ];
 
   return (
-    <footer className="border-t border-line bg-ink">
-      <div className="container-alma grid grid-cols-1 gap-12 py-16 md:grid-cols-4 md:gap-8">
-        <div className="md:col-span-1">
-          <span className="font-serif text-2xl font-semibold text-paper">ALMA</span>
-          <span className="ml-2 font-sans text-xs font-medium tracking-[0.3em] text-mist uppercase">
-            Location
-          </span>
+    <footer data-tone="dark" className="bg-ink text-paper">
+      <div className="container-alma grid grid-cols-2 gap-x-6 gap-y-12 py-16 md:grid-cols-4 md:py-20">
+        <div className="col-span-2 md:col-span-1">
+          <p className="font-serif text-2xl font-semibold tracking-[0.12em]">
+            ALMA <span className="font-medium">LOCATION</span>
+          </p>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-mist">
             Location de véhicules premium à Paris et en région parisienne.
           </p>
         </div>
 
         <FooterColumn title="Navigation">
-          {NAV_COLUMN.map((item) => (
-            <SectionLink key={item.section} section={item.section} className="footer-link">
-              {item.label}
-            </SectionLink>
+          {NAV_LINKS.map((link) => (
+            <Link key={link.to} to={link.to} className={LINK}>
+              {link.label}
+            </Link>
           ))}
         </FooterColumn>
 
         <FooterColumn title="Informations légales">
-          {LEGAL_COLUMN.map((item) => (
-            <Link key={item.href} to={item.href} className="footer-link">
-              {item.label}
+          {LEGAL_LINKS.map((link) => (
+            <Link key={link.to} to={link.to} className={LINK}>
+              {link.label}
             </Link>
           ))}
         </FooterColumn>
 
         <FooterColumn title="Réseaux sociaux">
-          <a
-            href="#"
-            onClick={(e) => e.preventDefault()}
-            className="footer-link inline-flex items-center gap-2"
-            aria-label={CONTACT_INFO.instagram}
-          >
-            <InstagramIcon size={16} />
-            Instagram
-          </a>
-          <a
-            href="#"
-            onClick={(e) => e.preventDefault()}
-            className="footer-link inline-flex items-center gap-2"
-            aria-label={CONTACT_INFO.tiktok}
-          >
-            <Music2 size={16} strokeWidth={1.75} />
-            TikTok
-          </a>
+          {socials.map((s) =>
+            s.href ? (
+              <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className={LINK}>
+                {s.label}
+              </a>
+            ) : (
+              <span key={s.label} className="text-sm text-mist/60">
+                {s.label} <span className="text-xs">— à venir</span>
+              </span>
+            ),
+          )}
         </FooterColumn>
       </div>
 
       <div className="border-t border-line">
         <div className="container-alma flex flex-col gap-2 py-6 text-xs text-mist md:flex-row md:items-center md:justify-between">
           <p>© {year} ALMA LOCATION. Tous droits réservés.</p>
-          <p>Site en cours de finalisation — informations à confirmer.</p>
         </div>
       </div>
     </footer>
   );
 }
 
-function FooterColumn({ title, children }: { title: string; children: React.ReactNode }) {
+function FooterColumn({ title, children }: { title: string; children: ReactNode }) {
   return (
     <div>
-      <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">{title}</h3>
-      <div className="mt-4 flex flex-col gap-3">{children}</div>
+      <h2 className="text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-gold">{title}</h2>
+      <div className="mt-5 flex flex-col gap-3">{children}</div>
     </div>
   );
 }
