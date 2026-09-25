@@ -9,6 +9,7 @@ export function HomeHero() {
         variant="showroom"
         image={SITE_IMAGES.homeHero}
         imageAlt="Véhicule ALMA LOCATION"
+        overlay="hero"
       />
 
       <div className="container-alma relative pb-52 pt-[calc(var(--header-h)+3.5rem)] md:pb-60">

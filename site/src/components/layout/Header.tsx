@@ -27,8 +27,8 @@ export function Header() {
     <>
       <header
         data-site-header
-        className={`fixed inset-x-0 top-0 z-50 h-[var(--header-h)] border-b backdrop-blur-md transition-colors duration-500 ${
-          dark ? "border-paper/5 bg-ink/85" : "border-stone bg-paper/90"
+        className={`fixed inset-x-0 top-0 z-50 h-[var(--header-h)] border-b backdrop-blur-md transition-[background-color,border-color] duration-500 ease-out ${
+          dark ? "border-paper/[0.06] bg-ink/80" : "border-stone/80 bg-paper/88"
         }`}
       >
         <div className="container-alma flex h-full items-center justify-between">
@@ -42,7 +42,7 @@ export function Header() {
                   key={link.to}
                   to={link.to}
                   aria-current={active ? "page" : undefined}
-                  className={`relative py-2 text-sm tracking-wide transition-colors ${
+                  className={`relative py-2 text-sm tracking-wide transition-colors duration-500 ${
                     active
                       ? dark
                         ? "text-gold"
@@ -64,7 +64,7 @@ export function Header() {
             })}
             <Link
               to={ROUTES.booking}
-              className={`inline-flex min-h-11 items-center rounded-full px-6 text-sm font-medium transition-colors ${
+              className={`inline-flex min-h-10 items-center rounded-full px-6 text-sm font-medium transition-colors duration-500 ${
                 dark ? "bg-gold text-ink hover:bg-gold-soft" : "bg-anthracite text-paper hover:bg-ink"
               }`}
             >
@@ -79,13 +79,14 @@ export function Header() {
             aria-label="Ouvrir le menu"
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
-            className={`-mr-2.5 flex h-11 w-11 flex-col items-center justify-center gap-[7px] lg:hidden ${
+            className={`-mr-3 flex h-11 w-11 flex-col items-center justify-center gap-[5px] transition-colors duration-500 lg:hidden ${
               dark ? "text-paper" : "text-anthracite"
             }`}
           >
-            <span className="h-[1.5px] w-7 rounded-full bg-current" />
-            <span className="h-[1.5px] w-7 rounded-full bg-current" />
-            <span className="h-[1.5px] w-7 rounded-full bg-current" />
+            {/* Icône fine (20 px) dans une zone tactile de 44 px */}
+            <span className="h-px w-5 bg-current" />
+            <span className="h-px w-5 bg-current" />
+            <span className="h-px w-5 bg-current" />
           </button>
         </div>
       </header>

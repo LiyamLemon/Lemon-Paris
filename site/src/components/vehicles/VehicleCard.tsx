@@ -11,20 +11,27 @@ interface VehicleCardProps {
 /** Carte véhicule, sur fond clair. Toutes les données viennent de src/data/vehicles.ts. */
 export function VehicleCard({ vehicle }: VehicleCardProps) {
   const detailsUrl = `/flotte/${vehicle.slug}`;
+  // Une vraie photo occupe un cadre plus généreux, bord à bord ; le visuel
+  // d'attente reste volontairement plus discret.
+  const photo = vehicle.images[0];
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-stone bg-ivory transition-shadow duration-500 hover:shadow-[0_24px_50px_-28px_rgba(29,27,24,0.35)]">
       <Link
         to={detailsUrl}
         aria-label={`Voir le véhicule ${vehicle.name}`}
-        className="relative block aspect-[4/3] overflow-hidden"
+        className={`relative block overflow-hidden ${photo ? "aspect-[4/3.4]" : "aspect-[16/10]"}`}
       >
         <SmartImage
-          src={vehicle.images[0]}
+          src={photo}
           alt={vehicle.name}
           placeholderLabel={vehicle.name}
-          imgClassName="transition-transform duration-700 group-hover:scale-[1.03]"
+          imgClassName="transition-transform duration-700 group-hover:scale-[1.04]"
         />
+        {photo && (
+          // Léger voile en haut : le badge reste lisible sur n'importe quelle photo.
+          <span className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-ink/35 to-transparent" />
+        )}
         <AvailabilityBadge available={vehicle.available} className="absolute right-4 top-4" />
       </Link>
 

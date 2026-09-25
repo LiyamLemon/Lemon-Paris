@@ -21,24 +21,25 @@ export function PromiseSection() {
           />
         </Reveal>
 
-        <div className="mt-14 grid grid-cols-1 gap-12 md:mt-20 md:grid-cols-3 md:gap-10">
+        <ul className="mx-auto mt-14 grid max-w-5xl grid-cols-1 gap-12 md:mt-20 md:grid-cols-3 md:gap-10">
           {TRUST_POINTS.map((point, i) => {
             const Icon = ICONS[i % ICONS.length];
             return (
-              <Reveal key={point.title} delay={i * 110}>
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gold/15 text-gold">
-                  <Icon size={22} strokeWidth={1.5} />
-                </div>
-                <h3 className="mt-6 font-serif text-[1.75rem] font-semibold text-paper">
+              <Reveal as="li" key={point.title} delay={i * 110} className="flex flex-col items-center text-center">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-gold/25 bg-gold/10 text-gold">
+                  <Icon size={20} strokeWidth={1.4} />
+                </span>
+                <h3 className="mt-6 font-serif text-[1.65rem] font-semibold leading-tight text-paper">
                   {point.title}
                 </h3>
-                <p className="mt-3 max-w-sm text-base leading-relaxed text-mist">
+                <span aria-hidden="true" className="mt-4 h-px w-8 bg-gold/40" />
+                <p className="mt-4 max-w-xs text-[0.95rem] leading-relaxed text-mist">
                   {point.description}
                 </p>
               </Reveal>
             );
           })}
-        </div>
+        </ul>
       </div>
     </section>
   );

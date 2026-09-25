@@ -19,9 +19,9 @@
   --color-anthracite: #1d1b18; /* titres sur fond clair */
 
   /* ── Accent — utilisé avec parcimonie ────────── */
-  --color-gold: #c39d5c; /* champagne : labels, filets, CTA importants */
-  --color-gold-soft: #dcc59a;
-  --color-gold-deep: #94733d; /* champagne lisible sur fond clair (prix) */
+  --color-gold: #bea37a; /* champagne beige doré : labels, filets, CTA importants */
+  --color-gold-soft: #d8c7a8;
+  --color-gold-deep: #86704c; /* champagne lisible sur fond clair (prix, états actifs) */
 
   --animate-reveal: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-fade: fade 0.4s ease forwards;
@@ -50,11 +50,11 @@
 /* Hauteur du header fixe. Chaque page réserve cet espace en haut de sa
    première section : aucun titre ne peut passer sous le header. */
 :root {
-  --header-h: 4.25rem;
+  --header-h: 3.375rem; /* 54px : header fin sur mobile */
 }
 @media (min-width: 768px) {
   :root {
-    --header-h: 5rem;
+    --header-h: 4.25rem;
   }
 }
 

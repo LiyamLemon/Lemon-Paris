@@ -87,9 +87,9 @@ export function MobileMenu({ open, onClose, returnFocusRef }: MobileMenuProps) {
               type="button"
               onClick={onClose}
               aria-label="Fermer le menu"
-              className="-mr-2.5 flex h-11 w-11 items-center justify-center text-anthracite"
+              className="-mr-3 flex h-11 w-11 items-center justify-center text-anthracite"
             >
-              <X size={26} strokeWidth={1.4} />
+              <X size={21} strokeWidth={1.25} />
             </button>
           </div>
         </div>

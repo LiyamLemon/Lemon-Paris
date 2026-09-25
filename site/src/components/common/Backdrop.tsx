@@ -1,38 +1,75 @@
+import { useState } from "react";
 import { CarLineArt } from "./CarLineArt";
-import { SmartImage } from "./SmartImage";
 
 interface BackdropProps {
   /**
-   * Fond graphique affiché tant qu'aucune photo n'est fournie :
+   * Fond graphique affiché TANT QU'AUCUNE PHOTO n'est fournie :
    * - "showroom" : salle d'exposition nocturne, projecteurs et sol réfléchissant ;
    * - "dusk" : ciel de Paris au crépuscule et ligne de toits ;
    * - "gradient" : dégradé gris vers noir (sections éditoriales).
    */
   variant: "showroom" | "dusk" | "gradient";
-  /** Photo réelle optionnelle (prioritaire sur le fond graphique). */
+  /**
+   * Photo réelle. Dès qu'elle est renseignée, le fond graphique (et son
+   * dessin de voiture) n'est plus affiché : seule la photo est montrée.
+   */
   image?: string;
   imageAlt?: string;
-  /** Intensité du voile sombre qui garantit la lisibilité du texte. */
-  overlay?: "soft" | "strong";
+  /**
+   * Voile qui garantit la lisibilité du texte posé sur le fond :
+   * - "soft" : bandeaux et sections éditoriales ;
+   * - "strong" : texte long sur photo ;
+   * - "hero" : grand hero, texte en bas à gauche (voile renforcé à gauche
+   *   et en bas, photo laissée plus lumineuse en haut à droite).
+   */
+  overlay?: "soft" | "strong" | "hero";
 }
+
+const OVERLAYS = {
+  soft: "bg-gradient-to-t from-ink/90 via-ink/35 to-ink/10",
+  strong: "bg-gradient-to-t from-ink via-ink/80 to-ink/55",
+  hero: "bg-[linear-gradient(to_top,var(--color-ink)_0%,rgba(14,13,11,0.75)_40%,rgba(14,13,11,0.35)_75%,rgba(14,13,11,0.55)_100%),linear-gradient(to_right,rgba(14,13,11,0.7)_0%,rgba(14,13,11,0.15)_70%)]",
+};
 
 /** Fond plein cadre des sections sombres (hero, bandeaux). Le parent doit être `relative`. */
 export function Backdrop({ variant, image, imageAlt = "", overlay = "soft" }: BackdropProps) {
   return (
     <div aria-hidden={!image} className="absolute inset-0 overflow-hidden">
-      {variant === "showroom" && <Showroom />}
-      {variant === "dusk" && <Dusk />}
-      {variant === "gradient" && (
-        <div className="absolute inset-0 bg-[linear-gradient(155deg,#6f6a63_0%,#2c2925_38%,#0e0d0b_72%)]" />
+      {image ? (
+        <BackdropPhoto src={image} alt={imageAlt} />
+      ) : (
+        <>
+          {variant === "showroom" && <Showroom />}
+          {variant === "dusk" && <Dusk />}
+          {variant === "gradient" && (
+            <div className="absolute inset-0 bg-[linear-gradient(155deg,#6f6a63_0%,#2c2925_38%,#0e0d0b_72%)]" />
+          )}
+        </>
       )}
+      <div className={`absolute inset-0 ${OVERLAYS[overlay]}`} />
+    </div>
+  );
+}
 
-      {image && <SmartImage src={image} alt={imageAlt} placeholderTone="dark" loading="eager" />}
-
-      <div
-        className={`absolute inset-0 ${
-          overlay === "strong"
-            ? "bg-gradient-to-t from-ink via-ink/80 to-ink/55"
-            : "bg-gradient-to-t from-ink/90 via-ink/35 to-ink/10"
+/**
+ * Photo plein cadre : fond noir pendant le chargement (jamais de dessin
+ * ni d'icône par-dessus une vraie photo), puis apparition en fondu.
+ */
+function BackdropPhoto({ src, alt }: { src: string; alt: string }) {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <div className="absolute inset-0 bg-ink">
+      <img
+        src={src}
+        alt={alt}
+        fetchPriority="high"
+        decoding="async"
+        ref={(img) => {
+          if (img?.complete && img.naturalWidth > 0) setLoaded(true);
+        }}
+        onLoad={() => setLoaded(true)}
+        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+          loaded ? "opacity-100" : "opacity-0"
         }`}
       />
     </div>
