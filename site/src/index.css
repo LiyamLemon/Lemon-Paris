@@ -21,7 +21,9 @@
   /* ── Accent — utilisé avec parcimonie ────────── */
   --color-gold: #bea37a; /* champagne beige doré : labels, filets, CTA importants */
   --color-gold-soft: #d8c7a8;
-  --color-gold-deep: #86704c; /* champagne lisible sur fond clair (prix, états actifs) */
+  /* Champagne foncé pour le texte sur fond clair (prix, états actifs, labels).
+     Contrôlé : 5.07:1 sur --color-paper, au-dessus du seuil AA (4.5:1). */
+  --color-gold-deep: #7c6644;
 
   --animate-reveal: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-fade: fade 0.4s ease forwards;
@@ -74,6 +76,20 @@ body {
 ::selection {
   background: var(--color-gold);
   color: var(--color-ink);
+}
+
+/* Anneau de focus clavier, visible sur les deux fonds. Contrôlé :
+   gold-deep sur paper = 5.07:1, gold sur ink = 8.06:1 (seuil non-texte : 3:1).
+   Les sections déclarent data-tone="dark"|"light" (voir chaque section et
+   le Header) : le focus prend automatiquement la bonne teinte. */
+:focus-visible {
+  outline: 2px solid var(--color-gold-deep);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+[data-tone="dark"] :focus-visible,
+[data-tone="dark"]:focus-visible {
+  outline-color: var(--color-gold);
 }
 
 /* Reveal-on-scroll (classe `is-visible` ajoutée par useReveal). */

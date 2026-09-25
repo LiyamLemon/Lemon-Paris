@@ -26,7 +26,7 @@ export function HomeHero() {
 
         <p className="mt-7 max-w-md text-base leading-relaxed text-mist md:text-lg">
           ALMA LOCATION met à votre disposition une flotte de véhicules soigneusement
-          sélectionnés, pour une expérience de conduite à la hauteur de vos exigences.
+          sélectionnés, pour conduire dans Paris l'esprit tranquille.
         </p>
 
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">

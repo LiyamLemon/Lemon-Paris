@@ -5,6 +5,14 @@ interface SmartImageProps {
   /** Chemin de la photo. Vide = visuel d'attente directement. */
   src?: string;
   alt: string;
+  /**
+   * Variantes de résolution de la même photo, prêtes pour de vraies
+   * photos (ex. "images/vehicules/berline-800.jpg 800w, .../berline-1600.jpg 1600w").
+   * Non utilisé tant qu'aucune photo réelle n'est fournie.
+   */
+  srcSet?: string;
+  /** Largeurs d'affichage associées à `srcSet` (ex. "(min-width: 768px) 33vw, 100vw"). */
+  sizes?: string;
   /** Légende du visuel d'attente (ex. modèle du véhicule). */
   placeholderLabel?: string;
   placeholderTone?: "light" | "dark";
@@ -25,6 +33,8 @@ interface SmartImageProps {
 export function SmartImage({
   src,
   alt,
+  srcSet,
+  sizes,
   placeholderLabel,
   placeholderTone = "light",
   compact,
@@ -53,6 +63,8 @@ export function SmartImage({
         <img
           ref={imgRef}
           src={src}
+          srcSet={srcSet}
+          sizes={sizes}
           alt={alt}
           loading={loading}
           fetchPriority={fetchPriority}

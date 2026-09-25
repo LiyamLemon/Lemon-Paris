@@ -39,6 +39,7 @@ export function Lightbox({ items, index, onClose, onNavigate }: LightboxProps) {
       role="dialog"
       aria-modal="true"
       aria-label={item.alt}
+      data-tone="dark"
       className="fixed inset-0 z-[70] flex animate-fade flex-col bg-ink/95 backdrop-blur-sm"
     >
       <div className="flex h-[var(--header-h)] shrink-0 items-center justify-between px-4 md:px-8">

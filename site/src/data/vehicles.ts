@@ -93,7 +93,7 @@ export const vehicles: Vehicle[] = [
     deposit: 800,
     includedKmPerDay: 180,
     description:
-      "Compacte, silencieuse et agile, idéale pour se déplacer dans Paris avec style. Une citadine premium sans compromis sur la qualité.",
+      "Compacte, silencieuse et agile, idéale pour se déplacer dans Paris avec style.",
     conditions: [
       "Permis B valide depuis plus de 1 an",
       "Recharge à restituer à 80 % minimum",

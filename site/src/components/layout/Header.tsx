@@ -27,6 +27,7 @@ export function Header() {
     <>
       <header
         data-site-header
+        data-tone={tone}
         className={`fixed inset-x-0 top-0 z-50 h-[var(--header-h)] border-b backdrop-blur-md transition-[background-color,border-color] duration-500 ease-out ${
           dark ? "border-paper/[0.06] bg-ink/80" : "border-stone/80 bg-paper/88"
         }`}
@@ -64,7 +65,7 @@ export function Header() {
             })}
             <Link
               to={ROUTES.booking}
-              className={`inline-flex min-h-10 items-center rounded-full px-6 text-sm font-medium transition-colors duration-500 ${
+              className={`inline-flex min-h-11 items-center rounded-full px-6 text-sm font-medium transition-colors duration-500 ${
                 dark ? "bg-gold text-ink hover:bg-gold-soft" : "bg-anthracite text-paper hover:bg-ink"
               }`}
             >

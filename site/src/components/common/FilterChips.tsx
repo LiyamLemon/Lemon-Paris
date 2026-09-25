@@ -36,7 +36,9 @@ export function FilterChips<T extends string>({
             className={`min-h-11 shrink-0 rounded-full border px-5 text-sm transition-colors ${
               active
                 ? "border-anthracite bg-anthracite text-paper"
-                : "border-stone bg-transparent text-graphite hover:border-anthracite/40 hover:text-anthracite"
+                : // anthracite/50 sur paper = 3.27:1 (seuil non-texte : 3:1) ; border-stone
+                  // (le filet décoratif) ne suffit pas pour un bord de contrôle cliquable.
+                  "border-anthracite/50 bg-transparent text-graphite hover:border-anthracite/70 hover:text-anthracite"
             }`}
           >
             {item ?? allLabel}

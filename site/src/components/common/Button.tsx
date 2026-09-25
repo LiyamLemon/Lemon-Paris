@@ -9,10 +9,12 @@ const VARIANTS: Record<Variant, string> = {
   gold: "bg-gold text-ink hover:bg-gold-soft",
   /* CTA sur fond clair */
   dark: "bg-anthracite text-paper hover:bg-ink",
+  // Bordures de contrôle contrôlées (seuil non-texte WCAG : 3:1) :
+  // paper/40 sur ink = 3.59:1, anthracite/50 sur paper = 3.27:1.
   /* CTA secondaire sur fond sombre */
-  "outline-light": "border border-paper/30 text-paper hover:border-paper hover:bg-paper/5",
+  "outline-light": "border border-paper/40 text-paper hover:border-paper hover:bg-paper/5",
   /* CTA secondaire sur fond clair */
-  "outline-dark": "border border-anthracite/25 text-anthracite hover:border-anthracite",
+  "outline-dark": "border border-anthracite/50 text-anthracite hover:border-anthracite",
 };
 
 const BASE =

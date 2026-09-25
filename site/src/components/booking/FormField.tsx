@@ -18,7 +18,9 @@ export function FormField({ label, error, id, required, ...inputProps }: FormFie
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${id}-error` : undefined}
         className={`block w-full min-w-0 rounded-xl border bg-ink px-4 py-3.5 text-base text-paper placeholder:text-mist/50 transition-colors focus:border-gold/60 focus:outline-none focus:ring-2 focus:ring-gold/25 ${
-          error ? "border-red-400/70" : "border-line"
+          // Bordure de contrôle contrôlée : paper/40 sur ink = 3.59:1 (seuil non-texte : 3:1).
+          // border-line (le filet décoratif) ne suffit pas pour un bord de champ.
+          error ? "border-red-400/70" : "border-paper/40"
         }`}
         {...inputProps}
       />
