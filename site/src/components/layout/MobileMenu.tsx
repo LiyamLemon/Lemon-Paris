@@ -117,19 +117,19 @@ export function MobileMenu({ open, onClose, returnFocusRef }: MobileMenuProps) {
                   >
                     <span
                       aria-hidden="true"
-                      className={`h-px shrink-0 bg-gold transition-all duration-300 ${
+                      className={`h-px shrink-0 bg-anthracite transition-all duration-300 ${
                         active ? "w-6 opacity-100" : "w-0 opacity-0"
                       }`}
                     />
                     <span
                       className={`font-serif text-[1.85rem] font-medium leading-none ${
-                        active ? "text-gold-deep italic" : "text-anthracite"
+                        active ? "text-anthracite italic" : "text-graphite"
                       }`}
                     >
                       {link.label}
                     </span>
                     {active && (
-                      <span className="ml-auto text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-gold-deep">
+                      <span className="ml-auto text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-graphite">
                         Vous êtes ici
                       </span>
                     )}

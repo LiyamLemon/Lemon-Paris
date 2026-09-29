@@ -2,13 +2,13 @@ import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
-type Variant = "gold" | "dark" | "outline-light" | "outline-dark";
+type Variant = "light" | "dark" | "outline-light" | "outline-dark";
 
 const VARIANTS: Record<Variant, string> = {
-  /* CTA principal — l'un des rares usages du champagne en aplat */
-  gold: "bg-gold text-ink hover:bg-gold-soft",
-  /* CTA sur fond clair */
-  dark: "bg-anthracite text-paper hover:bg-ink",
+  /* CTA principal sur fond sombre : blanc plein, texte noir */
+  light: "bg-paper text-ink hover:bg-mist",
+  /* CTA principal sur fond clair : noir plein, texte blanc */
+  dark: "bg-anthracite text-paper hover:opacity-90",
   // Bordures de contrôle contrôlées (seuil non-texte WCAG : 3:1) :
   // paper/40 sur ink = 3.59:1, anthracite/50 sur paper = 3.27:1.
   /* CTA secondaire sur fond sombre */
@@ -35,7 +35,7 @@ type NativeButtonProps = CommonProps &
 
 /** Bouton unique du site : lien de navigation (`to`) ou bouton natif. */
 export function Button(props: LinkButtonProps | NativeButtonProps) {
-  const { children, variant = "gold", arrow, fullWidth, className = "" } = props;
+  const { children, variant = "light", arrow, fullWidth, className = "" } = props;
   const classes = `${BASE} ${VARIANTS[variant]} ${fullWidth ? "w-full" : ""} ${className}`;
   const content = (
     <>

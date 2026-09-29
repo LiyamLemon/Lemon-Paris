@@ -42,7 +42,7 @@ export function Backdrop({ variant, image, imageAlt = "", overlay = "soft" }: Ba
           {variant === "showroom" && <Showroom />}
           {variant === "dusk" && <Dusk />}
           {variant === "gradient" && (
-            <div className="absolute inset-0 bg-[linear-gradient(155deg,#6f6a63_0%,#2c2925_38%,#0e0d0b_72%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(155deg,#4a4a4a_0%,#1a1a1a_38%,#080808_72%)]" />
           )}
         </>
       )}
@@ -96,9 +96,9 @@ function Showroom() {
 
 function Dusk() {
   return (
-    <div className="absolute inset-0 bg-[linear-gradient(to_bottom,#151b27_0%,#3a3440_32%,#8a5b43_58%,#c78a55_68%,#2a211b_78%,#0e0d0b_100%)]">
-      {/* Halo du soleil couchant */}
-      <div className="absolute inset-x-0 top-[48%] h-[30%] bg-[radial-gradient(50%_60%_at_60%_60%,rgba(230,170,110,0.45),transparent_70%)]" />
+    <div className="absolute inset-0 bg-[linear-gradient(to_bottom,#1a1a1a_0%,#2a2a2a_32%,#3a3a3a_58%,#4a4a4a_68%,#1a1a1a_78%,#080808_100%)]">
+      {/* Halo du crépuscule — gris neutre, sans teinte chaude */}
+      <div className="absolute inset-x-0 top-[48%] h-[30%] bg-[radial-gradient(50%_60%_at_60%_60%,rgba(255,255,255,0.14),transparent_70%)]" />
       <svg
         viewBox="0 0 1200 400"
         preserveAspectRatio="xMidYMax slice"

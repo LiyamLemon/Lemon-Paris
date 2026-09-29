@@ -52,7 +52,7 @@ export function Lightbox({ items, index, onClose, onNavigate }: LightboxProps) {
           type="button"
           onClick={onClose}
           aria-label="Fermer"
-          className="flex h-11 w-11 items-center justify-center text-paper transition-colors hover:text-gold"
+          className="flex h-11 w-11 items-center justify-center text-paper transition-colors hover:text-mist"
         >
           <X size={26} strokeWidth={1.4} />
         </button>
@@ -76,7 +76,7 @@ export function Lightbox({ items, index, onClose, onNavigate }: LightboxProps) {
               type="button"
               onClick={() => go(-1)}
               aria-label="Photo précédente"
-              className="absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-ink/70 text-paper transition-colors hover:text-gold"
+              className="absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-ink/70 text-paper transition-colors hover:text-mist"
             >
               <ChevronLeft size={22} strokeWidth={1.5} />
             </button>
@@ -84,7 +84,7 @@ export function Lightbox({ items, index, onClose, onNavigate }: LightboxProps) {
               type="button"
               onClick={() => go(1)}
               aria-label="Photo suivante"
-              className="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-ink/70 text-paper transition-colors hover:text-gold"
+              className="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-ink/70 text-paper transition-colors hover:text-mist"
             >
               <ChevronRight size={22} strokeWidth={1.5} />
             </button>

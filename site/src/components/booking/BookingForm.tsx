@@ -107,11 +107,11 @@ export function BookingForm() {
 
   if (confirmation) {
     return (
-      <div className="flex flex-col items-start gap-4 rounded-[1.75rem] border border-gold/30 bg-ink-soft p-7 sm:p-10">
-        <CheckCircle2 className="text-gold" size={34} strokeWidth={1.4} />
+      <div className="flex flex-col items-start gap-4 rounded-[1.75rem] border border-paper/30 bg-ink-soft p-7 sm:p-10">
+        <CheckCircle2 className="text-paper" size={34} strokeWidth={1.4} />
         <h2 className="font-serif text-3xl font-semibold text-paper">Demande envoyée avec succès</h2>
         <p className="text-base leading-relaxed text-mist">
-          Référence de votre demande : <span className="text-gold">{confirmation}</span>. Notre
+          Référence de votre demande : <span className="font-semibold text-paper">{confirmation}</span>. Notre
           équipe revient vers vous rapidement pour confirmer votre réservation.
         </p>
         <Button variant="outline-light" onClick={() => setConfirmation(null)} className="mt-2">
@@ -183,7 +183,7 @@ export function BookingForm() {
       <Step number="02" title="Détails de réservation">
         <div className="flex min-w-0 flex-col gap-2">
           <label htmlFor="vehicleSlug" className="text-sm text-paper/75">
-            Véhicule souhaité <span className="text-gold">*</span>
+            Véhicule souhaité <span className="text-paper">*</span>
           </label>
           <select
             id="vehicleSlug"
@@ -191,7 +191,7 @@ export function BookingForm() {
             onChange={(e) => updateField("vehicleSlug", e.target.value)}
             aria-invalid={Boolean(errors.vehicleSlug)}
             aria-describedby={errors.vehicleSlug ? "vehicleSlug-error" : undefined}
-            className={`block w-full min-w-0 rounded-xl border bg-ink px-4 py-3.5 text-base text-paper transition-colors focus:border-gold/60 focus:outline-none focus:ring-2 focus:ring-gold/25 ${
+            className={`block w-full min-w-0 rounded-xl border bg-ink px-4 py-3.5 text-base text-paper transition-colors focus:border-paper focus:outline-none focus:ring-2 focus:ring-paper/25 ${
               // paper/40 sur ink = 3.59:1 (seuil non-texte : 3:1) ; border-line ne suffit pas.
               errors.vehicleSlug ? "border-red-400/70" : "border-paper/40"
             }`}
@@ -219,7 +219,7 @@ export function BookingForm() {
               <p className="truncate font-serif text-xl font-semibold text-paper">{selected.name}</p>
               <p className="text-sm text-mist">
                 {selected.category} · {selected.transmission} ·{" "}
-                <span className="text-gold">{selected.pricePerDay} € / jour</span>
+                <span className="font-semibold text-paper">{selected.pricePerDay} € / jour</span>
               </p>
             </div>
           </div>
@@ -264,11 +264,11 @@ export function BookingForm() {
       </Step>
 
       <div>
-        <Button type="submit" variant="gold" fullWidth disabled={submitting} className="uppercase tracking-[0.14em]">
+        <Button type="submit" variant="light" fullWidth disabled={submitting} className="uppercase tracking-[0.14em]">
           {submitting ? "Envoi en cours…" : "Envoyer ma demande"}
         </Button>
         <p className="mt-4 text-center text-xs text-mist">
-          Les champs marqués <span className="text-gold">*</span> sont obligatoires.
+          Les champs marqués <span className="text-paper">*</span> sont obligatoires.
         </p>
       </div>
     </form>
@@ -279,7 +279,7 @@ function Step({ number, title, children }: { number: string; title: string; chil
   return (
     <fieldset className="flex min-w-0 flex-col gap-5">
       <legend className="mb-2 flex w-full items-baseline gap-4 border-b border-line pb-4">
-        <span className="text-xs font-semibold tabular-nums tracking-[0.2em] text-gold">{number}</span>
+        <span className="text-xs font-semibold tabular-nums tracking-[0.2em] text-paper">{number}</span>
         <span className="font-serif text-[1.65rem] font-semibold text-paper">{title}</span>
       </legend>
       {children}

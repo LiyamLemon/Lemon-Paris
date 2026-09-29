@@ -71,7 +71,7 @@ export function Contact() {
 function ContactCard({ icon: Icon, label, value, href }: ContactRow) {
   const content = (
     <>
-      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-stone text-gold-deep">
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-stone text-anthracite">
         <Icon size={18} strokeWidth={1.5} />
       </span>
       <span className="min-w-0 flex-1">

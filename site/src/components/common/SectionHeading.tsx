@@ -35,11 +35,11 @@ export function SectionHeading({
       <p
         className={`flex items-center gap-4 text-[0.7rem] font-semibold uppercase tracking-[0.3em] ${
           centered ? "justify-center" : ""
-        } ${dark ? "text-gold" : "text-graphite"}`}
+        } ${dark ? "text-paper" : "text-anthracite"}`}
       >
-        <span className="h-px w-10 shrink-0 bg-gold" />
+        <span className={`h-px w-10 shrink-0 ${dark ? "bg-paper" : "bg-anthracite"}`} />
         {eyebrow}
-        {centered && <span className="h-px w-10 shrink-0 bg-gold" />}
+        {centered && <span className={`h-px w-10 shrink-0 ${dark ? "bg-paper" : "bg-anthracite"}`} />}
       </p>
 
       <Heading

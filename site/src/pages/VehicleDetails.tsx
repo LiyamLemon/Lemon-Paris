@@ -76,7 +76,7 @@ export function VehicleDetails() {
                     aria-label={`Photo ${i + 1}`}
                     aria-pressed={activeImage === i}
                     className={`relative h-16 w-24 shrink-0 overflow-hidden rounded-xl border-2 transition-colors ${
-                      activeImage === i ? "border-gold" : "border-transparent"
+                      activeImage === i ? "border-anthracite" : "border-transparent"
                     }`}
                   >
                     <SmartImage src={img} alt="" compact />
@@ -89,14 +89,14 @@ export function VehicleDetails() {
           <div>
             <p className="text-[0.7rem] font-medium uppercase tracking-[0.2em] text-graphite">
               {vehicle.category}
-              <span className="mx-2 text-gold">•</span>
+              <span className="mx-2 text-graphite">•</span>
               {vehicle.transmission}
             </p>
             <h1 className="mt-3 font-serif text-5xl font-semibold leading-none text-anthracite md:text-6xl">
               {vehicle.name}
             </h1>
             <p className="mt-6 text-graphite">
-              <span className="font-serif text-5xl font-semibold leading-none text-gold-deep">
+              <span className="font-serif text-5xl font-semibold leading-none text-anthracite">
                 {vehicle.pricePerDay}
               </span>
               <span className="ml-2">€ / jour</span>
@@ -108,7 +108,7 @@ export function VehicleDetails() {
               {specs.map(({ icon: Icon, label, value }) => (
                 <div key={label} className="min-w-0">
                   <dt className="flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.15em] text-graphite">
-                    <Icon size={14} strokeWidth={1.5} className="shrink-0 text-gold-deep" />
+                    <Icon size={14} strokeWidth={1.5} className="shrink-0 text-anthracite" />
                     {label}
                   </dt>
                   <dd className="mt-1.5 font-medium text-anthracite">{value}</dd>
@@ -123,7 +123,7 @@ export function VehicleDetails() {
               <ul className="mt-4 flex flex-col gap-2.5 text-graphite">
                 {vehicle.conditions.map((c) => (
                   <li key={c} className="flex gap-3">
-                    <span className="mt-[0.7em] h-px w-4 shrink-0 bg-gold" />
+                    <span className="mt-[0.7em] h-px w-4 shrink-0 bg-anthracite" />
                     {c}
                   </li>
                 ))}

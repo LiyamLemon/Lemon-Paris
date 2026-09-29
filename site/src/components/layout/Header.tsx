@@ -46,8 +46,8 @@ export function Header() {
                   className={`relative py-2 text-sm tracking-wide transition-colors duration-500 ${
                     active
                       ? dark
-                        ? "text-gold"
-                        : "text-gold-deep"
+                        ? "text-paper"
+                        : "text-anthracite"
                       : dark
                         ? "text-paper/75 hover:text-paper"
                         : "text-graphite hover:text-anthracite"
@@ -56,9 +56,9 @@ export function Header() {
                   {link.label}
                   <span
                     aria-hidden="true"
-                    className={`absolute inset-x-0 -bottom-0.5 mx-auto h-px bg-gold transition-all duration-300 ${
-                      active ? "w-full opacity-100" : "w-0 opacity-0"
-                    }`}
+                    className={`absolute inset-x-0 -bottom-0.5 mx-auto h-px transition-all duration-300 ${
+                      dark ? "bg-paper" : "bg-anthracite"
+                    } ${active ? "w-full opacity-100" : "w-0 opacity-0"}`}
                   />
                 </Link>
               );
@@ -66,7 +66,7 @@ export function Header() {
             <Link
               to={ROUTES.booking}
               className={`inline-flex min-h-11 items-center rounded-full px-6 text-sm font-medium transition-colors duration-500 ${
-                dark ? "bg-gold text-ink hover:bg-gold-soft" : "bg-anthracite text-paper hover:bg-ink"
+                dark ? "bg-paper text-ink hover:bg-mist" : "bg-anthracite text-paper hover:opacity-90"
               }`}
             >
               Réserver

@@ -30,7 +30,7 @@ export function BookingBanner() {
             description="Choisissez votre véhicule et vos dates : notre équipe revient vers vous rapidement pour confirmer votre réservation."
           />
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <Button to={ROUTES.booking} variant="gold" arrow>
+            <Button to={ROUTES.booking} variant="light" arrow>
               Réserver maintenant
             </Button>
             <Button to={ROUTES.contact} variant="outline-light">

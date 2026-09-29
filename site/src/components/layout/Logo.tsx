@@ -12,8 +12,8 @@ export function Logo({ tone = "light", onClick }: LogoProps) {
       to="/"
       onClick={onClick}
       aria-label="ALMA LOCATION — accueil"
-      className={`font-serif text-[1.15rem] font-semibold leading-none tracking-[0.14em] transition-colors duration-500 hover:text-gold md:text-xl ${
-        tone === "dark" ? "text-paper" : "text-anthracite"
+      className={`font-serif text-[1.15rem] font-semibold leading-none tracking-[0.14em] transition-colors duration-500 md:text-xl ${
+        tone === "dark" ? "text-paper hover:text-mist" : "text-anthracite hover:text-graphite"
       }`}
     >
       ALMA <span className="font-medium">LOCATION</span>

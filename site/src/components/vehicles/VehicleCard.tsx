@@ -38,18 +38,18 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
       <div className="flex flex-1 flex-col px-6 pb-6 pt-6">
         <p className="text-[0.7rem] font-medium uppercase tracking-[0.2em] text-graphite">
           {vehicle.category}
-          <span className="mx-2 text-gold">•</span>
+          <span className="mx-2 text-graphite">•</span>
           {vehicle.transmission}
         </p>
 
         <h3 className="mt-3 font-serif text-[1.75rem] font-semibold leading-tight text-anthracite">
-          <Link to={detailsUrl} className="transition-colors hover:text-gold-deep">
+          <Link to={detailsUrl} className="transition-colors hover:text-graphite">
             {vehicle.name}
           </Link>
         </h3>
 
         <p className="mt-5 border-t border-stone pt-5 text-graphite">
-          <span className="font-serif text-[2rem] font-semibold leading-none text-gold-deep">
+          <span className="font-serif text-[2rem] font-semibold leading-none text-anthracite">
             {vehicle.pricePerDay}
           </span>
           <span className="ml-1.5 text-sm">€ / jour</span>
@@ -65,7 +65,7 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
           {vehicle.available ? (
             <Link
               to={bookingUrl(vehicle.slug)}
-              className="flex min-h-12 items-center justify-center rounded-full bg-anthracite px-3 text-[0.8rem] font-medium text-paper transition-colors hover:bg-ink"
+              className="flex min-h-12 items-center justify-center rounded-full bg-anthracite px-3 text-[0.8rem] font-medium text-paper transition-opacity hover:opacity-90"
             >
               Réserver
             </Link>

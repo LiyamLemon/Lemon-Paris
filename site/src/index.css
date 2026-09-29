@@ -4,26 +4,23 @@
   --font-serif: "Cormorant Garamond", "Georgia", serif;
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
 
+  /* ── Direction artistique : noir / blanc / gris neutres uniquement. ──
+     Aucun doré, champagne, beige ou brun : toute la palette du site vient
+     de ces variables. Un composant ne doit jamais coder une couleur en dur. */
+
   /* ── Zones sombres ───────────────────────────── */
-  --color-ink: #0e0d0b; /* noir profond, légèrement chaud */
-  --color-ink-soft: #171512;
-  --color-ink-raised: #221f1b;
-  --color-line: #2e2a25; /* filets sur fond sombre */
-  --color-mist: #a39c91; /* paragraphes sur fond sombre */
+  --color-ink: #080808; /* noir principal : fond des sections sombres */
+  --color-ink-soft: #111111; /* noir secondaire : cartes/panneaux sur fond sombre */
+  --color-ink-raised: #1a1a1a; /* surface sombre légèrement élevée */
+  --color-line: #262626; /* filets et bordures sur fond sombre, gris neutre */
+  --color-mist: #a5a5a5; /* gris clair : paragraphes et texte secondaire sur fond sombre */
 
   /* ── Zones claires ───────────────────────────── */
-  --color-paper: #f8f6f2; /* blanc cassé : fond des pages claires */
-  --color-ivory: #f0ede7; /* cartes, header clair, panneaux */
-  --color-stone: #e2ddd4; /* filets sur fond clair */
-  --color-graphite: #6b665e; /* paragraphes sur fond clair */
-  --color-anthracite: #1d1b18; /* titres sur fond clair */
-
-  /* ── Accent — utilisé avec parcimonie ────────── */
-  --color-gold: #bea37a; /* champagne beige doré : labels, filets, CTA importants */
-  --color-gold-soft: #d8c7a8;
-  /* Champagne foncé pour le texte sur fond clair (prix, états actifs, labels).
-     Contrôlé : 5.07:1 sur --color-paper, au-dessus du seuil AA (4.5:1). */
-  --color-gold-deep: #7c6644;
+  --color-paper: #f7f7f5; /* blanc cassé très léger : fond des pages claires */
+  --color-ivory: #ffffff; /* blanc pur : cartes, header clair, panneaux */
+  --color-stone: #e5e5e5; /* filets et bordures sur fond clair, gris neutre */
+  --color-graphite: #666666; /* gris texte sur fond clair : paragraphes */
+  --color-anthracite: #080808; /* noir principal : titres et CTA sur fond clair */
 
   --animate-reveal: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-fade: fade 0.4s ease forwards;
@@ -74,22 +71,23 @@ body {
 }
 
 ::selection {
-  background: var(--color-gold);
-  color: var(--color-ink);
+  background: var(--color-anthracite);
+  color: var(--color-ivory);
 }
 
-/* Anneau de focus clavier, visible sur les deux fonds. Contrôlé :
-   gold-deep sur paper = 5.07:1, gold sur ink = 8.06:1 (seuil non-texte : 3:1).
-   Les sections déclarent data-tone="dark"|"light" (voir chaque section et
-   le Header) : le focus prend automatiquement la bonne teinte. */
+/* Anneau de focus clavier, visible sur les deux fonds : noir sur fond
+   clair, blanc sur fond sombre — contraste maximal, largement au-dessus
+   du seuil AA non-texte (3:1). Les sections déclarent data-tone="dark"|"light"
+   (voir chaque section et le Header) : le focus prend automatiquement la
+   bonne teinte. */
 :focus-visible {
-  outline: 2px solid var(--color-gold-deep);
+  outline: 2px solid var(--color-anthracite);
   outline-offset: 2px;
   border-radius: 2px;
 }
 [data-tone="dark"] :focus-visible,
 [data-tone="dark"]:focus-visible {
-  outline-color: var(--color-gold);
+  outline-color: var(--color-paper);
 }
 
 /* Reveal-on-scroll (classe `is-visible` ajoutée par useReveal). */

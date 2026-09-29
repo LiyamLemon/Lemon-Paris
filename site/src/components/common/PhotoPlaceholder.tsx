@@ -22,8 +22,8 @@ export function PhotoPlaceholder({ label, tone = "light", compact = false }: Pho
       aria-hidden="true"
       className={`absolute inset-0 overflow-hidden ${
         light
-          ? "bg-[radial-gradient(120%_80%_at_50%_0%,#fbfaf7_0%,#ebe7df_55%,#ddd8ce_100%)]"
-          : "bg-[radial-gradient(120%_80%_at_50%_0%,#2a2621_0%,#171512_60%,#0e0d0b_100%)]"
+          ? "bg-[radial-gradient(120%_80%_at_50%_0%,#ffffff_0%,#efefef_55%,#e0e0e0_100%)]"
+          : "bg-[radial-gradient(120%_80%_at_50%_0%,#1a1a1a_0%,#111111_60%,#080808_100%)]"
       }`}
     >
       {/* Ligne d'horizon du studio */}

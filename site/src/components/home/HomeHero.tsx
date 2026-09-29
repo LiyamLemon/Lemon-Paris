@@ -13,8 +13,8 @@ export function HomeHero() {
       />
 
       <div className="container-alma relative pb-52 pt-[calc(var(--header-h)+3.5rem)] md:pb-60">
-        <p className="flex animate-fade items-center gap-4 text-[0.7rem] font-semibold uppercase tracking-[0.3em] text-gold">
-          <span className="h-px w-10 bg-gold" />
+        <p className="flex animate-fade items-center gap-4 text-[0.7rem] font-semibold uppercase tracking-[0.3em] text-paper">
+          <span className="h-px w-10 bg-paper" />
           Location Premium Paris
         </p>
 
@@ -30,7 +30,7 @@ export function HomeHero() {
         </p>
 
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-          <Button to={ROUTES.fleet} variant="gold" arrow>
+          <Button to={ROUTES.fleet} variant="light" arrow>
             Découvrir la flotte
           </Button>
           <Button to={ROUTES.booking} variant="outline-light">
