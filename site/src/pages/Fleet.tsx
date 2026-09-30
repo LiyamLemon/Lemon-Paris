@@ -3,6 +3,7 @@ import { VEHICLE_CATEGORIES, vehicles, type VehicleCategory } from "../data/vehi
 import { FilterChips } from "../components/common/FilterChips";
 import { PageHero } from "../components/common/PageHero";
 import { Reveal } from "../components/common/Reveal";
+import { FleetEmptyState } from "../components/vehicles/FleetEmptyState";
 import { VehicleCard } from "../components/vehicles/VehicleCard";
 import { BookingBanner } from "../components/home/BookingBanner";
 import { usePageTitle } from "../hooks/usePageTitle";
@@ -11,6 +12,7 @@ export function Fleet() {
   usePageTitle("Notre Flotte");
   const [category, setCategory] = useState<VehicleCategory | null>(null);
   const shown = category ? vehicles.filter((v) => v.category === category) : vehicles;
+  const hasFleet = vehicles.length > 0;
 
   return (
     <>
@@ -21,27 +23,37 @@ export function Fleet() {
         titleItalic="Flotte"
         description="Une sélection resserrée de véhicules premium, chacun entretenu avec soin pour vous garantir une expérience fiable, du premier au dernier kilomètre."
       >
-        <FilterChips
-          label="Filtrer par catégorie"
-          allLabel="Tous les véhicules"
-          options={VEHICLE_CATEGORIES}
-          value={category}
-          onChange={setCategory}
-        />
+        {hasFleet && (
+          <FilterChips
+            label="Filtrer par catégorie"
+            allLabel="Tous les véhicules"
+            options={VEHICLE_CATEGORIES}
+            value={category}
+            onChange={setCategory}
+          />
+        )}
       </PageHero>
 
       <section data-tone="light" className="bg-paper pb-20 md:pb-28">
         <div className="container-alma">
-          <p className="mb-6 text-sm text-graphite" aria-live="polite">
-            {shown.length} véhicule{shown.length > 1 ? "s" : ""}
-          </p>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {shown.map((vehicle, i) => (
-              <Reveal key={vehicle.slug} delay={(i % 3) * 90} className="h-full">
-                <VehicleCard vehicle={vehicle} />
-              </Reveal>
-            ))}
-          </div>
+          {hasFleet ? (
+            <>
+              <p className="mb-6 text-sm text-graphite" aria-live="polite">
+                {shown.length} véhicule{shown.length > 1 ? "s" : ""}
+              </p>
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {shown.map((vehicle, i) => (
+                  <Reveal key={vehicle.slug} delay={(i % 3) * 90} className="h-full">
+                    <VehicleCard vehicle={vehicle} />
+                  </Reveal>
+                ))}
+              </div>
+            </>
+          ) : (
+            <Reveal>
+              <FleetEmptyState />
+            </Reveal>
+          )}
         </div>
       </section>
 

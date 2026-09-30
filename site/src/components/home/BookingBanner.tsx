@@ -5,20 +5,19 @@ import { Reveal } from "../common/Reveal";
 import { SectionHeading } from "../common/SectionHeading";
 
 /**
- * Bandeau d'appel à la réservation, sur visuel de Paris. Réutilisé en bas
- * de l'accueil, de la flotte et du contact : il mène toujours à /reservation.
+ * Bandeau d'appel à la réservation. Réutilisé en bas de l'accueil, de la
+ * flotte et du contact — toujours juste avant le footer. Hauteur pilotée
+ * par son contenu (comme les autres sections), jamais forcée : un bandeau
+ * plus haut que son texte ne laisse qu'un grand vide sombre avant le footer.
  */
 export function BookingBanner() {
   return (
-    <section
-      data-tone="dark"
-      className="relative flex min-h-[34rem] items-center overflow-hidden bg-ink py-24 md:min-h-[40rem]"
-    >
+    <section data-tone="dark" className="relative overflow-hidden bg-ink py-20 md:py-28">
       <Backdrop
-        variant="dusk"
+        variant="gradient"
         image={SITE_IMAGES.bookingBanner}
         imageAlt="Paris au crépuscule"
-        overlay="strong"
+        overlay="soft"
       />
       <div className="container-alma relative">
         <Reveal>
