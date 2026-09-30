@@ -63,7 +63,7 @@ export const CONTACT = {
  * vide, un fond graphique dessiné en CSS est affiché à la place.
  */
 export const SITE_IMAGES = {
-  homeHero: "",
+  homeHero: "images/hero-clio-nuit.jpg",
   bookingBanner: "",
   conciergeHero: "",
 };

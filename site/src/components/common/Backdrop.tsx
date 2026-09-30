@@ -16,6 +16,11 @@ interface BackdropProps {
   image?: string;
   imageAlt?: string;
   /**
+   * `object-position` CSS de la photo (ex. "76% 58%"), pour garder le bon
+   * cadrage quand `object-fit: cover` recadre l'image sur un écran étroit.
+   */
+  imagePosition?: string;
+  /**
    * Voile qui garantit la lisibilité du texte posé sur le fond :
    * - "soft" : bandeaux et sections éditoriales ;
    * - "strong" : texte long sur photo ;
@@ -28,15 +33,22 @@ interface BackdropProps {
 const OVERLAYS = {
   soft: "bg-gradient-to-t from-ink/90 via-ink/35 to-ink/10",
   strong: "bg-gradient-to-t from-ink via-ink/80 to-ink/55",
-  hero: "bg-[linear-gradient(to_top,var(--color-ink)_0%,rgba(14,13,11,0.75)_40%,rgba(14,13,11,0.35)_75%,rgba(14,13,11,0.55)_100%),linear-gradient(to_right,rgba(14,13,11,0.7)_0%,rgba(14,13,11,0.15)_70%)]",
+  /*
+   * Voile localisé pour le hero photo : sombre en haut à gauche (colonne de
+   * texte), qui se dissipe en diagonale vers le bas-droite (la voiture),
+   * sans jamais devenir totalement opaque — la carrosserie reste visible.
+   * Un léger assombrissement horizontal en tout haut garantit la lisibilité
+   * du header, quel que soit le contenu de la photo à cet endroit.
+   */
+  hero: "bg-[linear-gradient(125deg,rgba(8,8,8,0.88)_0%,rgba(8,8,8,0.72)_24%,rgba(8,8,8,0.44)_45%,rgba(8,8,8,0.2)_62%,rgba(8,8,8,0.05)_80%,rgba(8,8,8,0)_100%),linear-gradient(to_bottom,rgba(8,8,8,0.4)_0%,rgba(8,8,8,0)_16%)]",
 };
 
 /** Fond plein cadre des sections sombres (hero, bandeaux). Le parent doit être `relative`. */
-export function Backdrop({ variant, image, imageAlt = "", overlay = "soft" }: BackdropProps) {
+export function Backdrop({ variant, image, imageAlt = "", imagePosition, overlay = "soft" }: BackdropProps) {
   return (
     <div aria-hidden={!image} className="absolute inset-0 overflow-hidden">
       {image ? (
-        <BackdropPhoto src={image} alt={imageAlt} />
+        <BackdropPhoto src={image} alt={imageAlt} position={imagePosition} />
       ) : (
         <>
           {variant === "showroom" && <Showroom />}
@@ -55,7 +67,7 @@ export function Backdrop({ variant, image, imageAlt = "", overlay = "soft" }: Ba
  * Photo plein cadre : fond noir pendant le chargement (jamais de dessin
  * ni d'icône par-dessus une vraie photo), puis apparition en fondu.
  */
-function BackdropPhoto({ src, alt }: { src: string; alt: string }) {
+function BackdropPhoto({ src, alt, position }: { src: string; alt: string; position?: string }) {
   const [loaded, setLoaded] = useState(false);
   return (
     <div className="absolute inset-0 bg-ink">
@@ -64,6 +76,7 @@ function BackdropPhoto({ src, alt }: { src: string; alt: string }) {
         alt={alt}
         fetchPriority="high"
         decoding="async"
+        style={position ? { objectPosition: position } : undefined}
         ref={(img) => {
           if (img?.complete && img.naturalWidth > 0) setLoaded(true);
         }}

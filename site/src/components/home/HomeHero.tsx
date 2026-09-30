@@ -4,15 +4,24 @@ import { Button } from "../common/Button";
 
 export function HomeHero() {
   return (
-    <section data-tone="dark" className="relative flex min-h-svh items-center overflow-hidden bg-ink">
+    // Pas de overflow-hidden ici : le fond (Backdrop) a déjà le sien. En
+    // garder un sur la section masquerait silencieusement le CTA sur les
+    // écrans très courts au lieu de laisser la page défiler.
+    <section data-tone="dark" className="relative flex min-h-svh items-end bg-ink">
       <Backdrop
         variant="showroom"
         image={SITE_IMAGES.homeHero}
-        imageAlt="Véhicule ALMA LOCATION"
+        imageAlt="Renault Clio ALMA LOCATION, de nuit dans une rue parisienne"
+        imagePosition="76% 58%"
         overlay="hero"
       />
 
-      <div className="container-alma relative pb-52 pt-[calc(var(--header-h)+3.5rem)] md:pb-60">
+      {/*
+        Ancré en bas (items-end) plutôt que centré : quelle que soit la
+        hauteur de l'écran, les CTA restent à distance fixe du bas et ne
+        sortent jamais du cadre — le titre remonte au-dessus, jamais l'inverse.
+      */}
+      <div className="container-alma relative pb-10 pt-[calc(var(--header-h)+2.5rem)] sm:pb-14 md:pb-16">
         <p className="flex animate-fade items-center gap-4 text-[0.7rem] font-semibold uppercase tracking-[0.3em] text-paper">
           <span className="h-px w-10 bg-paper" />
           Location Premium Paris
